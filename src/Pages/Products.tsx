@@ -1,8 +1,12 @@
-import React from 'react'
+import React,{useState} from 'react'
+import Category from '../components/Category'
 
 const Products = () => {
+  const [selCategory,setSelCategory]=useState<string[]>([]);
   return (
-    <div>Products</div>
+   <>
+      <Category setSelCategory={setSelCategory} selCategory={selCategory} />
+   </>
   )
 }
 
