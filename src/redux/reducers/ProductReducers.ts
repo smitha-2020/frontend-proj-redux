@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
 
-interface category {
+
+
+interface Category {
     id: number,
     name: string,
     image: string
@@ -12,7 +14,7 @@ interface Product {
     title: string,
     price: number,
     description: string,
-    category: category
+    category: Category
     images: string[]
 }
 interface ProductDesc {
@@ -27,6 +29,19 @@ interface ProductUpdate {
     price: number
 }
 const initialState: Product[] = [];
+
+export const fetchAllProductsbyCategory = createAsyncThunk(
+    "fetchAllProductsbyCategory",
+    async (id: number) => {
+        try {
+            const response: AxiosResponse<any, Product[]> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
+
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
 export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async () => {
@@ -82,9 +97,35 @@ const productSlice = createSlice({
             } else {
                 state.sort((a, b) => b.title.localeCompare(a.title))
             }
+        },
+        sortByPrice: (state, action: PayloadAction<"hightolow" | "lowtohigh">) => {
+
+            if (action.payload === "hightolow") {
+                state.sort((a, b) => a.price - b.price);
+            } else {
+                state.sort((a, b) => b.price - a.price)
+            }
+        }
+        , filterCatgories: (state, action: PayloadAction<number[]>):Product[] => {
+            const arrCategory = action.payload;
+            const categoryProducts =[...state];
+            if (action.payload.length > 0) {
+                //console.log(state.filter((productCategory) => { return arr.includes(productCategory.category.id) }))
+                // return  [...categoryProducts].filter((productCategory) => {  return  arrCategory.includes(productCategory.category.id)  })
+                 arrCategory.map((category) => [...state].filter((product)=> {return  product.category.id === category}))
+                
+            }
+            return state;
+
         }
     },
     extraReducers: (build) => {
+        build.addCase(fetchAllProductsbyCategory.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
+            if (action.payload && "message" in action.payload) {
+                return state;
+            }
+            return action.payload;
+        })
         build.addCase(fetchAllProducts.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
             if (action.payload && "message" in action.payload) {
                 return state;
@@ -116,5 +157,5 @@ const productSlice = createSlice({
 
 const productReducer = productSlice.reducer;
 export default productReducer;
-export const { ascendingOrder } = productSlice.actions;
+export const { ascendingOrder, filterCatgories,sortByPrice } = productSlice.actions;
 

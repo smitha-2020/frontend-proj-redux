@@ -9,6 +9,7 @@ import Cart from './Pages/Cart'
 import Profile from './Pages/Profile'
 import Header from './components/Header'
 import  NOTFOUND  from './Pages/NOTFOUND'
+
  
 
 const App = () => {

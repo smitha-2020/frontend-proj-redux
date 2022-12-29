@@ -34,24 +34,25 @@ nav span{
 nav ul{
     width:800px;
     display:grid;
-    grid-template-columns: repeat(5,120px);
+    grid-template-columns: repeat(6,120px);
 }
 nav ul li BsBasketFill{
     position:absolute;
 }
-nav ul li span{
-    color:gray;
-    position:relative;
-    top:-13px;
-    left:-5px;
-    font-size:10px;
-    width:3em;
-    height:3em;
-    border-radius: 50%;
-    background-color:#00cccc;
-    margin:0 0 0 5px;
-}
+// nav ul li span{
+//     color:gray;
+//     position:relative;
+//     top:-13px;
+//     left:-5px;
+//     font-size:10px;
+//     width:3em;
+//     height:3em;
+//     border-radius: 50%;
+//     background-color:#00cccc;
+//     margin:0 0 0 5px;
+// }
 .categories{
     width:400px;
     padding:5em;
 }
+
