@@ -1,33 +1,35 @@
-import React, { useEffect,useState } from 'react'
-import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
-import  categoryReducers, { fetchAllCategories } from '../redux/reducers/CategoryReducers'
-import {filterCatgories} from '../redux/reducers/ProductReducers'
+
+import React from 'react'
+import { useAppSelector } from '../hooks/reduxHook'
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
 
-const Category = ({setSelCategory,selCategory}:{setSelCategory:React.Dispatch<React.SetStateAction<number[]>>,selCategory:number[]}) => {
- 
+const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispatch<React.SetStateAction<number[]>>, selCategory: number[] }) => {
 
+
+  const categortList = ["others", "shoes", "furniture","electronics"]
   const categories = useAppSelector(state => state.categoryReducers)
-  //console.log(categories)
-  const dispatch = useAppDispatch();
-  useEffect(()=>{
-    dispatch(fetchAllCategories())
-  },[])
-  const selectItem = (e:React.ChangeEvent<HTMLInputElement>,selName:number) => {
-    if(!selCategory.some((category)=> category === selName)){
-      setSelCategory((prevState) =>  [...prevState,selName])
-      // dispatch(filterCatgories(selCategory))
-      
-    }else{
-      setSelCategory((prevState) =>  prevState.filter((state)=>{return state!==selName}))
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const index = selCategory.indexOf(Number(e.target.value))
+    if (index === -1) {
+      setSelCategory([...selCategory, Number(e.target.value)])
+     
+    } else {
+      setSelCategory(selCategory.filter((category) => category !== Number(e.target.value)))
     }
    
   }
+
+  const newcategories = categories.filter((category) => { return (categortList.includes(category.name.toLowerCase())) })
   return (
     <>
-    <ul className="categories">
-      {categories.map((category) => <li key={category.id}> <input type="checkbox"  name={category.name} value={category.name}   onChange={(e) => selectItem(e,category.id)}></input><a href="#">{category.name}</a></li>)}
-    </ul>
+      {/* <ul className="categories">
+        {newcategories.map((category) => <li key={category.id}> <input type="checkbox" name={category.name} value={category.name} onChange={(e) => selectItem(e, category.id)}></input><a href="#">{category.name}</a></li>)}
+      </ul> */}
+      <FormGroup>
+        {newcategories.map((category) => <FormControlLabel key={category.id} label={category.name} control={<Checkbox value={category.id} checked={selCategory.includes(category.id)} onChange={handleChange} />}></FormControlLabel>)}
+      </FormGroup>
     </>
   )
 }

@@ -1,3 +1,5 @@
+
+
 import Login from './components/Login'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home'
@@ -9,10 +11,25 @@ import Cart from './Pages/Cart'
 import Profile from './Pages/Profile'
 import Header from './components/Header'
 import  NOTFOUND  from './Pages/NOTFOUND'
+import { useAppDispatch } from './hooks/reduxHook'
+import { useEffect } from 'react'
+import { fetchAllProducts } from './redux/reducers/ProductReducers'
+import { fetchAllCategories } from './redux/reducers/CategoryReducers'
 
  
 
 const App = () => {
+
+  // const products = useAppSelector(state => state.productReducer)
+  // const categories = useAppSelector(state => state.categoryReducers)
+  const dispatch = useAppDispatch();
+  //dispatch(fetchAllProducts())
+  useEffect(() => {
+    dispatch(fetchAllProducts())
+    dispatch(fetchAllCategories())
+
+  }, []);
+
   return (
     <>
       <BrowserRouter>

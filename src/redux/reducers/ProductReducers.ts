@@ -64,28 +64,28 @@ export const getSingleProduct = createAsyncThunk(
         }
     }
 )
-// export const addProduct = createAsyncThunk(
-//     "addProduct",
-//     async (product:ProductDesc) => {
-//         try {
-//             const response:AxiosResponse<ProductDesc,Product> = await axios.post("https://api.escuelajs.co/api/v1/products/",product)
-//             return response.data
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     }
-// }
-// export const updateProduct = createAsyncThunk(
-//     "updateProduct",
-//     async (productupdate:ProductUpdate) => {
-//         try {
-//             const response:AxiosResponse<ProductUpdate,Product> = await axios.put("https://api.escuelajs.co/api/v1/products/2",productupdate)
-//             return response.data
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     }
-// )
+export const addProduct = createAsyncThunk(
+    "addProduct",
+    async (product:ProductDesc) => {
+        try {
+            const response:AxiosResponse<ProductDesc,Product> = await axios.post("https://api.escuelajs.co/api/v1/products/",product)
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+export const updateProduct = createAsyncThunk(
+    "updateProduct",
+    async (productupdate:ProductUpdate) => {
+        try {
+            const response:AxiosResponse<ProductUpdate,Product> = await axios.put("https://api.escuelajs.co/api/v1/products/2",productupdate)
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
 const productSlice = createSlice({
     name: 'productSlice',
     initialState: initialState,
@@ -106,17 +106,8 @@ const productSlice = createSlice({
                 state.sort((a, b) => b.price - a.price)
             }
         }
-        , filterCatgories: (state, action: PayloadAction<number[]>):Product[] => {
-            const arrCategory = action.payload;
-            const categoryProducts =[...state];
-            if (action.payload.length > 0) {
-                //console.log(state.filter((productCategory) => { return arr.includes(productCategory.category.id) }))
-                // return  [...categoryProducts].filter((productCategory) => {  return  arrCategory.includes(productCategory.category.id)  })
-                 arrCategory.map((category) => [...state].filter((product)=> {return  product.category.id === category}))
-                
-            }
-            return state;
-
+        , filterCatgories: (state, action) => {
+          
         }
     },
     extraReducers: (build) => {
@@ -157,5 +148,5 @@ const productSlice = createSlice({
 
 const productReducer = productSlice.reducer;
 export default productReducer;
-export const { ascendingOrder, filterCatgories,sortByPrice } = productSlice.actions;
+export const { ascendingOrder, filterCatgories, sortByPrice } = productSlice.actions;
 

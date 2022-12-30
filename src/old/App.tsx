@@ -31,7 +31,7 @@ const App = () => {
     <>
       <div>
         <button>Add</button>
-        {products.map(element => <p key={element.id}>{element.title}</p>)}
+        {/* {products.map(element => <p key={element.id}>{element.title}</p>)} */}
         {/* <select onChange={(e) => selectedItem(e)}>
           <option key="select">---select---</option>
           {products.map(element => <option key={element.id}>{element.title}</option>)}

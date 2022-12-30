@@ -1,31 +1,49 @@
-import React,{useEffect} from 'react'
-import { useAppSelector,useAppDispatch } from '../hooks/reduxHook'
-import { Product } from '../common/Common' 
-import { filterCatgories } from '../redux/reducers/ProductReducers'
 
-const ProductList = ({products,selCategory}:{products:Product[],selCategory:number[]}) => {
+import { Product } from "../common/Common";
+import { Box } from "@mui/material";
+import styled from "@emotion/styled";
 
-  const pro = useAppSelector(state => state.productReducer)
-  const dispatch = useAppDispatch();
+const ProductList = ({
+  products,
+  selCategory,
+}: {
+  products: Product[];
+  selCategory: number[];
+}) => {
+  const ProductListing = styled(Box)({
+    display: "flex",
+    flexDirection: "row",
+    gap: "10px",
+    flexWrap: "wrap",
+    width: "1200px",
+    margin: "0 0 0 200px",
+  });
 
-
-  useEffect(()=> {
-    console.log("Newcategory clicked!!"+selCategory)
-    dispatch(filterCatgories(selCategory)) //Notworking Code
-
-  },[selCategory])
-   
-   
-    //console.log(products)
+  const Card = styled(Box)({
+    display: "flex",
+    flexDirection: "column",
+    border: "1px solid gray",
+    textAlign: "center",
+    gap: "20px",
+    minWidth: "250px",
+    minHeight: "250px",
+    padding: "10px 0 0 10px",
+    borderRadius: "1em",
+    backgroundColor: "lightblue",
+  });
   return (
     <>
-     <div>ProductList</div>
-     {products.length}
-     {products.map(element => <p key={element.id}>{element.title}</p>)}
-    </>
-   
-   
-  )
-}
+      {/* <div>ProductList</div> */}
+      {products.length}
 
-export default ProductList
+ 
+      <ProductListing>
+        {products.map((element) => (
+          <Card key={element.id}>{element.title}</Card>
+        ))}
+      </ProductListing>
+    </>
+  );
+};
+
+export default ProductList;
