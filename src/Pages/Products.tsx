@@ -4,7 +4,7 @@ import ProductList from '../components/ProductList';
 import { Product } from '../common/Common';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent,Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ import IndividualProduct from './IndividualProduct';
 
 
 const Products = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const AnatherBox = styled(Box)({
     display: "flex",
     flexDirection: "row",
@@ -37,18 +37,18 @@ const Products = () => {
     flexDirection: "column",
     gap: "20px",
     minWidth: "200px",
+    fontSize:"12px"
   })
   const OuterBox = styled(Box)({
-    width: "100%",
-    position: "relative",
-    height: "100px"
+   marginBottom:"20px"
   })
-  const SelectBox = styled(Box)({
-    position: "absolute",
-    right: "40px",
-    top: "100px"
 
+
+  const ProductBox = styled(Box)({
+    display: "flex",
+    flexDirection: "column",
   })
+
   const [selCategory, setSelCategory] = useState<number[]>([]);
   const displayNewProducts = (state: RootState) => {
     let data;
@@ -72,7 +72,6 @@ const Products = () => {
     } else {
       return state.productReducer;
     }
-
   }
   const products = useAppSelector(state => { return displayNewProducts(state) })
   const dispatch = useAppDispatch();
@@ -89,46 +88,58 @@ const Products = () => {
       dispatch(sortByPrice("lowtohigh"))
     }
   }
-  if(id){
-    return(
+  if (id) {
+    return (
       <>
-        <IndividualProduct/>
+        <IndividualProduct />
       </>
     )
-  
-  }else{
-  return (
-    <>
-      <OuterBox>
-        <SelectBox>
-          <FormControl fullWidth>
-            <AnatherInputLabel id="demo-simple-select-label">Sorting</AnatherInputLabel>
-            <AnatherSelect
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value=""
-              label="Sorting"
-              onChange={(e) => handleChange(e)}
-            >
-              <AnatherMenuItem value="a-z">a-z</AnatherMenuItem>
-              <AnatherMenuItem value="z-a">z-a</AnatherMenuItem>
-              <AnatherMenuItem value="hightolow">Price(High to Low)</AnatherMenuItem>
-              <AnatherMenuItem value="lowtohigh">Price(Low to High)</AnatherMenuItem>
-            </AnatherSelect>
-          </FormControl>
-        </SelectBox>
+  } else {
+    return (
+      <>
+        {/* adding number of products */}
+        {/*  */}
+        {/* <OuterBox>
+          <SelectBox>
+          </SelectBox>
+        </OuterBox> */}
+        <AnatherBox>
+          <CategoryBox>
+            <Category setSelCategory={setSelCategory} selCategory={selCategory} />
+          </CategoryBox>
+          <ProductBox>
+            <OuterBox>
+            <Grid container spacing={2}>
+            <Grid item xs={5}></Grid>
+            
+              <Grid item xs={5}>{products.length} products displayed</Grid>
+              <Grid item  xs={2}>
+              <FormControl fullWidth>
+                <AnatherInputLabel id="demo-simple-select-label">Sorting</AnatherInputLabel>
+                <AnatherSelect
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value=""
+                  label="Sorting"
+                  onChange={(e) => handleChange(e)}
+                >
+                  <AnatherMenuItem value="a-z">a-z</AnatherMenuItem>
+                  <AnatherMenuItem value="z-a">z-a</AnatherMenuItem>
+                  <AnatherMenuItem value="hightolow">Price(High to Low)</AnatherMenuItem>
+                  <AnatherMenuItem value="lowtohigh">Price(Low to High)</AnatherMenuItem>
+                </AnatherSelect>
+              </FormControl>
+              </Grid>
+            </Grid>
+            </OuterBox>
+            <Box>
+              <ProductList products={products} selCategory={selCategory} />
+            </Box>
+          </ProductBox>
 
-
-      </OuterBox>
-
-      <AnatherBox>
-        <CategoryBox>
-          <Category setSelCategory={setSelCategory} selCategory={selCategory} />
-        </CategoryBox>
-        <ProductList products={products} selCategory={selCategory} />
-      </AnatherBox>
-    </>
-  )
+        </AnatherBox>
+      </>
+    )
   }
 }
 

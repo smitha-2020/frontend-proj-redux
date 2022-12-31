@@ -2,9 +2,10 @@
 import React from 'react'
 import { useAppSelector } from '../hooks/reduxHook'
 import { Checkbox, FormControlLabel, FormGroup,Box } from '@mui/material'
-
+import styled from '@emotion/styled';
 
 const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispatch<React.SetStateAction<number[]>>, selCategory: number[] }) => {
+
   const categortList = ["others", "shoes", "furniture","electronics"]
   const categories = useAppSelector(state => state.categoryReducers)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

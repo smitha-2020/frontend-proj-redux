@@ -27,8 +27,6 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchAllProducts())
     dispatch(fetchAllCategories())
-    
-
   }, []);
 
   return (
