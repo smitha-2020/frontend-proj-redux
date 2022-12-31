@@ -1,6 +1,6 @@
 
 import { Product } from "../common/Common";
-import { Box } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import styled from "@emotion/styled";
 
 const ProductList = ({
@@ -34,12 +34,14 @@ const ProductList = ({
   return (
     <>
       {/* <div>ProductList</div> */}
-      {products.length}
-
- 
+      {/* {products.length} */}
       <ProductListing>
         {products.map((element) => (
-          <Card key={element.id}>{element.title}</Card>
+          <Card key={element.id}>
+            {element.title}
+            <Link href={`/product/${element.id}`} >Link</Link>
+          
+          </Card>
         ))}
       </ProductListing>
     </>

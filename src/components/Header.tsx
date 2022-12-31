@@ -4,12 +4,16 @@ import Button from '@mui/material/Button';
 import { BsBasketFill } from "react-icons/bs";
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
-import { Box, Stack, AppBar, Toolbar, Typography } from '@mui/material';
+import { Box, Stack, AppBar, Toolbar, Typography, useTheme, Tabs, Tab } from '@mui/material';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 
 
 const Header = () => {
+
+    const theme = useTheme();
+    console.log(theme)
     const AnatherAppBar = styled(AppBar)({
-        backgroundColor: 'white', color: "#888"
+        backgroundColor: 'white', color: "#8c8c8c"
     })
     const NewToolBar = styled(Toolbar)({
         display: "flex",
@@ -24,6 +28,27 @@ const Header = () => {
         <>
 
             {/* NabBar specific style */}
+            {/* <AppBar>
+                <Toolbar>
+                    <Grid container>
+                        <Grid item xs={3}>
+                            <Typography><LocalMallIcon /></Typography>
+                        </Grid>
+                        <Grid item xs={6} spacing={2}>
+                            <Tabs>
+                                <NavLink to="/">Home</NavLink>
+                                <NavLink to="/about">About</NavLink>
+                                <NavLink to="/products">Products</NavLink>
+                                <NavLink to="/contact">Contact</NavLink>
+                                <NavLink to="/cart"><BsBasketFill /></NavLink>
+                            </Tabs>
+                        </Grid>
+                        <Grid item xs={3}></Grid>
+                    </Grid>
+                </Toolbar>
+            </AppBar> */}
+
+
             <AnatherAppBar position="static">
                 <NewToolBar>
                     <Typography variant="h6">
@@ -33,6 +58,7 @@ const Header = () => {
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/about">About</NavLink>
                         <NavLink to="/products">Products</NavLink>
+                        {/* <NavLink to="/products/:id">Individual</NavLink> */}
                         <NavLink to="/contact">Contact</NavLink>
                         <NavLink to="/cart"><BsBasketFill /></NavLink>
                     </Menus>

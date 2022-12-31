@@ -36,14 +36,12 @@ const loginSlice = createSlice({
             // if(action.payload && "message" in action.payload){
             //     return action.payload;
             // }
-            console.log("Rejected")
             return state
         })
         build.addCase(fetchLoginInfo.pending, (state) => {
             // if(action.payload && "message" in action.payload){
             //     return action.payload;
             // }
-            console.log("Pending")
             return state
         })
     }

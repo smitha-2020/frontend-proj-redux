@@ -55,9 +55,10 @@ export const fetchAllProducts = createAsyncThunk(
 )
 export const getSingleProduct = createAsyncThunk(
     "getSingleProduct",
-    async () => {
+    async (productId:string) => {
+        let url = `https://api.escuelajs.co/api/v1/products/${productId}`;
         try {
-            const response: AxiosResponse<any, Product> = await axios.get("https://api.escuelajs.co/api/v1/products/1")
+            const response: AxiosResponse<any, Product> = await axios.get(url)
             return response.data
         } catch (e) {
             console.log(e)
@@ -106,9 +107,6 @@ const productSlice = createSlice({
                 state.sort((a, b) => b.price - a.price)
             }
         }
-        , filterCatgories: (state, action) => {
-          
-        }
     },
     extraReducers: (build) => {
         build.addCase(fetchAllProductsbyCategory.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
@@ -131,10 +129,11 @@ const productSlice = createSlice({
             console.log("Pending")
             return state;
         })
-        build.addCase(getSingleProduct.fulfilled, (state, action: PayloadAction<Product>) => {
-            if (action.payload) {
-                console.log(action.payload);
+        build.addCase(getSingleProduct.fulfilled, (state, action) => {
+            if (action.payload && "message" in action.payload) {
+                return state;
             }
+            return action.payload;
         })
         // build.addCase(updateProduct.fulfilled,(state,action)=>{
         //     if(action.payload){
@@ -148,5 +147,5 @@ const productSlice = createSlice({
 
 const productReducer = productSlice.reducer;
 export default productReducer;
-export const { ascendingOrder, filterCatgories, sortByPrice } = productSlice.actions;
+export const { ascendingOrder, sortByPrice } = productSlice.actions;
 

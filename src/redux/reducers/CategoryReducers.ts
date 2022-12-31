@@ -42,11 +42,9 @@ const categorySlice = createSlice({
         })
       
         build.addCase(fetchAllCategories.rejected, (state) => {
-            console.log("Rejected")
             return state;
         })
         build.addCase(fetchAllCategories.pending, (state) => {
-            console.log("Pending")
             return state;
         })
       
