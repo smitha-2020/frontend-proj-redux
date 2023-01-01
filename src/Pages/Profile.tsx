@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAppSelector } from '../hooks/reduxHook'
+
 
 const Profile = () => {
-  return (
-    <div>Profile</div>
-  )
+  const authentication = useAppSelector(state => state.auhtReducer)
+  if(authentication){
+    return (
+      <div>Profile</div>
+    )
+  }else{
+    return(<>
+        Not Logged in
+    </>)
+  }
+  
 }
 
 export default Profile

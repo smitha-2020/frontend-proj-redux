@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import { BsBasketFill } from "react-icons/bs";
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
+import { FaSignInAlt,FaUserAlt } from "react-icons/fa";
 import { Box, Stack, AppBar, Toolbar, Typography, useTheme, Tabs, Tab } from '@mui/material';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 
@@ -58,8 +59,10 @@ const Header = () => {
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/about">About</NavLink>
                         <NavLink to="/products">Products</NavLink>
-                        {/* <NavLink to="/products/:id">Individual</NavLink> */}
+                        <NavLink to="/profile">Profile</NavLink>
                         <NavLink to="/contact">Contact</NavLink>
+                        <NavLink to="/login"><FaSignInAlt/></NavLink>
+                        <NavLink to="/register"><FaUserAlt/></NavLink>
                         <NavLink to="/cart"><BsBasketFill /></NavLink>
                     </Menus>
                 </NewToolBar>

@@ -4,12 +4,11 @@ import ProductList from '../components/ProductList';
 import { Product } from '../common/Common';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent,Grid } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
 import IndividualProduct from './IndividualProduct';
-
 
 const Products = () => {
   const { id } = useParams();
@@ -37,18 +36,15 @@ const Products = () => {
     flexDirection: "column",
     gap: "20px",
     minWidth: "200px",
-    fontSize:"12px"
+    fontSize: "12px"
   })
   const OuterBox = styled(Box)({
-   marginBottom:"20px"
+    marginBottom: "20px"
   })
-
-
   const ProductBox = styled(Box)({
     display: "flex",
     flexDirection: "column",
   })
-
   const [selCategory, setSelCategory] = useState<number[]>([]);
   const displayNewProducts = (state: RootState) => {
     let data;
@@ -109,28 +105,28 @@ const Products = () => {
           </CategoryBox>
           <ProductBox>
             <OuterBox>
-            <Grid container spacing={2}>
-            <Grid item xs={5}></Grid>
-            
-              <Grid item xs={5}>{products.length} products displayed</Grid>
-              <Grid item  xs={2}>
-              <FormControl fullWidth>
-                <AnatherInputLabel id="demo-simple-select-label">Sorting</AnatherInputLabel>
-                <AnatherSelect
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value=""
-                  label="Sorting"
-                  onChange={(e) => handleChange(e)}
-                >
-                  <AnatherMenuItem value="a-z">a-z</AnatherMenuItem>
-                  <AnatherMenuItem value="z-a">z-a</AnatherMenuItem>
-                  <AnatherMenuItem value="hightolow">Price(High to Low)</AnatherMenuItem>
-                  <AnatherMenuItem value="lowtohigh">Price(Low to High)</AnatherMenuItem>
-                </AnatherSelect>
-              </FormControl>
+              <Grid container spacing={2}>
+                <Grid item xs={5}></Grid>
+
+                <Grid item xs={5}>{products.length} products displayed</Grid>
+                <Grid item xs={2}>
+                  <FormControl fullWidth>
+                    <AnatherInputLabel id="demo-simple-select-label">Sorting</AnatherInputLabel>
+                    <AnatherSelect
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value=""
+                      label="Sorting"
+                      onChange={(e) => handleChange(e)}
+                    >
+                      <AnatherMenuItem value="a-z">a-z</AnatherMenuItem>
+                      <AnatherMenuItem value="z-a">z-a</AnatherMenuItem>
+                      <AnatherMenuItem value="hightolow">Price(High to Low)</AnatherMenuItem>
+                      <AnatherMenuItem value="lowtohigh">Price(Low to High)</AnatherMenuItem>
+                    </AnatherSelect>
+                  </FormControl>
+                </Grid>
               </Grid>
-            </Grid>
             </OuterBox>
             <Box>
               <ProductList products={products} selCategory={selCategory} />

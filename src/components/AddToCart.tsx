@@ -1,24 +1,21 @@
 import React, { useState } from 'react'
 
 import { Button } from "@mui/material";
-import { Product,Cart } from '../common/Common';
+import { Product, Cart } from '../common/Common';
 import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { addToCart } from '../redux/reducers/cartReducer';
 
-
 const AddToCart = ({ products }: { products: Product[] }) => {
     const ButtonNew = styled(Button)({
         backgroundColor: "darkgray",
         color: "white",
         marginTop: "20px"
-    }); 
-
+    });
     const cart = useAppSelector(state => { return state.cartReducer; })
     const dispatch = useAppDispatch();
- 
     const stock = 5;
     const [amount, setAmount] = useState(1)
     const setIncrease = () => {
@@ -32,19 +29,18 @@ const AddToCart = ({ products }: { products: Product[] }) => {
         backgroundColor: "lightblue",
         color: "gray"
     });
-    const data:Cart={
-        quantity:amount,
-        product:products
+    const data: Cart = {
+        quantity: amount,
+        product: products
     }
-
-    const addCart = (e:React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        dispatch(addToCart({...data}))
+    const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        dispatch(addToCart({ ...data }))
         console.log(cart)
-    } 
+    }
     return (
         <>
             <ToggleButton amount={amount} setIncrease={setIncrease} setDecrease={setDecrease} />
-            <NavLink to="/cart" onClick={(e)=> {addCart(e)}}>
+            <NavLink to="/cart" onClick={(e) => { addCart(e) }}>
                 <ButtonNew variant='contained'>Add To Cart</ButtonNew>
             </NavLink>
         </>
