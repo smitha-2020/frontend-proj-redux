@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { BsBasketFill } from "react-icons/bs";
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
-import { FaSignInAlt,FaUserAlt } from "react-icons/fa";
+import { FaSignInAlt, FaUserAlt } from "react-icons/fa";
 import { Box, Stack, AppBar, Toolbar, Typography, useTheme, Tabs, Tab } from '@mui/material';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { useAppSelector } from '../hooks/reduxHook';
 
 
 const Header = () => {
 
-    const theme = useTheme();
-    console.log(theme)
+    const cart = useAppSelector(state => { return state.cartReducer; })
+    const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
+    console.log(carttotal)
     const AnatherAppBar = styled(AppBar)({
         backgroundColor: 'white', color: "#8c8c8c"
     })
@@ -25,6 +27,10 @@ const Header = () => {
         display: "flex",
         gap: "20px"
     })
+
+    useEffect(() => {
+        console.log("Hi")
+    }, [])
     return (
         <>
 
@@ -59,9 +65,9 @@ const Header = () => {
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/products">Products</NavLink>
                         <NavLink to="/profile">Profile</NavLink>
-                        <NavLink to="/login"><FaSignInAlt/></NavLink>
-                        <NavLink to="/register"><FaUserAlt/></NavLink>
-                        <NavLink to="/cart"><BsBasketFill /></NavLink>
+                        <NavLink to="/login"><FaSignInAlt /></NavLink>
+                        <NavLink to="/register"><FaUserAlt /></NavLink>
+                        <NavLink to="/cart"><BsBasketFill /><span className="span-cart">{carttotal}</span></NavLink>
                     </Menus>
                 </NewToolBar>
             </AnatherAppBar>

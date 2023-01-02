@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { fetchLoginInfo, setData } from '../redux/reducers/loginInfo'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import styled from '@emotion/styled';
 
 
@@ -59,7 +59,7 @@ const Login = () => {
     if (access_token) {
       localStorage.setItem("accessToken", access_token)
 
-      if(localStorage.getItem('accessToken')){
+      if (localStorage.getItem('accessToken')) {
         navigate('/')
       }
       setAccessToken(access_token)
@@ -80,6 +80,7 @@ const Login = () => {
 
   return (
     <>
+      {/*   
       <div>Login</div>
       <div>
         <span>Username</span>
@@ -89,30 +90,29 @@ const Login = () => {
         <span>Password</span>
         <input type="text" value={logindata.password} onChange={(e) => getData('password', e)} name="password" />
       </div>
-      <button onClick={loginData}>Login</button> 
-{/*       
-      <DivBox> 
-      <CentreredBox>
-        <MainBox>
-          <RowBox>Login</RowBox>
-          <RowBox>
-            <Box> <span>Username</span></Box>
-            <Box> <input type="text" value={logindata.email} onChange={(e) => getData('email', e)} name="email" /></Box>
-          </RowBox>
-          <RowBox>
-            <Box> <span>Password</span></Box>
-            <Box> <input type="text" value={logindata.password} onChange={(e) => getData('password', e)} name="password" /></Box>
-          </RowBox>
-          <RowBox>
-            <SubmitButton onClick={loginData}>Login</SubmitButton>
-          </RowBox>
-        </MainBox>
-      </CentreredBox>
-      </DivBox>  */}
+      <button onClick={loginData}>Login</button> */}
+
+      <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '100vh', minWidth: '100vw' }}>
+        <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ width: '800px', height: '500px', marginLeft: "20px" }}>
+          <Grid item>
+            <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
+              <Typography>Username</Typography>
+              <Box component="span" m="{1}"> <input type="text" value={logindata.email} onChange={(e) => getData('email', e)} name="email" /></Box>
+            </Grid>
+            <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
+              <Typography>Password</Typography>
+              <Box component="span" m="{1}"> <input type="text" value={logindata.password} onChange={(e) => getData('password', e)} name="password" /></Box>
+            </Grid>
+            <Grid item><button onClick={loginData}>Login</button></Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+
+
+
     </>
   )
 }
-
 export default Login
 
 

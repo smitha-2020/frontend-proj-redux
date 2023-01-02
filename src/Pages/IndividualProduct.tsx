@@ -13,6 +13,7 @@ import Star from "../components/Star";
 
 const IndividualProduct = ({ products }: { products: Product[] }) => {
   let { id } = useParams();
+
   let image: string;
   let img: string = "";
   let rating: number = 0;
@@ -49,6 +50,7 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
     });
   }
   if (price && description && title && img) {
+    let idPass: string = (id) ? id : "";
     return (
       <>
         <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '100vh', minWidth: '100vw' }}>
@@ -93,7 +95,7 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
                 <Grid item style={{ marginTop: '20px',fontSize:'12px',fontWeight:'400' }}>Brand: {title}</Grid>
                 <Grid item style={{ border:"1px solid gray",marginTop:'20px'}}></Grid>
                 <Grid item>
-                <AddToCart products={products} />
+                <AddToCart products={products} id={idPass}/>
                 </Grid>
               </Grid>
             </Grid>

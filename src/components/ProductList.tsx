@@ -2,6 +2,7 @@
 import { Product } from "../common/Common";
 import { Box, Link } from "@mui/material";
 import styled from "@emotion/styled";
+import { NavLink } from 'react-router-dom';
 
 const ProductList = ({
   products,
@@ -60,7 +61,10 @@ const ProductList = ({
         {products.map((element) => (
           <Card key={element.id}>
             <ImgBox>
-              <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></Link>
+            <NavLink to={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></NavLink>
+
+
+              {/* <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></Link> */}
             </ImgBox>
             <CategorySBox>{element.category}</CategorySBox>
             <DescriptionBox>
