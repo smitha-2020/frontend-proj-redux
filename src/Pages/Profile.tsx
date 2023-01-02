@@ -5,6 +5,7 @@ import { useAppSelector } from '../hooks/reduxHook'
 const Profile = () => {
   const authentication = useAppSelector(state => state.auhtReducer)
   if(authentication){
+    console.log(authentication)
     return (
       <div>Profile</div>
     )

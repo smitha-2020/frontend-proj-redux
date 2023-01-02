@@ -4,18 +4,23 @@ import axios, { AxiosResponse } from 'axios';
 
 
 
-interface Category {
-    id: number,
-    name: string,
-    image: string
-}
-interface Product {
+// interface Category {
+//     id: number,
+//     name: string,
+//     image: string
+// }
+export interface Rating {
+    rate: number,
+    count: number
+    }
+export interface Product {
     id: number,
     title: string,
     price: number,
     description: string,
-    category: Category
-    images: string[]
+    category: string,
+    image: string,
+    rating:Rating 
 }
 interface ProductDesc {
     title: string,
@@ -35,7 +40,6 @@ export const fetchAllProductsbyCategory = createAsyncThunk(
     async (id: number) => {
         try {
             const response: AxiosResponse<any, Product[]> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
-
             return response.data
         } catch (e) {
             console.log(e)
@@ -46,7 +50,8 @@ export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async () => {
         try {
-            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
+            //const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
+            const response: AxiosResponse<any, Product[]> = await axios.get("https://fakestoreapi.com/products")
             return response.data
         } catch (e) {
             console.log(e)

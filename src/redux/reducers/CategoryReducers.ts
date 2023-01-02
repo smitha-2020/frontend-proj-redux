@@ -4,19 +4,21 @@ import { Action } from '@remix-run/router';
 import axios, { AxiosResponse } from 'axios';
 
 
-interface Category {
-    id: number,
-    name: string,
-    image: string
-}
-type CategoryType = Category[]
+// interface Category {
+//     id: number,
+//     name: string,
+//     image: string
+// }
+type CategoryType = []
 
-const initialState: Category[] = [];
+const initialState: string[] = [];
 export const fetchAllCategories = createAsyncThunk(
     "fetchAllCategories",
     async () => {
         try {
-            const res = await axios.get("https://api.escuelajs.co/api/v1/categories")
+            const res = await axios.get("https://fakestoreapi.com/products/categories")
+            //const res = await axios.get("https://api.escuelajs.co/api/v1/categories")
+            
             return res.data;
         
         } catch (e) {

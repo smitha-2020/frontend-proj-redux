@@ -57,10 +57,8 @@ const Header = () => {
                     </Typography>
                     <Menus>
                         <NavLink to="/">Home</NavLink>
-                        <NavLink to="/about">About</NavLink>
                         <NavLink to="/products">Products</NavLink>
                         <NavLink to="/profile">Profile</NavLink>
-                        <NavLink to="/contact">Contact</NavLink>
                         <NavLink to="/login"><FaSignInAlt/></NavLink>
                         <NavLink to="/register"><FaUserAlt/></NavLink>
                         <NavLink to="/cart"><BsBasketFill /></NavLink>

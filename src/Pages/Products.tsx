@@ -45,14 +45,14 @@ const Products = () => {
     display: "flex",
     flexDirection: "column",
   })
-  const [selCategory, setSelCategory] = useState<number[]>([]);
+  const [selCategory, setSelCategory] = useState<string[]>([]);
   const displayNewProducts = (state: RootState) => {
     let data;
     let filteredData: Product[] = [];
-    //console.log(selCategory)
+    console.log(selCategory)
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
-        [...data] = state.productReducer.filter((product) => { return product.category.id === selCategory[i] })
+        [...data] = state.productReducer.filter((product) => { return product.category === selCategory[i] })
         filteredData.push(...data)
         // console.log(filteredData)
       }
@@ -70,6 +70,8 @@ const Products = () => {
     }
   }
   const products = useAppSelector(state => { return displayNewProducts(state) })
+  //const products = useAppSelector(state => { return (state.productReducer) })
+  console.log(products)
   const dispatch = useAppDispatch();
   const handleChange = (e: SelectChangeEvent<unknown>) => {
     if (e.target.value === "a-z") {
@@ -87,7 +89,7 @@ const Products = () => {
   if (id) {
     return (
       <>
-        <IndividualProduct />
+        <IndividualProduct products={products}/>
       </>
     )
   } else {
@@ -107,7 +109,6 @@ const Products = () => {
             <OuterBox>
               <Grid container spacing={2}>
                 <Grid item xs={5}></Grid>
-
                 <Grid item xs={5}>{products.length} products displayed</Grid>
                 <Grid item xs={2}>
                   <FormControl fullWidth>
@@ -121,15 +122,15 @@ const Products = () => {
                     >
                       <AnatherMenuItem value="a-z">a-z</AnatherMenuItem>
                       <AnatherMenuItem value="z-a">z-a</AnatherMenuItem>
-                      <AnatherMenuItem value="hightolow">Price(High to Low)</AnatherMenuItem>
-                      <AnatherMenuItem value="lowtohigh">Price(Low to High)</AnatherMenuItem>
+                      <AnatherMenuItem value="hightolow">Price(Low to High)</AnatherMenuItem>
+                      <AnatherMenuItem value="lowtohigh">Price(High to Low)</AnatherMenuItem>
                     </AnatherSelect>
                   </FormControl>
                 </Grid>
               </Grid>
             </OuterBox>
             <Box>
-              <ProductList products={products} selCategory={selCategory} />
+              <ProductList products={products} />
             </Box>
           </ProductBox>
 

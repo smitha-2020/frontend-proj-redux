@@ -5,10 +5,8 @@ import styled from "@emotion/styled";
 
 const ProductList = ({
   products,
-  selCategory,
 }: {
   products: Product[];
-  selCategory: number[];
 }) => {
   const ProductListing = styled(Box)({
     display: "flex",
@@ -62,11 +60,11 @@ const ProductList = ({
         {products.map((element) => (
           <Card key={element.id}>
             <ImgBox>
-              <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.category.image} /></Link>
+              <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></Link>
             </ImgBox>
-            <CategorySBox>{element.category.name}</CategorySBox>
+            <CategorySBox>{element.category}</CategorySBox>
             <DescriptionBox>
-              <NameBox>{element.title}</NameBox>
+              <NameBox>{element.title.substring(1,15)}</NameBox>
               <NameBox>${element.price}</NameBox>
             </DescriptionBox>
           </Card>

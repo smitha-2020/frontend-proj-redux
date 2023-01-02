@@ -5,7 +5,7 @@ import { store } from './redux/store';
 import App from './App';
 //import App from './old/App';
 import reportWebVitals from './reportWebVitals';
-import '../src/css/main.css'
+import "../src/css/main.css";
 
 
 const container = document.getElementById('root')!;

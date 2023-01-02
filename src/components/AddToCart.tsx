@@ -41,7 +41,7 @@ const AddToCart = ({ products }: { products: Product[] }) => {
         <>
             <ToggleButton amount={amount} setIncrease={setIncrease} setDecrease={setDecrease} />
             <NavLink to="/cart" onClick={(e) => { addCart(e) }}>
-                <ButtonNew variant='contained'>Add To Cart</ButtonNew>
+                <Button variant='contained' style={{backgroundColor: "darkgray",color: "white",marginTop: "20px"}}>Add To Cart</Button>
             </NavLink>
         </>
     )
