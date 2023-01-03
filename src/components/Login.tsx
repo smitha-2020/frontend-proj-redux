@@ -3,8 +3,6 @@ import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { fetchLoginInfo, setData } from '../redux/reducers/loginInfo'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Grid, Typography } from "@mui/material";
-import styled from '@emotion/styled';
-
 
 const Login = () => {
   // const DivBox = styled(Box)({

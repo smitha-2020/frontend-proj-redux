@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { addToCart } from '../redux/reducers/cartReducer';
 
-const AddToCart = ({ products,id }: { products: Product[],id:string }) => {
+const AddToCart = ({ products,id }: { products: Product,id:string }) => {
     const ButtonNew = styled(Button)({
         backgroundColor: "darkgray",
         color: "white",
@@ -31,7 +31,7 @@ const AddToCart = ({ products,id }: { products: Product[],id:string }) => {
     });
     const data: Cart = {
         quantity: amount,
-        product: products.filter((product) => {return product.id===Number(id)})
+        product: products
     }
     const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         //e.preventDefault();

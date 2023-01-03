@@ -27,10 +27,9 @@ export interface Product {
 }
 export interface Cart {
     quantity: number,
-    product: Product[]
+    product: Product
 }
 export interface authenticUser {
-
     id: number,
     avatar:string,
     email: string,

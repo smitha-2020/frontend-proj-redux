@@ -9,6 +9,7 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import SecurityIcon from "@mui/icons-material/Security";
 import AddToCart from "../components/AddToCart";
 import Star from "../components/Star";
+import { isArray } from "util";
 
 
 const IndividualProduct = ({ products }: { products: Product[] }) => {
@@ -35,7 +36,9 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
   // });
 
   const product = products.filter((product) => { return product.id === Number(id) })
-  console.log("products" + product)
+
+  const [newdata] = product;
+  console.log("products" + Array.isArray(newdata))
   if (product) {
     product.map((data) => {
       img = data.category
@@ -56,8 +59,9 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
           <Grid container spacing={0} alignItems="center" justifyContent="center" style={{ width: '1200px', height: '500px', marginLeft: "20px" }}>
             {/* <Grid item xs={5}> <img src={img} alt={img} width="250" height="250" /></Grid> */}
             <Grid item xs={5}>
-              <Grid container spacing={0} xs={12} direction="row" alignItems="center" justifyContent="center">
+              <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
                 <ProductImg images={images} image={img}/>
+
               </Grid>
             </Grid>
             <Grid item xs={1}></Grid>
@@ -99,7 +103,7 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
                 <Grid item style={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Brand: {title}</Grid>
                 <Grid item style={{ border: "1px solid gray", marginTop: '20px' }}></Grid>
                 <Grid item>
-                  <AddToCart products={products} id={idPass} />
+                  <AddToCart products={newdata} id={idPass} />
                 </Grid>
               </Grid>
             </Grid>
