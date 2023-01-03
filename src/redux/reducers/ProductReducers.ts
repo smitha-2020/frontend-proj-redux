@@ -76,7 +76,7 @@ export const addProduct = createAsyncThunk(
     "addProduct",
     async (product:ProductDesc) => {
         try {
-            const response:AxiosResponse<ProductDesc,Product> = await axios.post("https://api.escuelajs.co/api/v1/products/",product)
+            const response:AxiosResponse<Product,Product> = await axios.post("https://api.escuelajs.co/api/v1/products/",product)
             return response.data
         } catch (e) {
             console.log(e)
@@ -135,6 +135,13 @@ const productSlice = createSlice({
         build.addCase(fetchAllProducts.pending, (state) => {
             console.log("Pending")
             return state;
+        })
+        build.addCase(addProduct.fulfilled, (state, action) => {
+            if(action.payload){
+                return [...state,action.payload]
+            }else{
+                return state;
+            }
         })
         build.addCase(getSingleProduct.fulfilled, (state, action) => {
             if (action.payload && "message" in action.payload) {

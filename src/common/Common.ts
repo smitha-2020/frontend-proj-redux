@@ -38,3 +38,10 @@ export interface authenticUser {
     role:string
 
 }
+export interface ProductDesc {
+    title: string,
+    price: number,
+    description: string,
+    categoryId: number,
+    images: string[]
+}
