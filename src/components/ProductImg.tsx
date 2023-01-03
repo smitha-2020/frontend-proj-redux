@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
-import { Category } from '../common/Common';
+import { Categorys } from '../common/Common';
 
-const ProductImg = ({ images, image }: { images: string[], image: Category }) => {
+const ProductImg = ({ images, image }: { images: string[], image: Categorys }) => {
 
     const [mainImg, setMainImg] = useState(image.image)
     //console.log(mainImg)

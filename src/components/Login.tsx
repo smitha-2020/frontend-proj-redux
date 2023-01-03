@@ -91,7 +91,6 @@ const Login = () => {
         <input type="text" value={logindata.password} onChange={(e) => getData('password', e)} name="password" />
       </div>
       <button onClick={loginData}>Login</button> */}
-
       <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '100vh', minWidth: '100vw' }}>
         <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ width: '800px', height: '500px', marginLeft: "20px" }}>
           <Grid item>
@@ -107,9 +106,6 @@ const Login = () => {
           </Grid>
         </Grid>
       </Grid>
-
-
-
     </>
   )
 }

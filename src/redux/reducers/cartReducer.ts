@@ -2,17 +2,13 @@ import axios from 'axios'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Cart } from '../../common/Common'
 
-
-
 const initialState:Cart[] =[];
-
 const cartSlice = createSlice({
     name: 'productSlice',
     initialState: initialState,
     reducers: {
         addToCart(state,action:PayloadAction<Cart>){
-            //console.log(state)
-            console.log("i am here" +action.payload)
+            state.filter((item) => {return item})
            return [...state,action.payload]
         },
         removeFromCart(state,action){
@@ -22,7 +18,6 @@ const cartSlice = createSlice({
         }
     }
 })
-
 const cartReducer = cartSlice.reducer;
 export default cartReducer;
 

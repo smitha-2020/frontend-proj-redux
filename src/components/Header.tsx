@@ -5,13 +5,15 @@ import { BsBasketFill } from "react-icons/bs";
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
 import { FaSignInAlt, FaUserAlt } from "react-icons/fa";
-import { Box, Stack, AppBar, Toolbar, Typography, useTheme, Tabs, Tab } from '@mui/material';
+import { Box, Stack, AppBar, Toolbar, Typography, useTheme, Tabs, Tab, Avatar } from '@mui/material';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { useAppSelector } from '../hooks/reduxHook';
+import { authenticUser } from '../common/Common';
 
 
 const Header = () => {
 
+    const authentication:authenticUser = useAppSelector(state => state.auhtReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     console.log(carttotal)
@@ -64,8 +66,7 @@ const Header = () => {
                     <Menus>
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/products">Products</NavLink>
-                        <NavLink to="/profile">Profile</NavLink>
-                        <NavLink to="/login"><FaSignInAlt /></NavLink>
+                        {authentication.avatar?<NavLink to="/profile"><Avatar alt="Remy Sharp" src={authentication.avatar} /></NavLink>:<NavLink to="/login"><FaSignInAlt /></NavLink>}
                         <NavLink to="/register"><FaUserAlt /></NavLink>
                         <NavLink to="/cart"><BsBasketFill /><span className="span-cart">{carttotal}</span></NavLink>
                     </Menus>

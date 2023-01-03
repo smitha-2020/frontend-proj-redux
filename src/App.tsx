@@ -35,6 +35,8 @@ const App = () => {
       console.log(authentication)
     }
   }, []);
+
+  
   return (
     <>
       <BrowserRouter>

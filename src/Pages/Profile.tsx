@@ -4,17 +4,21 @@ import { useAppSelector } from '../hooks/reduxHook'
 
 const Profile = () => {
   const authentication = useAppSelector(state => state.auhtReducer)
-  if(authentication){
+  useEffect(() => {
+    console.log("data refreshed");
+  }, [authentication])
+  if (authentication) {
     console.log(authentication)
     return (
-      <div>Profile</div>
+      <div><a href="#">Logout</a>Profile</div>
+
     )
-  }else{
-    return(<>
-        Not Logged in
+  } else {
+    return (<>
+      Not Logged in
     </>)
   }
-  
+
 }
 
 export default Profile

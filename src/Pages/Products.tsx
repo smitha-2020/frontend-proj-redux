@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Category from '../components/Category'
 import ProductList from '../components/ProductList';
-import { Product } from '../common/Common';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
 import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
+import { Product } from '../common/Common';
 import IndividualProduct from './IndividualProduct';
 
 const Products = () => {
@@ -45,14 +45,14 @@ const Products = () => {
     display: "flex",
     flexDirection: "column",
   })
-  const [selCategory, setSelCategory] = useState<string[]>([]);
+  const [selCategory, setSelCategory] = useState<number[]>([]);
   const displayNewProducts = (state: RootState) => {
     let data;
     let filteredData: Product[] = [];
     console.log(selCategory)
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
-        [...data] = state.productReducer.filter((product) => { return product.category === selCategory[i] })
+        [...data] = state.productReducer.filter((product) => { return product.category.id === selCategory[i] })
         filteredData.push(...data)
         // console.log(filteredData)
       }
@@ -71,7 +71,8 @@ const Products = () => {
   }
   const products = useAppSelector(state => { return displayNewProducts(state) })
   //const products = useAppSelector(state => { return (state.productReducer) })
-  console.log(products)
+  //const products = useAppSelector(state => { return (state.productReducer) })
+  //console.log(products)
   const dispatch = useAppDispatch();
   const handleChange = (e: SelectChangeEvent<unknown>) => {
     if (e.target.value === "a-z") {

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
+import  {Product}  from '../../common/Common';
 
 
 
@@ -13,15 +14,15 @@ export interface Rating {
     rate: number,
     count: number
     }
-export interface Product {
-    id: number,
-    title: string,
-    price: number,
-    description: string,
-    category: string,
-    image: string,
-    rating:Rating 
-}
+// export interface Product {
+//     id: number,
+//     title: string,
+//     price: number,
+//     description: string,
+//     category: string,
+//     image: string,
+//     rating:Rating 
+// }
 interface ProductDesc {
     title: string,
     price: number,
@@ -51,7 +52,8 @@ export const fetchAllProducts = createAsyncThunk(
     async () => {
         try {
             //const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
-            const response: AxiosResponse<any, Product[]> = await axios.get("https://fakestoreapi.com/products")
+            //const response: AxiosResponse<any, Product[]> = await axios.get("https://fakestoreapi.com/products")
+            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products?offset=3&limit=500")
             return response.data
         } catch (e) {
             console.log(e)
