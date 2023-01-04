@@ -34,9 +34,7 @@ const AddToCart = ({ products,id }: { products: Product,id:string }) => {
         product: products
     }
     const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        //e.preventDefault();
         dispatch(addToCart({ ...data }))
-        //console.log(cart)
     }
     return (
         <>

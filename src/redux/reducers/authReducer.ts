@@ -20,7 +20,9 @@ export const authSlice = createSlice({
     name: "authSlice",
     initialState: initialState,
     reducers: {
-
+        clearSession(state){
+            return {id:0,avatar:"",email:"",password:"",name:"",role:""}
+        }
     },
     extraReducers: (build) => {
         build.addCase(fetchSession.fulfilled, (state, action) => {
@@ -32,9 +34,9 @@ export const authSlice = createSlice({
         build.addCase(fetchSession.pending, (state) => {
             return state
         })
-
     }
 })
 
 const auhtReducer = authSlice.reducer;
 export default auhtReducer;
+export const {clearSession} = authSlice.actions;

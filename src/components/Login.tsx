@@ -1,57 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
-import { fetchLoginInfo, setData } from '../redux/reducers/loginInfo'
+
+import { fetchLoginInfo } from '../redux/reducers/loginInfo'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import { AiOutlineLogin } from 'react-icons/ai';
+import LoginIcon from '@mui/icons-material/Login';
 
 const Login = () => {
-  // const DivBox = styled(Box)({
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   width: "100vw",
-  //   height: "100vh",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-
-  // });
-  // const CentreredBox = styled(Box)({
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   width: "500px",
-  //   height: "500px",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   backgroundColor: "#f2f2f2",
-  //   justifyItems:"center",
-  // });
-
-  // const MainBox = styled(Box)({
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   gap: "10px",
-  //   flexWrap: "wrap",
-  //   width: "500px",
-  // });
-  // const RowBox = styled(Box)({
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   gap: "30px",
-  //   flexWrap: "wrap",
-  //   width: "400px",
-  //   justifyContent: "center"
-  // });
-  // const SubmitButton = styled(Button)({
-  //   backgroundColor: "lightgray",
-  //   color: "white"
-  // });
   const navigate = useNavigate()
-
+  const [isSignup, setIsSignUp] = useState(false)
   const [accessToken, setAccessToken] = useState("")
   const [logindata, setLoginData] = useState({
+    name: "",
     email: "",
-    password: ""
+    password: "",
+    avatar: ""
   });
-
   const { access_token } = useAppSelector(state => state.loginReducer)
   useEffect(() => {
     if (access_token) {
@@ -63,47 +29,35 @@ const Login = () => {
       setAccessToken(access_token)
     }
   }, [access_token])
-
   const dispatch = useAppDispatch();
-  const getData = (field: string, e: React.ChangeEvent<HTMLInputElement>) => {
+  const getData = (field: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     setLoginData((prevVal) => ({ ...prevVal, [field]: e.target.value }));
   }
   const loginData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    dispatch(fetchLoginInfo({
-      email: logindata.email,
-      password: logindata.password
-    }))
+    if(!isSignup){
+      if(logindata.email!=="" && logindata.password!==""){
+        console.log(logindata)
+        dispatch(fetchLoginInfo({
+          email: logindata.email,
+          password: logindata.password
+        }))
+      }
+    }
   }
-
   return (
     <>
-      {/*   
-      <div>Login</div>
-      <div>
-        <span>Username</span>
-        <input type="text" value={logindata.email} onChange={(e) => getData('email', e)} name="email" />
-      </div>
-      <div>
-        <span>Password</span>
-        <input type="text" value={logindata.password} onChange={(e) => getData('password', e)} name="password" />
-      </div>
-      <button onClick={loginData}>Login</button> */}
-      <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '100vh', minWidth: '100vw' }}>
-        <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ width: '800px', height: '500px', marginLeft: "20px" }}>
-          <Grid item>
-            <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
-              <Typography>Username</Typography>
-              <Box component="span" m="{1}"> <input type="text" value={logindata.email} onChange={(e) => getData('email', e)} name="email" /></Box>
-            </Grid>
-            <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
-              <Typography>Password</Typography>
-              <Box component="span" m="{1}"> <input type="text" value={logindata.password} onChange={(e) => getData('password', e)} name="password" /></Box>
-            </Grid>
-            <Grid item><button onClick={loginData}>Login</button></Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      <form> 
+        <Box display="flex" flexDirection="column" maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={5} padding={3} borderRadius={5} boxShadow={'5px 5px 10px lightgray'} sx={{":hover":{boxShadow:"10px 10px 10px lightgray",},}}>
+          <Typography variant="h2" textAlign="center" padding={3}> {isSignup?'SignUp':'Login'}</Typography>
+          {isSignup && <TextField type="text" variant="outlined" placeholder="name" margin="normal"  value={logindata.name} onChange={(e) => getData('name', e)} />}
+          <TextField type="email" variant="outlined" placeholder="email" margin="normal"  value={logindata.email} onChange={(e) => getData('email', e)} />
+          <TextField  type="password" variant="outlined"  placeholder="password" margin="normal"  value={logindata.password} onChange={(e) => getData('password', e)}  />
+          {isSignup && <input type="file" id="myFile" name="filename"  value={logindata.avatar} onChange={(e) => getData('avatar', e)} style={{marginTop:"10px"}}/> }
+          <Button endIcon={isSignup?<LoginIcon/>:<AiOutlineLogin/>} sx={{marginTop:3,borderRadius:3,fill:'white'}} variant="contained" color="warning"  onClick={loginData}>  {isSignup?'Signup':'Login'}</Button>
+          <Button sx={{marginTop:3,borderRadius:3}} onClick={()=>{setIsSignUp(!isSignup)}}> {isSignup?'change to Login':'change to signup'}</Button>
+        </Box>
+      </form>
     </>
   )
 }
