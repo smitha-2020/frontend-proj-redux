@@ -10,11 +10,26 @@ interface LoginData {
 const initialState = {
     access_token: "" 
 }
+interface FileInput{
+    file: File
+  }
 export const fetchLoginInfo = createAsyncThunk(
     "fetchLoginInfo",
     async (data: LoginData) => {
         try {
             const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", data, { headers: { 'Content-Type': 'application/json' } })
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+export const registration = createAsyncThunk(
+    "registration",
+    async (inputFile: FileInput) => {
+        try {
+            const response = await axios.post("https://api.escuelajs.co/api/v1/files/upload", inputFile, { headers: { 'Content-Type': 'multipart/form-data' } })
+            console.log(response.data)
             return response.data;
         } catch (e) {
             console.log(e)
@@ -38,8 +53,11 @@ const loginSlice = createSlice({
             return state
         })
         build.addCase(fetchLoginInfo.pending, (state) => {
-   
             return state
+        })
+        .addCase(registration.fulfilled,(state, action) =>{
+            return action.payload;
+
         })
     }
 });

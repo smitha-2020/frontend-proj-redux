@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 
-import { fetchLoginInfo } from '../redux/reducers/loginInfo'
+import { fetchLoginInfo, registration } from '../redux/reducers/loginInfo'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
@@ -24,7 +24,7 @@ const Login = () => {
       localStorage.setItem("accessToken", access_token)
 
       if (localStorage.getItem('accessToken')) {
-        navigate('/')
+        navigate('/profile')
       }
       setAccessToken(access_token)
     }
@@ -42,6 +42,8 @@ const Login = () => {
           email: logindata.email,
           password: logindata.password
         }))
+      }else{
+        //dispatch(registration(logindata.avatar))
       }
     }
   }

@@ -51,9 +51,9 @@ export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async () => {
         try {
-            //const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
+            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
             //const response: AxiosResponse<any, Product[]> = await axios.get("https://fakestoreapi.com/products")
-            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products?offset=5&limit=500")
+            //const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products?offset=5&limit=500")
             return response.data
         } catch (e) {
             console.log(e)
