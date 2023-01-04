@@ -9,7 +9,6 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import SecurityIcon from "@mui/icons-material/Security";
 import AddToCart from "../components/AddToCart";
 import Star from "../components/Star";
-import { isArray } from "util";
 
 
 const IndividualProduct = ({ products }: { products: Product[] }) => {
@@ -61,15 +60,14 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
             <Grid item xs={5}>
               <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
                 <ProductImg images={images} image={img}/>
-
               </Grid>
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid item xs={6}>
               <Grid container spacing={0} direction="column" >
                 <Grid item style={{ marginTop: '10px', fontSize: '25px', fontWeight: '400' }}>{title}</Grid>
-                {/* <Grid item style={{ marginTop: '20px',fontSize:'12px',fontWeight:'400' }}> <Star stars={rating} /></Grid>
-                <Grid item style={{ marginTop: '10px',fontSize:'12px',fontWeight:'400' }}> ({reviews} reviews so far)</Grid> */}
+                <Grid item style={{ marginTop: '20px',fontSize:'12px',fontWeight:'400' }}> <Star/></Grid>
+                {/* <Grid item style={{ marginTop: '10px',fontSize:'12px',fontWeight:'400' }}> ({reviews} reviews so far)</Grid> */}
                 <Grid item style={{ marginTop: '10px', fontSize: '18px', fontWeight: '400' }}>Price : ${price}</Grid>
                 <Grid item style={{ marginTop: '10px', fontSize: '12px', fontWeight: '400', width: "500px" }}>{description}</Grid>
                 <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ marginTop: '30px' }}>

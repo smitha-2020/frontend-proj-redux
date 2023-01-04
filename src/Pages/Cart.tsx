@@ -6,11 +6,8 @@ import { removeFromCart,increaseQuantity,decreaseQuantity } from '../redux/reduc
 import { authenticUser } from '../common/Common';
 import ToggleButton from '../components/ToggleButton';
 import NoData from '../components/NoData';
-
 import CartBtn from '../components/CartBtn';
 import CartTotal from '../components/CartTotal';
-
-
 
 const Cart = () => {
   const cart = useAppSelector(state => { return state.cartReducer; })
