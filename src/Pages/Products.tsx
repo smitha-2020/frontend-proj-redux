@@ -3,7 +3,7 @@ import Category from '../components/Category'
 import ProductList from '../components/ProductList';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, TextField } from '@mui/material';
 import styled from '@emotion/styled';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ const Products = () => {
     display: "flex",
     flexDirection: "row",
     gap: "10px",
-    margin: "100px 0 0 0",
+    margin: "30px 0 0 0",
     padding: "50px 0 0 50px"
   })
   const AnatherInputLabel = styled(InputLabel)({
@@ -46,6 +46,7 @@ const Products = () => {
     flexDirection: "column",
   })
   const [selCategory, setSelCategory] = useState<number[]>([]);
+  const [search,setSearch] = useState("");
   const displayNewProducts = (state: RootState) => {
     let data;
     let filteredData: Product[] = [];
@@ -87,10 +88,13 @@ const Products = () => {
       dispatch(sortByPrice("lowtohigh"))
     }
   }
+
+
+
   if (id) {
     return (
       <>
-        <IndividualProduct products={products}/>
+        <IndividualProduct products={products} />
       </>
     )
   } else {
@@ -105,6 +109,9 @@ const Products = () => {
         <AnatherBox>
           <CategoryBox>
             <Category setSelCategory={setSelCategory} selCategory={selCategory} />
+            <Box>
+              <TextField type="email" variant="outlined" placeholder="Search" margin="normal" value={search}  />
+            </Box>
           </CategoryBox>
           <ProductBox>
             <OuterBox>

@@ -72,6 +72,17 @@ export const getSingleProduct = createAsyncThunk(
         }
     }
 )
+// export const uploadImagewithForm = createAsyncThunk(
+//     "uploadImagewithForm",
+//     async (image:File) => {
+//         try {
+//             const response:AxiosResponse<Product,Product> = await axios.post("https://api.escuelajs.co/api/v1/files/upload",image,{ headers: })
+//             return response.data
+//         } catch (e) {
+//             console.log(e)
+//         }
+//     }
+// )
 export const addProduct = createAsyncThunk(
     "addProduct",
     async (product:ProductDesc) => {

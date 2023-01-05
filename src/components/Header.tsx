@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { BsBasketFill } from "react-icons/bs";
 import styled from '@emotion/styled';
 import { FaSignInAlt, FaUserAlt,FaSignOutAlt } from "react-icons/fa";
@@ -8,9 +8,11 @@ import { Box, AppBar, Toolbar, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { authenticUser } from '../common/Common';
 import { clearSession } from '../redux/reducers/authReducer';
+import { FcSignature } from "react-icons/fc";
 
 
 const Header = () => {
+    const navigate = useNavigate();
     const authentication:authenticUser = useAppSelector(state => state.auhtReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
@@ -30,13 +32,14 @@ const Header = () => {
         console.log("Logging out")
         localStorage.setItem("accessToken", "")
         dispatch(clearSession())
+        navigate("/login")
     } 
     return (
         <>
             <AnatherAppBar position="static">
                 <NewToolBar>
-                    <Typography variant="h6">
-                        SMART BUY
+                    <Typography variant="h1">
+                       <FcSignature/>
                     </Typography>
                     <Menus>
                         <NavLink to="/">Home</NavLink>
@@ -44,6 +47,7 @@ const Header = () => {
                         {/* <Avatar alt="Remy Sharp" src={authentication.avatar} /> */}
                         {authentication.avatar?<NavLink style={{color:'coral'}} to="/profile">{`welcome, ${authentication.name} `}</NavLink>:<NavLink to="/login"><FaSignInAlt /></NavLink>}
                         {authentication.avatar?<FaSignOutAlt onClick={(e) => deleteSession(e)}/>:""}
+                        <NavLink to="/register"><FaUserAlt/></NavLink>
                         <NavLink to="/cart"><BsBasketFill /><span className="span-cart">{carttotal}</span></NavLink>
                     </Menus>
                 </NewToolBar>

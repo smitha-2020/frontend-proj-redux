@@ -36,7 +36,13 @@ export interface authenticUser {
     password: string,
     name: string,
     role:string
+}
 
+export interface RegisteredUser {
+    access_token:string,
+    user:authenticUser,
+    isRegistered:boolean,
+    isLogin:boolean
 }
 export interface ProductDesc {
     title: string,
@@ -45,3 +51,14 @@ export interface ProductDesc {
     categoryId: number,
     images: string[]
 }
+export interface LoginData {
+    email: string,
+    password: string
+}
+export type Inputs = {
+    name: string,
+    email: string,
+    password: string,
+    repassword?:string,
+    avatar:FileList
+  };

@@ -35,9 +35,7 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
   // });
 
   const product = products.filter((product) => { return product.id === Number(id) })
-
   const [newdata] = product;
-  console.log("products" + Array.isArray(newdata))
   if (product) {
     product.map((data) => {
       img = data.category
@@ -67,7 +65,7 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
               <Grid container spacing={0} direction="column" >
                 <Grid item style={{ marginTop: '10px', fontSize: '25px', fontWeight: '400' }}>{title}</Grid>
                 <Grid item style={{ marginTop: '20px',fontSize:'12px',fontWeight:'400' }}> <Star/></Grid>
-                {/* <Grid item style={{ marginTop: '10px',fontSize:'12px',fontWeight:'400' }}> ({reviews} reviews so far)</Grid> */}
+                <Grid item style={{ marginTop: '10px',fontSize:'12px',fontWeight:'400' }}> ({price} reviews so far)</Grid>
                 <Grid item style={{ marginTop: '10px', fontSize: '18px', fontWeight: '400' }}>Price : ${price}</Grid>
                 <Grid item style={{ marginTop: '10px', fontSize: '12px', fontWeight: '400', width: "500px" }}>{description}</Grid>
                 <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ marginTop: '30px' }}>

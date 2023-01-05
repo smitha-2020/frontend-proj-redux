@@ -28,13 +28,12 @@ const App = () => {
     const userJson = localStorage.getItem('accessToken')!;
     // const data = userJson !== null ? userJson: null;
     if(!userJson){
-     console.log("Authentication Failed")
-    
+     //console.log("Authentication Failed")
     }else{
       dispatch(fetchSession(userJson))
-      console.log(authentication)
     }
   }, []);
+  // setTimeout(() => console.log('Initial timeout!'), 100000);
 
   
   return (

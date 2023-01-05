@@ -1,46 +1,53 @@
-import React, { useEffect, useState } from 'react'
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { useForm, SubmitHandler, useFormState } from 'react-hook-form';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { uploadImagefromForm } from '../redux/reducers/loginInfo';
+import { Inputs } from '../common/Common'
 
+const schema = yup.object().shape({
+    name: yup.string().min(6).required(),
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+    repassword: yup.string().oneOf([yup.ref("password"), null]),
+    avatar: yup.mixed().required().test({
+        test: (value) => value.length > 0,
+        message: "Image field cannot be empty!!"
+    })
+})
 const Register = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        password2: ''
+    const login = useAppSelector(state => state.loginReducer)
+    const dispatch = useAppDispatch();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
+        resolver: yupResolver(schema)
     });
-
-    const { name, email, password, password2 } = formData;
-    
-    const getData = (field: string, e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        setFormData((prevVal) => ({ ...prevVal, [field]: e.target.value }));
-      }
-    function onsubmitData( e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-    }
+    const onSubmit: SubmitHandler<Inputs> = data => {
+        if (data.avatar) {
+            dispatch(uploadImagefromForm(data))     
+        }
+    };
     return (
         <>
-            <div>Register</div>
-            <form onSubmit={(e) => onsubmitData(e)}>
-                <div>
-                    <span>Name</span>
-                    <input type="text" value={name} name={name} id="name" onChange={(e) => getData('name',e)} placeholder="Enter your name" />
-                </div>
-                <div>
-                    <span>Email</span>
-                    <input type="text" value={email} name={email} id="email" onChange={(e) => getData('email',e)} placeholder="Enter email" />
-                </div>
-                <div>
-                    <span>Password</span>
-                    <input type="password" value={password} name={password} id="password" onChange={(e) => getData('password',e)} placeholder="Enter password" />
-                </div>
-                <div>
-                    <span>Confirm Password</span>
-                    <input type="password" value={password2} name={password2} id="password2" onChange={(e) => getData('password2',e)} placeholder="Confirm password" />
-                </div>
-                <button type="submit">submit</button>
-
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Box display="flex" flexDirection="column" maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={5} padding={3} borderRadius={5} boxShadow={'5px 5px 10px lightgray'} sx={{ ":hover": { boxShadow: "10px 10px 10px lightgray", }, }}>
+                    <Typography variant="h2" textAlign="center" padding={3}> SignUp</Typography>
+                    <TextField type="text" variant="outlined" placeholder="Name" margin="normal" {...register("name")} />
+                    <span className="errorwarnings">{errors.name?.message}</span>
+                    <TextField type="email" variant="outlined" placeholder="Email" margin="normal" {...register("email")} />
+                    <span className="errorwarnings"> {errors.email?.message}</span>
+                    <TextField type="password" variant="outlined" placeholder="Password" margin="normal"  {...register("password")} />
+                    <span className="errorwarnings"> {errors.password?.message}</span>
+                    <TextField type="password" variant="outlined" placeholder="Re-Enter-Password" margin="normal" {...register("repassword")} />
+                    <span className="errorwarnings"> {errors.repassword && 'passwords dont match'}</span>
+                    <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("avatar")} />
+                    <span className="errorwarnings"> {errors.avatar?.message}</span>
+                    <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Signup<AiOutlineLogin /></Button>
+                    <br/>
+                    <span className="successMsg"> {login.isRegistered && "Successfully Registered!!!"}</span> 
+                </Box>
             </form>
-
         </>
     )
 }

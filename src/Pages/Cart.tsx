@@ -32,7 +32,7 @@ const Cart = () => {
         <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '10px', minWidth: '100vw', color: 'lightgray', marginTop: '20px' }}>
           <Grid container spacing={0} alignItems="center" justifyContent="center" style={{ width: '900px', height: 'auto', minHeight: '100px', marginLeft: "20px", backgroundColor: "#f2f2f2", color: 'lightgray' }}>
             <Grid item style={{ fontSize: '10px', textAlign: 'center' }}>
-              {authentication.avatar ? `shopping cart for user ${authentication.name}` : `user has not logged in..`}
+              {authentication.avatar ? `Shopping cart for user, ${authentication.name}` : `user has not logged in..`}
             </Grid>
           </Grid>
         </Grid>

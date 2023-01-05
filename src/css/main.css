@@ -33,6 +33,11 @@ img {
   justify-content: "center";
 }
 
+.successMsg {
+  font-size: 10px;
+  color: green;
+}
+
 .OuterBox {
   display: "flex";
   flex-direction: "row";
@@ -47,6 +52,11 @@ img {
 .displayBoxtitle {
   font-size: "25px";
   margin-top: "10px";
+}
+
+.errorwarnings {
+  font-size: 10px;
+  color: red;
 }
 
 NavLink {
