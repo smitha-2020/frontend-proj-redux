@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Category from '../components/Category'
 import ProductList from '../components/ProductList';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
-import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, TextField } from '@mui/material';
+import {ascendingOrder, fetchAllProducts, fetchProductsByPagination, sortByPrice } from '../redux/reducers/ProductReducers';
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, TextField, Pagination } from '@mui/material';
 import styled from '@emotion/styled';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
 import { Product } from '../common/Common';
 import IndividualProduct from './IndividualProduct';
+import Footer from '../components/Footer';
+//import { ascendingOrder, fetchAllProducts, fetchProductsByPagination, sortByPrice } from '../redux/reducers/experimentReducer';
 
 const Products = () => {
   const { id } = useParams();
@@ -46,35 +48,38 @@ const Products = () => {
     flexDirection: "column",
   })
   const [selCategory, setSelCategory] = useState<number[]>([]);
-  const [search,setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(12);
+  const [totalPages, setTotalPages] = useState(240);
+  const [search, setSearch] = useState("");
+  let totalPagess = 0;
+
+  // useEffect(() => {
+  //   dispatch(fetchAllProducts())
+  // }, [])
+
+  useEffect(() => {
+    setTotalPages(products.length)
+  }, [selCategory])
+  useEffect(() => {
+    dispatch(fetchProductsByPagination(currentPage))
+  }, [currentPage])
+  const dispatch = useAppDispatch();
   const displayNewProducts = (state: RootState) => {
     let data;
     let filteredData: Product[] = [];
-    console.log(selCategory)
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
-        [...data] = state.productReducer.filter((product) => { return product.category.id === selCategory[i] })
+        [...data] = state.productReducer.product.filter((product) => { return product.category.id === selCategory[i] })
         filteredData.push(...data)
-        // console.log(filteredData)
       }
       return filteredData;
-      // return [{ id: 123,
-      //   title: "Handmade",
-      //   price: 123,
-      //   description: "Handmade",
-      //   category: {  id: 123,
-      //     name: "string",
-      //     image: "string"},
-      //   images: []}];
     } else {
-      return state.productReducer;
+      return state.productReducer.product;
     }
   }
   const products = useAppSelector(state => { return displayNewProducts(state) })
-  //const products = useAppSelector(state => { return (state.productReducer) })
-  //const products = useAppSelector(state => { return (state.productReducer) })
-  //console.log(products)
-  const dispatch = useAppDispatch();
+  console.log(products)
   const handleChange = (e: SelectChangeEvent<unknown>) => {
     if (e.target.value === "a-z") {
       dispatch(ascendingOrder("asc"))
@@ -88,9 +93,9 @@ const Products = () => {
       dispatch(sortByPrice("lowtohigh"))
     }
   }
-
-
-
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+  };
   if (id) {
     return (
       <>
@@ -100,24 +105,19 @@ const Products = () => {
   } else {
     return (
       <>
-        {/* adding number of products */}
-        {/*  */}
-        {/* <OuterBox>
-          <SelectBox>
-          </SelectBox>
-        </OuterBox> */}
         <AnatherBox>
           <CategoryBox>
             <Category setSelCategory={setSelCategory} selCategory={selCategory} />
             <Box>
-              <TextField type="email" variant="outlined" placeholder="Search" margin="normal" value={search}  />
+              <TextField type="email" variant="outlined" placeholder="Search" margin="normal" value={search} />
             </Box>
           </CategoryBox>
           <ProductBox>
             <OuterBox>
               <Grid container spacing={2}>
                 <Grid item xs={5}></Grid>
-                <Grid item xs={5}>{products.length} products displayed</Grid>
+                {/* <Grid item xs={5}>{products.length} products displayed</Grid> */}
+                <Grid item xs={5}></Grid>
                 <Grid item xs={2}>
                   <FormControl fullWidth>
                     <AnatherInputLabel id="demo-simple-select-label">Sorting</AnatherInputLabel>
@@ -141,8 +141,10 @@ const Products = () => {
               <ProductList products={products} />
             </Box>
           </ProductBox>
-
         </AnatherBox>
+        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw', marginTop: '20px' }}>
+          <Pagination count={(totalPages<12)?(240/cardsPerPage): 1} onChange={handlePageChange} />
+        </Grid>
       </>
     )
   }

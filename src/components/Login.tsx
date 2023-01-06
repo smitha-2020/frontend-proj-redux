@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { fetchLoginInfo } from '../redux/reducers/loginInfo'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Box, Button, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -58,7 +58,7 @@ const Login = () => {
           <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit">Login<LoginIcon /></Button>
           <br/>
           <span className="errorwarnings">{!isLogin&& "Login Failed.Try again"}</span>
-          {/* <Button sx={{ marginTop: 3, borderRadius: 3 }} onClick={() => { setIsSignUp(!isSignup) }}> {isSignup ? 'change to Login' : 'change to signup'}</Button> */}
+          <Button sx={{ marginTop: 3, borderRadius: 3,fontSize:10 }}><NavLink to="/update">forgot password?</NavLink></Button>
         </Box>
       </form>
     </>

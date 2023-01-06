@@ -23,7 +23,7 @@ export interface Product {
     price: number,
     description: string,
     images: string[],
-    category: Categorys
+    category: Categorys,
 }
 export interface Cart {
     quantity: number,
@@ -31,18 +31,17 @@ export interface Cart {
 }
 export interface authenticUser {
     id: number,
-    avatar:string,
+    avatar: string,
     email: string,
     password: string,
     name: string,
-    role:string
+    role: string
 }
-
 export interface RegisteredUser {
-    access_token:string,
-    user:authenticUser,
-    isRegistered:boolean,
-    isLogin:boolean
+    access_token: string,
+    user: authenticUser,
+    isRegistered: boolean,
+    isLogin: boolean
 }
 export interface ProductDesc {
     title: string,
@@ -59,6 +58,10 @@ export type Inputs = {
     name: string,
     email: string,
     password: string,
-    repassword?:string,
-    avatar:FileList
-  };
+    repassword?: string,
+    avatar: FileList
+};
+export interface ProductDetails{
+    product:Product[],
+    totalCount:number
+}

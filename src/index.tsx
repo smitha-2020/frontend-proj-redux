@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
@@ -6,15 +6,32 @@ import App from './App';
 //import App from './old/App';
 import reportWebVitals from './reportWebVitals';
 import "../src/css/main.css";
+import { createTheme, ThemeProvider } from '@mui/material'
+import blue from '@mui/material/colors/blue';
+import { purple } from '@mui/material/colors';
+import { createContext } from 'react'
+import { ThemeContext } from '@emotion/react';
+
+
+export const ThemeCtx = createContext(null);
 
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
+
+// const theme = createTheme({
+//   palette: {
+//     secondary: blue,
+//   },
+// });
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+
       <App />
+
     </Provider>
   </React.StrictMode>
 );

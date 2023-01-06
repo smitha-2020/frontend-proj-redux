@@ -1,57 +1,209 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsBasketFill } from "react-icons/bs";
-import styled from '@emotion/styled';
-import { FaSignInAlt, FaUserAlt,FaSignOutAlt } from "react-icons/fa";
-import { Box, AppBar, Toolbar, Typography } from '@mui/material';
+import { FaSignInAlt, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
+import { Box, AppBar, Toolbar, Typography, Switch } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { authenticUser } from '../common/Common';
 import { clearSession } from '../redux/reducers/authReducer';
 import { FcSignature } from "react-icons/fc";
+import IconButton from '@mui/material/IconButton';
+
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
 const Header = () => {
     const navigate = useNavigate();
-    const authentication:authenticUser = useAppSelector(state => state.auhtReducer)
+    const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
-    const AnatherAppBar = styled(AppBar)({
-        backgroundColor: 'white', color: "#8c8c8c"
-    })
-    const NewToolBar = styled(Toolbar)({
-        display: "flex",
-        justifyContent: "space-between"
-    })
-    const Menus = styled(Box)({
-        display: "flex",
-        gap: "20px"
-    })
-    const deleteSession = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+
+    const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         console.log("Logging out")
         localStorage.setItem("accessToken", "")
         dispatch(clearSession())
         navigate("/login")
-    } 
+    }
+    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
     return (
         <>
-            <AnatherAppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: 'white', color: 'lightgray' }}>
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            href="/"
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'none', md: 'flex' },
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                                fontSize: '45px',
+
+                            }}
+                        >
+                            <FcSignature style={{ fill: 'white' }} />
+                        </Typography>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleOpenNavMenu}
+                                color="inherit"
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorElNav}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                open={Boolean(anchorElNav)}
+                                onClose={handleCloseNavMenu}
+                                sx={{
+                                    display: { xs: 'block', md: 'none' },
+                                }}
+                            >
+                            </Menu>
+                        </Box>
+                        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="a"
+                            href=""
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            LOGO
+                        </Typography>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                                <NavLink to="/" style={{ color: 'gray' }}>Home</NavLink>
+                            </Button>
+                            <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                                <NavLink to="/products" style={{ color: 'gray' }}>Products</NavLink>
+                            </Button>
+                            {/* <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                                {authentication.avatar ? <FaSignOutAlt style={{ color: 'gray' }} onClick={(e) => deleteSession(e)} /> : ""}
+                            </Button> */}
+                            <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                                {authentication.avatar ? "" : <NavLink to="/login"><FaSignInAlt /></NavLink>}
+                            </Button>
+                            <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                                <NavLink style={{ color: 'gray' }} to="/register"><FaUserAlt /></NavLink>
+                            </Button>
+                            <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                                <NavLink to="/cart" style={{ color: 'gray' }}><BsBasketFill style={{ fill: 'gray' }} /><span className="span-cart">{carttotal}</span></NavLink>
+                            </Button>
+
+                        </Box>
+
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    {authentication.avatar ? <Avatar alt="Remy Sharp" src={authentication.avatar} /> : ""}
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center"><NavLink style={{ color: 'gray', fontSize: '12px' }} to="/profile">Profile</NavLink> </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center"><NavLink style={{ color: 'gray', fontSize: '12px' }} to="/cart">Cart</NavLink> </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center" onClick={(e) => deleteSession(e)} style={{ color: 'gray', fontSize: '12px' }}>Logout</Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                        <Box>
+                            <Switch {...label} size="small"/>
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar>
+
+
+
+
+
+
+            {/* <AnatherAppBar position="static">
                 <NewToolBar>
                     <Typography variant="h1">
-                       <FcSignature/>
+                        <FcSignature />
                     </Typography>
                     <Menus>
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/products">Products</NavLink>
-                        {/* <Avatar alt="Remy Sharp" src={authentication.avatar} /> */}
-                        {authentication.avatar?<NavLink style={{color:'coral'}} to="/profile">{`welcome, ${authentication.name} `}</NavLink>:<NavLink to="/login"><FaSignInAlt /></NavLink>}
-                        {authentication.avatar?<FaSignOutAlt onClick={(e) => deleteSession(e)}/>:""}
-                        <NavLink to="/register"><FaUserAlt/></NavLink>
+                        {authentication.avatar ? <NavLink style={{ color: 'coral' }} to="/profile">{`welcome, ${authentication.name} `}</NavLink> : <NavLink to="/login"><FaSignInAlt /></NavLink>}
+                        {authentication.avatar ? <FaSignOutAlt onClick={(e) => deleteSession(e)} /> : ""}
+                        <NavLink to="/register"><FaUserAlt /></NavLink>
                         <NavLink to="/cart"><BsBasketFill /><span className="span-cart">{carttotal}</span></NavLink>
                     </Menus>
                 </NewToolBar>
-            </AnatherAppBar>
+            </AnatherAppBar> */}
         </>
     )
 }

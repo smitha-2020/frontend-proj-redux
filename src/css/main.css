@@ -84,4 +84,18 @@ NavLink {
   color: "lightgray";
 }
 
+#light {
+  background-color: white;
+}
+
+#dark {
+  background-color: lightcoral;
+}
+
+.homediv {
+  width: 200px;
+  height: 500px;
+  border: 1px solid black;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -1,41 +1,26 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosResponse } from 'axios';
-import  {Product}  from '../../common/Common';
 
 
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { AxiosResponse } from "axios"
+import { Product, ProductDesc, ProductDetails } from "../../common/Common"
+import axios from "axios"
 
-// interface Category {
-//     id: number,
-//     name: string,
-//     image: string
-// }
-export interface Rating {
-    rate: number,
-    count: number
+
+const initialState: ProductDetails = {
+    product: [],
+    totalCount: 0
+};
+export const fetchAllProducts = createAsyncThunk(
+    "fetchAllProducts",
+    async () => {
+        try {
+            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
     }
-// export interface Product {
-//     id: number,
-//     title: string,
-//     price: number,
-//     description: string,
-//     category: string,
-//     image: string,
-//     rating:Rating 
-// }
-interface ProductDesc {
-    title: string,
-    price: number,
-    description: string,
-    categoryId: number,
-    images: string[]
-}
-interface ProductUpdate {
-    title: string,
-    price: number
-}
-const initialState: Product[] = [];
-
+)
 export const fetchAllProductsbyCategory = createAsyncThunk(
     "fetchAllProductsbyCategory",
     async (id: number) => {
@@ -47,13 +32,11 @@ export const fetchAllProductsbyCategory = createAsyncThunk(
         }
     }
 )
-export const fetchAllProducts = createAsyncThunk(
-    "fetchAllProducts",
-    async () => {
+export const fetchProductsByPagination = createAsyncThunk(
+    "fetchProductsByPagination",
+    async (currentPage: number) => {
         try {
-            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
-            //const response: AxiosResponse<any, Product[]> = await axios.get("https://fakestoreapi.com/products")
-            //const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products?offset=5&limit=500")
+            const response: AxiosResponse<any, Product[]> = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=${currentPage}&limit=12`)
             return response.data
         } catch (e) {
             console.log(e)
@@ -62,7 +45,7 @@ export const fetchAllProducts = createAsyncThunk(
 )
 export const getSingleProduct = createAsyncThunk(
     "getSingleProduct",
-    async (productId:string) => {
+    async (productId: string) => {
         let url = `https://api.escuelajs.co/api/v1/products/${productId}`;
         try {
             const response: AxiosResponse<any, Product> = await axios.get(url)
@@ -72,105 +55,118 @@ export const getSingleProduct = createAsyncThunk(
         }
     }
 )
-// export const uploadImagewithForm = createAsyncThunk(
-//     "uploadImagewithForm",
-//     async (image:File) => {
+export const addProduct = createAsyncThunk(
+    "addProduct",
+    async (product: ProductDesc) => {
+        try {
+            const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+// export const updateProduct = createAsyncThunk(
+//     "updateProduct",
+//     async (productupdate: ProductUpdate) => {
 //         try {
-//             const response:AxiosResponse<Product,Product> = await axios.post("https://api.escuelajs.co/api/v1/files/upload",image,{ headers: })
+//             const response: AxiosResponse<ProductUpdate, Product> = await axios.put("https://api.escuelajs.co/api/v1/products/2", productupdate)
 //             return response.data
 //         } catch (e) {
 //             console.log(e)
 //         }
 //     }
 // )
-export const addProduct = createAsyncThunk(
-    "addProduct",
-    async (product:ProductDesc) => {
-        try {
-            const response:AxiosResponse<Product,Product> = await axios.post("https://api.escuelajs.co/api/v1/products/",product)
-            return response.data
-        } catch (e) {
-            console.log(e)
-        }
-    }
-)
-export const updateProduct = createAsyncThunk(
-    "updateProduct",
-    async (productupdate:ProductUpdate) => {
-        try {
-            const response:AxiosResponse<ProductUpdate,Product> = await axios.put("https://api.escuelajs.co/api/v1/products/2",productupdate)
-            return response.data
-        } catch (e) {
-            console.log(e)
-        }
-    }
-)
 const productSlice = createSlice({
     name: 'productSlice',
     initialState: initialState,
     reducers: {
         ascendingOrder: (state, action: PayloadAction<"asc" | "desc">) => {
-
             if (action.payload === "asc") {
-                state.sort((a, b) => a.title.localeCompare(b.title))
+                state.product.sort((a, b) => a.title.localeCompare(b.title))
             } else {
-                state.sort((a, b) => b.title.localeCompare(a.title))
+                state.product.sort((a, b) => b.title.localeCompare(a.title))
             }
         },
         sortByPrice: (state, action: PayloadAction<"hightolow" | "lowtohigh">) => {
-
             if (action.payload === "hightolow") {
-                state.sort((a, b) => a.price - b.price);
+                state.product.sort((a, b) => a.price - b.price);
             } else {
-                state.sort((a, b) => b.price - a.price)
+                state.product.sort((a, b) => b.price - a.price)
             }
         }
     },
     extraReducers: (build) => {
-        build.addCase(fetchAllProductsbyCategory.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
-            if (action.payload && "message" in action.payload) {
-                return state;
-            }
-            return action.payload;
-        })
+
         build.addCase(fetchAllProducts.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
             if (action.payload && "message" in action.payload) {
                 return state;
+            } else {
+                state.product = action.payload;
+                state.totalCount = action.payload.length;
             }
-            return action.payload
-        })
-        build.addCase(fetchAllProducts.rejected, (state) => {
-            console.log("Rejected")
-            return state;
-        })
-        build.addCase(fetchAllProducts.pending, (state) => {
-            console.log("Pending")
-            return state;
-        })
-        build.addCase(addProduct.fulfilled, (state, action) => {
-            if(action.payload){
-                return [...state,action.payload]
-            }else{
+        }
+        )
+            .addCase(fetchAllProducts.rejected, (state) => {
+                console.log("Rejected")
                 return state;
-            }
-        })
-        build.addCase(getSingleProduct.fulfilled, (state, action) => {
-            if (action.payload && "message" in action.payload) {
+            })
+            .addCase(fetchAllProducts.pending, (state) => {
+                console.log("Pending")
                 return state;
-            }
-            return action.payload;
-        })
-        // build.addCase(updateProduct.fulfilled,(state,action)=>{
-        //     if(action.payload){
-        //         console.log(action.payload);
-        //         return state;
+            })
+            .addCase(fetchAllProductsbyCategory.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
+                if (action.payload && "message" in action.payload) {
+                    return state;
+                } else {
+                    state.product = action.payload;
+                    state.totalCount = action.payload.length;
+                }
 
-        //     }
-        // })
+            })
+            .addCase(fetchAllProductsbyCategory.rejected, (state) => {
+                console.log("Rejected")
+                return state;
+            })
+            .addCase(fetchAllProductsbyCategory.pending, (state) => {
+                console.log("Pending")
+                return state;
+            })
+            .addCase(fetchProductsByPagination.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
+                if (action.payload && "message" in action.payload) {
+                    return state;
+                } else {
+                    state.product = action.payload;
+                    state.totalCount = action.payload.length;
+                }
+
+            })
+            .addCase(fetchProductsByPagination.rejected, (state) => {
+                console.log("Rejected")
+                return state;
+            })
+            .addCase(fetchProductsByPagination.pending, (state) => {
+                console.log("Pending")
+                return state;
+            })
+            .addCase(getSingleProduct.fulfilled, (state, action) => {
+                if (action.payload && "message" in action.payload) {
+                    return state;
+                }
+                state.product = action.payload;
+            })
+            .addCase(addProduct.fulfilled, (state, action) => {
+                if (action.payload && "message" in action.payload) {
+                    return state;
+                } else {
+                    if (action.payload) {
+                        state.product.push(action.payload)
+                    }
+                }
+            })
     }
 });
 
-const productReducer = productSlice.reducer;
-export default productReducer;
+const experimentReducer = productSlice.reducer;
+export default experimentReducer;
 export const { ascendingOrder, sortByPrice } = productSlice.actions;
-
