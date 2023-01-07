@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import { Categorys, Product } from "../common/Common";
 import { RootState } from "../redux/store";
 import { Grid } from "@mui/material";
-import ProductImg from "../components/ProductImg";
+import ProductImg from "../components/product/ProductImg";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import SecurityIcon from "@mui/icons-material/Security";
-import AddToCart from "../components/AddToCart";
-import Star from "../components/Star";
+import AddToCart from "../components/cart/AddToCart";
+import Star from "../components/cart/Star";
 
 
 const IndividualProduct = ({ products }: { products: Product[] }) => {

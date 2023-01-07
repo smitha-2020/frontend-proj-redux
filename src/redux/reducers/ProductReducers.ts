@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosResponse } from "axios"
-import { Product, ProductDesc, ProductDetails } from "../../common/Common"
+import { Product, ProductBase, ProductDesc, ProductDetails } from "../../common/Common"
 import axios from "axios"
 
 const initialState: ProductDetails = {
     product: [],
-    totalCount: 0
+    totalCount: 0,
+    isAdded:false
 };
 export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
@@ -54,10 +55,17 @@ export const getSingleProduct = createAsyncThunk(
 )
 export const addProduct = createAsyncThunk(
     "addProduct",
-    async (product: ProductDesc) => {
+    async (product: ProductBase) => {
+        console.log(product)
         try {
-            const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
-            return response.data
+            const responseImg = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': product.imagestr[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
+            if(responseImg.data){
+                console.log(responseImg.data)
+                const response = await axios.post("https://api.escuelajs.co/api/v1/products", {...product,images:[responseImg.data.location]})
+                console.log(response.data)
+                return response.data
+            }
+          
         } catch (e) {
             console.log(e)
         }
@@ -156,6 +164,8 @@ const productSlice = createSlice({
                 } else {
                     if (action.payload) {
                         state.product.push(action.payload)
+                        state.isAdded=true;
+                        console.log(state)
                     }
                 }
             })

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { Button, Grid } from "@mui/material";
 import { NavLink } from 'react-router-dom';
-import { removeFromCart, removeCart,increaseQuantity,decreaseQuantity } from '../redux/reducers/cartReducer';
+import { removeFromCart, removeCart,increaseQuantity,decreaseQuantity } from '../../redux/reducers/cartReducer';
 import { useNavigate } from 'react-router-dom'
 
 

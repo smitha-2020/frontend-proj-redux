@@ -4,10 +4,10 @@ import {  Grid } from "@mui/material";
 import { FaTrashAlt } from "react-icons/fa";
 import { removeFromCart,increaseQuantity,decreaseQuantity } from '../redux/reducers/cartReducer';
 import { authenticUser } from '../common/Common';
-import ToggleButton from '../components/ToggleButton';
+import ToggleButton from '../components/cart/ToggleButton';
 import NoData from '../components/NoData';
-import CartBtn from '../components/CartBtn';
-import CartTotal from '../components/CartTotal';
+import CartBtn from '../components/cart/CartBtn';
+import CartTotal from '../components/cart/CartTotal';
 
 const Cart = () => {
   const cart = useAppSelector(state => { return state.cartReducer; })

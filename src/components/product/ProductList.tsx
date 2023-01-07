@@ -1,5 +1,5 @@
 
-import { Product } from "../common/Common";
+import { Product } from "../../common/Common";
 import { Box } from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';

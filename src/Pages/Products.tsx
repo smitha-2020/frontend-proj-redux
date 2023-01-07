@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Category from '../components/Category'
-import ProductList from '../components/ProductList';
+import Category from '../components/category/Category'
+import ProductList from '../components/product/ProductList';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
 import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, Pagination } from '@mui/material';

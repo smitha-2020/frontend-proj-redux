@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Grid } from "@mui/material";
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import Typography from '@mui/material/Typography';
 
 const CartTotal = () => {

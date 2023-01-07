@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
 import { Button } from "@mui/material";
-import { Product, Cart } from '../common/Common';
+import { Product, Cart } from '../../common/Common';
 import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { addToCart } from '../redux/reducers/cartReducer';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
+import { addToCart } from '../../redux/reducers/cartReducer';
 
 const AddToCart = ({ products,id }: { products: Product,id:string }) => {
     const ButtonNew = styled(Button)({

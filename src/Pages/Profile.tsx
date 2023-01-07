@@ -1,14 +1,14 @@
 import { Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { text } from 'stream/consumers';
-import CreateProduct from '../components/CreateProduct';
-import UpdateProduct from '../components/UpdateProduct';
+import CreateProduct from '../components/products_actions/CreateProduct';
+import UpdateProduct from '../components/products_actions/UpdateProduct';
 import { useAppSelector } from '../hooks/reduxHook'
 
 
 const Profile = () => {
-  const [createProduct, setCreateProduct] = useState<boolean>(false);
-  const [updateProduct, setUpdateProduct] = useState<boolean>(false);
+  const [display, setDisplay] = useState<string>("");
+
   const authentication = useAppSelector(state => state.auhtReducer)
   useEffect(() => {
     console.log("data refreshed");
@@ -28,7 +28,11 @@ const Profile = () => {
                 <Grid item xs={2}>
                 </Grid>
                 <Grid item xs={2}>
-                  <a href="#" onClick={(e) => { setCreateProduct(!createProduct); }}>Create Product</a>
+                  <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a>
+                </Grid>
+                <br />
+                <Grid item xs={2}>
+                  <a href="#" onClick={(e) => { setDisplay('updateProduct'); }}>Update Product</a>
                 </Grid>
                 <br />
                 <Grid item xs={2}>
@@ -40,8 +44,9 @@ const Profile = () => {
             </Grid>
           </Grid>
           <Grid item alignItems="center" justifyContent="center" xs={10} style={{ minHeight: '80vh' }}>
-            {createProduct && <CreateProduct />}
-            {updateProduct && <UpdateProduct />}
+            {(display==='createProduct')?<CreateProduct/>:''}
+            {(display==='updateProduct')?<UpdateProduct/>:''}
+         
 
           </Grid>
         </Grid>

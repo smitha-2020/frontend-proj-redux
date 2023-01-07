@@ -1,5 +1,5 @@
-import axios, { AxiosError } from 'axios'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { LoginData } from '../../common/Common';
 import { Inputs, authenticUser, RegisteredUser } from '../../common/Common'

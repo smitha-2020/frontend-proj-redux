@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { useAppSelector } from '../hooks/reduxHook'
+import { useAppSelector } from '../../hooks/reduxHook'
 
 import { Checkbox, FormControlLabel, FormGroup,Box } from '@mui/material'
 

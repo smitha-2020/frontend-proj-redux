@@ -50,6 +50,16 @@ export interface ProductDesc {
     categoryId: number,
     images: string[]
 }
+export interface ProductBase{
+    title: string,
+    price: number,
+    description: string,
+    categoryId: number,
+    imagestr:FileList
+}
+export interface ProductNew extends ProductBase{
+    images: string[]
+}
 export interface LoginData {
     email: string,
     password: string
@@ -63,5 +73,6 @@ export type Inputs = {
 };
 export interface ProductDetails{
     product:Product[],
-    totalCount:number
+    totalCount:number,
+    isAdded:boolean
 }
