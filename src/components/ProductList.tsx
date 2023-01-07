@@ -1,6 +1,6 @@
 
 import { Product } from "../common/Common";
-import { Box, Link } from "@mui/material";
+import { Box } from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
 
@@ -57,21 +57,22 @@ const ProductList = ({
   });
   return (
     <>
-      <ProductListing>
-        {products.map((element) => (
-          <Card key={element.id}>
-            <ImgBox>
-            <NavLink to={`/product/${element.id}`} ><img width="220" height="180" src={element.category.image} alt={element.category.image}/></NavLink>
-              {/* <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></Link> */}
-            </ImgBox>
-            <CategorySBox>{element.category.name}</CategorySBox>
-            <DescriptionBox>
-              <NameBox>{element.title}</NameBox>
-              <NameBox>${element.price}</NameBox>
-            </DescriptionBox>
-          </Card>
-        ))}
-      </ProductListing>
+      {
+        products.length > 0 ? <ProductListing>
+          {products.map((element) => (
+            <Card key={element.id}>
+              <ImgBox>
+                <NavLink to={`/product/${element.id}`} ><img width="220" height="180" src={element.category.image} alt={element.category.image} /></NavLink>
+                {/* <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></Link> */}
+              </ImgBox>
+              <CategorySBox>{element.category.name}</CategorySBox>
+              <DescriptionBox>
+                <NameBox>{element.title}</NameBox>
+                <NameBox>${element.price}</NameBox>
+              </DescriptionBox>
+            </Card>
+          ))}
+        </ProductListing> : <p>No Records Found!!</p>}
     </>
   );
 };

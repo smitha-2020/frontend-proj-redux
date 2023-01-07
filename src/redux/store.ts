@@ -5,17 +5,13 @@ import categoryReducers from './reducers/CategoryReducers';
 import cartReducer from './reducers/cartReducer';
 import auhtReducer from './reducers/authReducer';
 
-
-
 export const store = configureStore({
   reducer: {
     productReducer,
     loginReducer,
     categoryReducers,
     cartReducer,
-    auhtReducer,
-    
-    
+    auhtReducer, 
   }
 });
 

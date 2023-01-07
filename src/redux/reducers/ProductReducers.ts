@@ -1,10 +1,7 @@
-
-
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosResponse } from "axios"
 import { Product, ProductDesc, ProductDetails } from "../../common/Common"
 import axios from "axios"
-
 
 const initialState: ProductDetails = {
     product: [],
@@ -122,7 +119,6 @@ const productSlice = createSlice({
                     state.product = action.payload;
                     state.totalCount = action.payload.length;
                 }
-
             })
             .addCase(fetchAllProductsbyCategory.rejected, (state) => {
                 console.log("Rejected")
@@ -139,7 +135,6 @@ const productSlice = createSlice({
                     state.product = action.payload;
                     state.totalCount = action.payload.length;
                 }
-
             })
             .addCase(fetchProductsByPagination.rejected, (state) => {
                 console.log("Rejected")
