@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
 
@@ -41,9 +41,7 @@ const App = () => {
     <>
       <div>
         <BrowserRouter>
-       
         <Header />
-            {/* <Experiment/> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
@@ -55,13 +53,9 @@ const App = () => {
               <Route path="/update" element={<UpdatePassword />} />
               <Route path="*" element={<NOTFOUND />} />
             </Routes>
-     
-           
             {/* <Footer /> */}
         </BrowserRouter>
       </div>
-
-      {/* <Login/> */}
     </>
   )
 

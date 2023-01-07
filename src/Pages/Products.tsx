@@ -57,7 +57,7 @@ const Products = () => {
     let filteredData: Product[] = [];
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
-        [...data] = state.productReducer.product.filter((product) => { return product.category.id === selCategory[i] })
+        [...data] = state.productReducer.product.filter((product) => { return product.category.id === selCategory[i] && product.title.includes(search.search) })
         filteredData.push(...data)
       }
       return filteredData;
@@ -112,6 +112,7 @@ const Products = () => {
   } else {
     return (
       <>
+     
         <AnatherBox>
           <CategoryBox>
             <Category setSelCategory={setSelCategory} selCategory={selCategory} />
@@ -171,7 +172,6 @@ const Products = () => {
         <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw', marginTop: '20px' }}>
           <Pagination count={totalDisplayed} onChange={handlePageChange} />
         </Grid>
-
       </>
     )
   }

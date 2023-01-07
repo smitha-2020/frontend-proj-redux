@@ -66,18 +66,17 @@ const loginSlice = createSlice({
         build.addCase(fetchLoginInfo.fulfilled, (state, action) => {
             if (action.payload && "message" in action.payload) {
                 state.isLogin = false;
-                state.access_token = action.payload.access_token
-            } else {
-                state.isLogin = true;
+                //state.access_token = action.payload.access_token
+            }else{
+                return action.payload;
             }
-            return action.payload;
+            return state;
+           
         })
             .addCase(fetchLoginInfo.rejected, (state) => {
-                //state.isLogin=false;
                 return state
             })
             .addCase(fetchLoginInfo.pending, (state) => {
-                //state.isLogin=false;
                 return state
             })
             .addCase(uploadImagefromForm.fulfilled, (state, action) => {

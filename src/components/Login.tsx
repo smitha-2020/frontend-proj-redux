@@ -19,6 +19,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [accessToken, setAccessToken] = useState("")
   const { access_token,isLogin } = useAppSelector(state => state.loginReducer)
+
   useEffect(() => {
     if (access_token) {
       localStorage.setItem("accessToken", access_token)
@@ -33,8 +34,9 @@ const Login = () => {
     resolver: yupResolver(schema)
   });
   const onSubmit: SubmitHandler<LoginData> = data => {
-    console.log(data)
     dispatch(fetchLoginInfo(data))
+    console.log(isLogin)
+  
   };
   return (
     <>
