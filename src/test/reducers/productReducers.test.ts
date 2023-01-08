@@ -1,9 +1,9 @@
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import { Product, ProductBase, ProductDesc, ProductDetails } from "../../common/Common";
-import { addingProduct, ascendingOrder, deletingProduct, fetchAllProducts, modifyProduct } from "../../redux/reducers/ProductReducers";
+import {  ascendingOrder, deletingProduct, fetchAllProducts, modifyProduct } from "../../redux/reducers/ProductReducers";
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
+import { data } from "../../common/data";
 
 let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 beforeAll(() => {
@@ -42,23 +42,15 @@ describe("test product reducer", () => {
             await store.dispatch(fetchAllProducts())
             store.dispatch(ascendingOrder("desc"))
             expect(store.getState().productReducer.product[0].title).toBe("Twesome Frozen Salad22")
-
         }),
         test("should display products in ascending order", async () => {
             await store.dispatch(fetchAllProducts())
             store.dispatch(ascendingOrder("asc"))
             expect(store.getState().productReducer.product[0].title).toBe("Awesome Frozen Salad")
-
         }),
         test("should update the product", async () => {
             await store.dispatch(fetchAllProducts())
-            await store.dispatch(modifyProduct({
-                id: 1,
-                updateProduct: {
-                    title: "Change title",
-                    price: 100
-                }
-            }))
+            await store.dispatch(modifyProduct(data))
             expect(store.getState().productReducer.product.find(productDetails => productDetails.id === 1)?.title).toBe("Change title")
         }),
         test("should delete the product", async () => {
