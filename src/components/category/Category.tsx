@@ -1,9 +1,7 @@
 
 import React from 'react'
 import { useAppSelector } from '../../hooks/reduxHook'
-
 import { Checkbox, FormControlLabel, FormGroup,Box } from '@mui/material'
-
 
 const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispatch<React.SetStateAction<number[]>>, selCategory: number[] }) => {
   const categories = useAppSelector(state => state.categoryReducers)
@@ -20,11 +18,10 @@ const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispa
   const newcategories = categories.filter((category) => { return (categortList.includes(category.name.toLowerCase())) })
   return (
     <>
-    {newcategories.length>0? <FormGroup>
+    {newcategories.length>0? <FormGroup  sx={{fontSize:'10'}} >
         <Box>Categories:</Box>
-        {newcategories.map((category) => <FormControlLabel key={category.id} label={category.name} control={<Checkbox value={category.id} checked={selCategory.includes(category.id)} onChange={handleChange} />}></FormControlLabel>)}
-      </FormGroup>:<p>No Categories Listed!!</p>}
-     
+        {newcategories.map((category) => <FormControlLabel key={category.id}  label={category.name} control={<Checkbox  value={category.id} checked={selCategory.includes(category.id)} onChange={handleChange} />}></FormControlLabel>)}
+      </FormGroup>:<p>No Categories Listed!!</p>}  
     </>
   )
 }

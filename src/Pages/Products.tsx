@@ -9,7 +9,6 @@ import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
 import { Product } from '../common/Common';
 import IndividualProduct from './IndividualProduct';
-import Footer from '../components/Footer';
 import { usePagination } from "../hooks/pagination"
 
 const Products = () => {
@@ -112,12 +111,16 @@ const Products = () => {
   } else {
     return (
       <>
-     
         <AnatherBox>
           <CategoryBox>
             <Category setSelCategory={setSelCategory} selCategory={selCategory} />
-            <Box>
-              <input type="text" placeholder="Search" name="search" value={search.search} onChange={(e) => searchText('search', e)} />
+            <Box display="flex" flexDirection="column">
+              <Box>
+                Looking for something?
+              </Box>
+              <Box>
+                <input type="text" placeholder="Search" name="search" value={search.search} onChange={(e) => searchText('search', e)} />
+              </Box>
             </Box>
           </CategoryBox>
           <ProductBox>
@@ -145,7 +148,7 @@ const Products = () => {
                     </FormControl></Grid>
                     <Grid item xs={6}>
                       <FormControl fullWidth>
-                        <AnatherInputLabel id="select-label-sort">Pages</AnatherInputLabel>
+                        <AnatherInputLabel id="select-label-sort">Items/Pages</AnatherInputLabel>
                         <AnatherSelect
                           labelId="select-label-sort"
                           id="select-label-sort"

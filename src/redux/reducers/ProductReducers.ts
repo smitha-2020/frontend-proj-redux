@@ -55,7 +55,6 @@ export const getSingleProduct = createAsyncThunk(
         }
     }
 )
-
 export const addingProduct = createAsyncThunk(
     "addingProduct",
     async (product: ProductDesc) => {

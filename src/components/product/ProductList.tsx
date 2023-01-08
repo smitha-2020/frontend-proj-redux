@@ -1,6 +1,6 @@
 
 import { Product } from "../../common/Common";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
 
@@ -72,7 +72,7 @@ const ProductList = ({
               </DescriptionBox>
             </Card>
           ))}
-        </ProductListing> : <p>No Records Found!!</p>}
+        </ProductListing> : <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '84vh', height: 'auto', minWidth: '70vw', color: 'lightgray', marginTop: '5px' }}>No Records Found!!</Grid>}
     </>
   );
 };

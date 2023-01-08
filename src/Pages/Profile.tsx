@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { text } from 'stream/consumers';
 import CreateProduct from '../components/products_actions/CreateProduct';
@@ -8,7 +8,6 @@ import { useAppSelector } from '../hooks/reduxHook'
 
 const Profile = () => {
   const [display, setDisplay] = useState<string>("");
-
   const authentication = useAppSelector(state => state.auhtReducer)
   useEffect(() => {
     console.log("data refreshed");
@@ -17,26 +16,37 @@ const Profile = () => {
     console.log("authentication" + authentication.avatar)
     return (
       <>
-        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '87vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' }}>
+        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' }}>
           <Grid item alignItems="center" justifyContent="center" xs={2} style={{ backgroundColor: 'lightgray', minHeight: '80vh' }}>
             <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" >
               <Grid item>
                 <img src={authentication.avatar} alt={authentication.avatar} width="150" height="150" style={{ borderRadius: '50%' }} />
               </Grid>
               <br />
+              <br />
+              <Grid item xs={2}>
+                {authentication.name}
+              </Grid>
+              <br />
+              <Grid item xs={2}>
+                {authentication.email}
+              </Grid>
+              <br />
+              <Grid item xs={2}>
+                {authentication.role}
+              </Grid>
+              <br />
               <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
                 <Grid item xs={2}>
                 </Grid>
                 <Grid item xs={2}>
-                  <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a>
+                  {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a> : ''}
                 </Grid>
                 <br />
                 <Grid item xs={2}>
-                  <a href="#" onClick={(e) => { setDisplay('updateProduct'); }}>Update Product</a>
+                  {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('updateProduct'); }}>Update Product</a> : ''}
                 </Grid>
-                <br />
-                <Grid item xs={2}>
-                </Grid>
+
                 {/* <Grid item xs={2}>
                   <a href="#" onClick={(e) => { setUpdateProduct(!updateProduct); }}>Update Product</a>
                 </Grid> */}
@@ -44,13 +54,10 @@ const Profile = () => {
             </Grid>
           </Grid>
           <Grid item alignItems="center" justifyContent="center" xs={10} style={{ minHeight: '80vh' }}>
-            {(display==='createProduct')?<CreateProduct/>:''}
-            {(display==='updateProduct')?<UpdateProduct/>:''}
-         
-
+            {(display === 'createProduct' && authentication.role === "admin") ? <CreateProduct /> : ''}
+            {(display === 'updateProduct' && authentication.role === "admin") ? <UpdateProduct /> : ''}
           </Grid>
         </Grid>
-
       </>
     )
   } else {

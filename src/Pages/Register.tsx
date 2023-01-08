@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { useForm, SubmitHandler, useFormState } from 'react-hook-form';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -25,28 +25,32 @@ const Register = () => {
     });
     const onSubmit: SubmitHandler<Inputs> = data => {
         if (data.avatar) {
-            dispatch(uploadImagefromForm(data))     
+            dispatch(uploadImagefromForm(data))
         }
     };
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Box display="flex" flexDirection="column" maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={5} padding={3} borderRadius={5} boxShadow={'5px 5px 10px lightgray'} sx={{ ":hover": { boxShadow: "10px 10px 10px lightgray", }, }}>
-                    <Typography variant="h2" textAlign="center" padding={3}> SignUp</Typography>
-                    <TextField type="text" variant="outlined" placeholder="Name" margin="normal" {...register("name")} />
-                    <span className="errorwarnings">{errors.name?.message}</span>
-                    <TextField type="email" variant="outlined" placeholder="Email" margin="normal" {...register("email")} />
-                    <span className="errorwarnings"> {errors.email?.message}</span>
-                    <TextField type="password" variant="outlined" placeholder="Password" margin="normal"  {...register("password")} />
-                    <span className="errorwarnings"> {errors.password?.message}</span>
-                    <TextField type="password" variant="outlined" placeholder="Re-Enter-Password" margin="normal" {...register("repassword")} />
-                    <span className="errorwarnings"> {errors.repassword && 'passwords dont match'}</span>
-                    <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("avatar")} />
-                    <span className="errorwarnings"> {errors.avatar?.message}</span>
-                    <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Signup<AiOutlineLogin /></Button>
-                    <br/>
-                    <span className="successMsg"> {login.isRegistered && "Successfully Registered!!!"}</span> 
-                </Box>
+                <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' }}>
+                    <Box display="flex" flexDirection="column" maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={5} padding={3} borderRadius={5} boxShadow={'5px 5px 10px lightgray'} sx={{ ":hover": { boxShadow: "10px 10px 10px lightgray", }, }}>
+                        <Typography variant="h2" textAlign="center" padding={3}> SignUp</Typography>
+                        <TextField type="text" variant="outlined" placeholder="Name" margin="normal" {...register("name")} />
+                        <span className="errorwarnings">{errors.name?.message}</span>
+                        <TextField type="email" variant="outlined" placeholder="Email" margin="normal" {...register("email")} />
+                        <span className="errorwarnings"> {errors.email?.message}</span>
+                        <TextField type="password" variant="outlined" placeholder="Password" margin="normal"  {...register("password")} />
+                        <span className="errorwarnings"> {errors.password?.message}</span>
+                        <TextField type="password" variant="outlined" placeholder="Re-Enter-Password" margin="normal" {...register("repassword")} />
+                        <span className="errorwarnings"> {errors.repassword && 'passwords dont match'}</span>
+                        <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("avatar")} />
+                        <span className="errorwarnings"> {errors.avatar?.message}</span>
+                        <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Signup<AiOutlineLogin /></Button>
+                        <br />
+                        <span className="successMsg"> {login.isRegistered && "Successfully Registered!!!"}</span>
+                    </Box>
+
+                </Grid>
+
             </form>
         </>
     )
