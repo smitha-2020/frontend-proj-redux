@@ -3,7 +3,9 @@ import { ProductBase } from '../../common/Common';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { addProduct } from '../../redux/reducers/ProductReducers';
+import { addingProduct } from '../../redux/reducers/ProductReducers';
+import { uploadImagefromForm } from '../../redux/reducers/loginInfo';
+import axios from 'axios';
 
 const CreateProduct = () => {
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<ProductBase>({
@@ -14,11 +16,19 @@ const CreateProduct = () => {
       categoryId: 0,
     }
   });
+  const uploadImageData = async(data:ProductBase) => {
+    const responseImg = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file':data.imagestr[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
+    return responseImg.data;
+  }
   const product = useAppSelector(state => state.productReducer)
   const dispatch = useAppDispatch();
-  const onSubmit: SubmitHandler<ProductBase> = data => {
+  const onSubmit: SubmitHandler<ProductBase> = async(data) => {
     if (data.description) {
-      dispatch(addProduct(data))
+      const uploadedImage =await uploadImageData(data)
+    console.log(uploadedImage['location'])
+    const newData = {...data,images:[uploadedImage['location']]}
+    console.log(newData)
+    dispatch(addingProduct(newData))
     } else {
       reset({ title: "", price: 0, description: "", categoryId: 0 })
     }
@@ -42,7 +52,7 @@ const CreateProduct = () => {
           <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("imagestr")} />
           <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Add</Button>
           <br />
-          <p className="successMsg">{product.isAdded ? 'Data Added successfully' : ''}</p>
+          <p className="successMsg">{product.isDone ? 'Data Added successfully' : ''}</p>
         </Box>
       </form>
     </>

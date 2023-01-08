@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { createStore } from './redux/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "../src/css/main.css";
 
 const container = document.getElementById('root')!;
+const store = createStore();
 const root = createRoot(container);
 root.render(
   <React.StrictMode>

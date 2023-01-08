@@ -5,16 +5,22 @@ import categoryReducers from './reducers/CategoryReducers';
 import cartReducer from './reducers/cartReducer';
 import auhtReducer from './reducers/authReducer';
 
-export const store = configureStore({
-  reducer: {
-    productReducer,
-    loginReducer,
-    categoryReducers,
-    cartReducer,
-    auhtReducer, 
-  }
-});
 
+
+export const createStore = () =>{
+   return configureStore({
+    reducer: {
+      productReducer,
+      loginReducer,
+      categoryReducers,
+      cartReducer,
+      auhtReducer, 
+    }
+  });
+
+}
+
+const store = createStore();
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<

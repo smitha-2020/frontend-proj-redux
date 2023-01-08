@@ -10,7 +10,7 @@ import Cart from './Pages/Cart'
 import Profile from './Pages/Profile'
 import Header from './components/Header'
 import NOTFOUND from './Pages/NOTFOUND'
-import { fetchAllProducts, fetchProductsByPagination } from './redux/reducers/ProductReducers'
+import { fetchAllProducts } from './redux/reducers/ProductReducers'
 import { fetchAllCategories } from './redux/reducers/CategoryReducers'
 import Register from './Pages/Register'
 import { fetchSession } from './redux/reducers/authReducer'
@@ -53,7 +53,7 @@ const App = () => {
               <Route path="/update" element={<UpdatePassword />} />
               <Route path="*" element={<NOTFOUND />} />
             </Routes>
-            {/* <Footer /> */}
+            <Footer />
         </BrowserRouter>
       </div>
     </>

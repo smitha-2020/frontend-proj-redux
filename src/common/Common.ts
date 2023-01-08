@@ -55,7 +55,7 @@ export interface ProductBase{
     price: number,
     description: string,
     categoryId: number,
-    imagestr:FileList
+    imagestr:string[]
 }
 export interface ProductNew extends ProductBase{
     images: string[]
@@ -74,5 +74,17 @@ export type Inputs = {
 export interface ProductDetails{
     product:Product[],
     totalCount:number,
-    isAdded:boolean
+    isDone:boolean
+}
+export interface ProductOpt {
+    id: number,
+    title?: string,
+    price?: number,
+    description?: string,
+    images?: string[],
+    categoryId?: number,
+}
+export interface ProductModify {
+    id: number,
+    updateProduct:Partial<Product>
 }
