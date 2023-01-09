@@ -7,7 +7,8 @@ export const AnatherBox = styled(Box)({
     display: "flex",
     flexDirection: "row",
     gap: "10px",
-    padding: "50px 0 0 50px"
+    padding: "50px 0 0 50px",
+    minHeight:'81vh'
   })
   export const AnatherInputLabel = styled(InputLabel)({
     fontSize: "10px"

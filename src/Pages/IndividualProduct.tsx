@@ -52,8 +52,8 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
     let idPass: string = (id) ? id : "";
     return (
       <>
-        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '100vh', minWidth: '100vw' }}>
-          <Grid container spacing={0} alignItems="center" justifyContent="center" style={{ width: '1200px', height: '500px', marginLeft: "20px" }}>
+        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '100vh', minWidth: '100vw',backgroundColor:'primary.main' }}>
+          <Grid container spacing={0} alignItems="center" justifyContent="center" sx={{ width: '1200px', height: '500px', marginLeft: "20px" }}>
             {/* <Grid item xs={5}> <img src={img} alt={img} width="250" height="250" /></Grid> */}
             <Grid item xs={5}>
               <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
@@ -63,41 +63,41 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
             <Grid item xs={1}></Grid>
             <Grid item xs={6}>
               <Grid container spacing={0} direction="column" >
-                <Grid item style={{ marginTop: '10px', fontSize: '25px', fontWeight: '400' }}>{title}</Grid>
-                <Grid item style={{ marginTop: '20px',fontSize:'12px',fontWeight:'400' }}> <Star/></Grid>
-                <Grid item style={{ marginTop: '10px',fontSize:'12px',fontWeight:'400' }}> ({price} reviews so far)</Grid>
-                <Grid item style={{ marginTop: '10px', fontSize: '18px', fontWeight: '400' }}>Price : ${price}</Grid>
-                <Grid item style={{ marginTop: '10px', fontSize: '12px', fontWeight: '400', width: "500px" }}>{description}</Grid>
-                <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ marginTop: '30px' }}>
+                <Grid item sx={{ marginTop: '10px', fontSize: '25px', fontWeight: '400' }}>{title}</Grid>
+                <Grid item sx={{ marginTop: '20px',fontSize:'12px',fontWeight:'400' }}> <Star/></Grid>
+                <Grid item sx={{ marginTop: '10px',fontSize:'12px',fontWeight:'400' }}> ({price} reviews so far)</Grid>
+                <Grid item sx={{ marginTop: '10px', fontSize: '18px', fontWeight: '400' }}>Price : ${price}</Grid>
+                <Grid item sx={{ marginTop: '10px', fontSize: '12px', fontWeight: '400', width: "500px" }}>{description}</Grid>
+                <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ marginTop: '30px' }}>
                   <Grid item xs={3}>
-                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ fontSize: '10px', fontWeight: '400' }}>
+                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" sx={{ fontSize: '10px', fontWeight: '400' }}>
                       <Grid item><LocalShippingIcon /></Grid>
                       <Grid item> Fast Delivery</Grid>
                     </Grid>
                   </Grid>
                   <Grid item xs={3}>
-                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ fontSize: '10px', fontWeight: '400' }}>
+                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" sx={{ fontSize: '10px', fontWeight: '400' }}>
                       <Grid item></Grid> <AutorenewIcon />
                       <Grid item>30day replacement</Grid>
                     </Grid>
                   </Grid>
                   <Grid item xs={3}>
-                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ fontSize: '10px', fontWeight: '400' }}>
+                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" sx={{ fontSize: '10px', fontWeight: '400' }}>
                       <Grid item><LocalShippingIcon /></Grid>
                       <Grid item> Fast Delivery</Grid>
                     </Grid>
                   </Grid>
                   <Grid item xs={3}>
-                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ fontSize: '10px', fontWeight: '400' }}>
+                    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" sx={{ fontSize: '10px', fontWeight: '400' }}>
                       <Grid item>  <SecurityIcon /></Grid>
                       <Grid item>2 year warrenty</Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item style={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Available : In stock</Grid>
-                <Grid item style={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>ID : {id}</Grid>
-                <Grid item style={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Brand: {title}</Grid>
-                <Grid item style={{ border: "1px solid gray", marginTop: '20px' }}></Grid>
+                <Grid item sx={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Available : In stock</Grid>
+                <Grid item sx={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>ID : {id}</Grid>
+                <Grid item sx={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Brand: {title}</Grid>
+                <Grid item sx={{ border: "1px solid gray", marginTop: '20px' }}></Grid>
                 <Grid item>
                   <AddToCart products={newdata} id={idPass} />
                 </Grid>

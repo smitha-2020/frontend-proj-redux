@@ -86,6 +86,7 @@ const Products = () => {
               <Box sx={{color:'text.primary'}}>
                 Looking for something?
               </Box>
+              <br/>
               <Box>
                 <input type="text" placeholder="Search" name="search" value={search.search} onChange={(e) => searchText('search', e)} />
               </Box>
@@ -140,7 +141,7 @@ const Products = () => {
             </Box>
           </ProductBox>
         </AnatherBox>
-        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw',backgroundColor:'primary.main',width:'100%' }}>
+        <Grid container display="flex" spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw',backgroundColor:'primary.main',width:'100%' }}>
           <Pagination count={totalDisplayed} onChange={handlePageChange}  sx={{backgroundColor:'primary.main'}}/>
         </Grid>
       </>
