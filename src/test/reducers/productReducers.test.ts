@@ -16,7 +16,6 @@ beforeEach(() => {
     store = createStore();
 
 })
-server.listen();
 describe("test product reducer", () => {
     test("test to return initial state for product reducer", () => {
         expect(store.getState().productReducer.product.length).toBe(0)

@@ -41,7 +41,8 @@ export interface RegisteredUser {
     access_token: string,
     user: authenticUser,
     isRegistered: boolean,
-    isLogin: boolean
+    isLogin: boolean,
+    isLoading:boolean
 }
 export interface ProductDesc {
     title: string,

@@ -1,8 +1,10 @@
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
-import { useForm, SubmitHandler, useFormState } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { uploadImagefromForm } from '../redux/reducers/loginInfo';
 import { Inputs } from '../common/Common'
@@ -18,14 +20,16 @@ const schema = yup.object().shape({
     })
 })
 const Register = () => {
+    const navigate = useNavigate();
     const login = useAppSelector(state => state.loginReducer)
     const dispatch = useAppDispatch();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
         resolver: yupResolver(schema)
     });
-    const onSubmit: SubmitHandler<Inputs> = data => {
+    const onSubmit: SubmitHandler<Inputs> = async(data) => {
         if (data.avatar) {
-            dispatch(uploadImagefromForm(data))
+            await dispatch(uploadImagefromForm(data))
+            navigate('/login') 
         }
     };
     return (
@@ -48,9 +52,7 @@ const Register = () => {
                         <br />
                         <span className="successMsg"> {login.isRegistered && "Successfully Registered!!!"}</span>
                     </Box>
-
                 </Grid>
-
             </form>
         </>
     )

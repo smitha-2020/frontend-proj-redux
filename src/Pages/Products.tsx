@@ -61,6 +61,7 @@ const Products = () => {
       }
       return filteredData;
     } else if (search.search !== "") {
+      
       [...data] = state.productReducer.product.filter((product) => { return product.title.includes(search.search) })
       filteredData.push(...data)
       return filteredData;

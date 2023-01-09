@@ -14,34 +14,47 @@ import { fetchAllProducts } from './redux/reducers/ProductReducers'
 import { fetchAllCategories } from './redux/reducers/CategoryReducers'
 import Register from './Pages/Register'
 import { fetchSession } from './redux/reducers/authReducer'
-import UpdatePassword from './components/UpdatePassword'
 import Footer from './components/Footer'
+import { createTheme, ThemeProvider } from '@mui/material'
 
-
+const theme = createTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#d6cbd3',
+      contrastText: 'white'
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '#0066ff',
+      main: '#0044ff',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#ffcc00',
+    }
+  }
+})
 const App = () => {
-  // const products = useAppSelector(state => state.productReducer)
-  const authentication = useAppSelector(state => state.auhtReducer)
+  const authentication = useAppSelector(state => state.loginReducer.user)
   const dispatch = useAppDispatch();
-  
-  //dispatch(fetchAllProducts())
+
   useEffect(() => {
     dispatch(fetchAllProducts())
     dispatch(fetchAllCategories())
-    const userJson = localStorage.getItem('accessToken')!;
-    // const data = userJson !== null ? userJson: null;
+    const userJson = localStorage.getItem('access_token')!;
     if (!userJson) {
       //console.log("Authentication Failed")
     } else {
       dispatch(fetchSession(userJson))
     }
   }, []);
-  // setTimeout(() => console.log('Initial timeout!'), 100000);
 
   return (
     <>
       <div>
-        <BrowserRouter>
-        <Header />
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Header />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
@@ -50,11 +63,11 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="profile" element={<Profile />} />
-              <Route path="/update" element={<UpdatePassword />} />
               <Route path="*" element={<NOTFOUND />} />
             </Routes>
             <Footer />
-        </BrowserRouter>
+          </BrowserRouter>
+        </ThemeProvider>
       </div>
     </>
   )

@@ -29,6 +29,7 @@ const CreateProduct = () => {
     const newData = {...data,images:[uploadedImage['location']]}
     console.log(newData)
     dispatch(addingProduct(newData))
+    console.log(product.isDone)
     } else {
       reset({ title: "", price: 0, description: "", categoryId: 0 })
     }

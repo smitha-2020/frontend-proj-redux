@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { useForm, SubmitHandler } from 'react-hook-form';
-
-import { fetchLoginInfo } from '../redux/reducers/loginInfo'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Box, Button, Grid, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import LoginIcon from '@mui/icons-material/Login';
+
+import { fetchLoginInfo } from '../redux/reducers/loginInfo'
 import { LoginData } from '../common/Common';
+import { fetchSession } from '../redux/reducers/authReducer';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -17,25 +17,24 @@ const schema = yup.object().shape({
 })
 const Login = () => {
   const navigate = useNavigate()
-  const [accessToken, setAccessToken] = useState("")
-  const { access_token, isLogin } = useAppSelector(state => state.loginReducer)
-
-  useEffect(() => {
-    if (access_token) {
-      localStorage.setItem("accessToken", access_token)
-      if (localStorage.getItem('accessToken')) {
-        navigate('/profile')
-      }
-      setAccessToken(access_token)
-    }
-  }, [access_token])
+  const { isLogin, isLoading } = useAppSelector(state => state.loginReducer)
   const dispatch = useAppDispatch();
   const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginData>({
     resolver: yupResolver(schema)
   });
-  const onSubmit: SubmitHandler<LoginData> = data => {
-    dispatch(fetchLoginInfo(data))
-    console.log(isLogin)
+  const onSubmit: SubmitHandler<LoginData> = async (data) => {
+    try {
+      await dispatch(fetchLoginInfo(data))
+      const userJson = localStorage.getItem('access_token');
+      console.log("user" + userJson)
+      if (userJson) {
+        await dispatch(fetchSession(userJson))
+        navigate('/profile')
+      }
+    }
+    catch (e) {
+      console.log(e)
+    }
   };
   return (
     <>
@@ -49,9 +48,9 @@ const Login = () => {
             <span className="errorwarnings">{errors.password?.message}</span>
             <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit">Login<LoginIcon /></Button>
             <br />
-            <span className="errorwarnings">{!isLogin && "Login Failed.Try again"}</span>
+            <span className="errorwarnings">{isLogin && "Login Failed.Try again"}</span>
+            <span className="errorwarnings">{isLoading && "Loading..."}</span>
             <Button sx={{ marginTop: 3, borderRadius: 3, fontSize: 10 }}><NavLink to="/register">Not Registered yet?click to register..</NavLink></Button>
-            <Button sx={{ marginTop: 3, borderRadius: 3, fontSize: 10 }}><NavLink to="/update">forgot password?</NavLink></Button>
           </Box>
         </Grid>
       </form>

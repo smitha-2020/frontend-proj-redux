@@ -3,20 +3,14 @@ import React, { useContext } from 'react'
 import { NavLink, useNavigate } from "react-router-dom";
 import { BsBasketFill } from "react-icons/bs";
 import { FaSignInAlt, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
-import { Box, AppBar, Toolbar, Typography, Switch } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Switch, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { authenticUser } from '../common/Common';
 import { clearSession } from '../redux/reducers/authReducer';
+
 import { FcSignature } from "react-icons/fc";
 import IconButton from '@mui/material/IconButton';
-
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
@@ -30,7 +24,7 @@ const Header = () => {
 
     const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         console.log("Logging out")
-        localStorage.setItem("accessToken", "")
+        localStorage.setItem("access_token", "")
         dispatch(clearSession())
         navigate("/login")
     }
@@ -183,27 +177,6 @@ const Header = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-
-
-
-
-
-
-            {/* <AnatherAppBar position="static">
-                <NewToolBar>
-                    <Typography variant="h1">
-                        <FcSignature />
-                    </Typography>
-                    <Menus>
-                        <NavLink to="/">Home</NavLink>
-                        <NavLink to="/products">Products</NavLink>
-                        {authentication.avatar ? <NavLink style={{ color: 'coral' }} to="/profile">{`welcome, ${authentication.name} `}</NavLink> : <NavLink to="/login"><FaSignInAlt /></NavLink>}
-                        {authentication.avatar ? <FaSignOutAlt onClick={(e) => deleteSession(e)} /> : ""}
-                        <NavLink to="/register"><FaUserAlt /></NavLink>
-                        <NavLink to="/cart"><BsBasketFill /><span className="span-cart">{carttotal}</span></NavLink>
-                    </Menus>
-                </NewToolBar>
-            </AnatherAppBar> */}
         </>
     )
 }

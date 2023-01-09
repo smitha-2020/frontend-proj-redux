@@ -174,7 +174,7 @@ const productSlice = createSlice({
                 }
                 if (action.payload && "id" in action.payload) {
 
-                    return { ...state, product: [...state.product, action.payload] }
+                    return { ...state, product: [...state.product, action.payload],isDone:true  }
                 }
                 // const newProduct = (action.payload) ? action.payload : state;
                 // if (!newProduct) {
@@ -215,7 +215,7 @@ const productSlice = createSlice({
                         const updateProducts = getProducts.map((product) =>
                             (product.id === action.payload?.id) ? action.payload : product
                         )
-                        return { ...state, product: updateProducts }
+                        return { ...state, product: updateProducts,isDone:true }
                     }
                 }
             })
@@ -223,7 +223,8 @@ const productSlice = createSlice({
                 {
                     if (action.payload) {
                         const newReturn = state.product.filter((reqData) => { return reqData.id !== action.payload })
-                        return { ...state, product: newReturn }
+                        //state.isDone=true;
+                        return { ...state, product: newReturn}
                     }
                     // return {...state,product:action.payload}
                 }

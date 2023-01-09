@@ -6,21 +6,17 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { json } from 'stream/consumers';
 import { string } from 'yup';
+import { modifyProduct } from '../../redux/reducers/ProductReducers';
+import { data } from '../../common/data';
 
 const UpdateProduct = () => {
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<ProductOpt>({
-    defaultValues: {
-      id: 0,
-      title: "",
-      price: 0,
-      description: "",
-      categoryId: 0,
-    }
-  });
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<ProductOpt>({});
   const product = useAppSelector(state => state.productReducer)
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<ProductOpt> = data => {
     if (data.id) {
+      //const newData = {id:data.id,}
+      //dispatch(modifyProduct(newData))
       //console.log(data)
     
     }
@@ -55,7 +51,7 @@ const UpdateProduct = () => {
           <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Add</Button>
           <br />
           <p className="successMsg">{product.isDone ? 'Data Added successfully' : ''}</p>
-          <p>Fill the fields you wish to update.Select the Product Id</p>
+          <p className="successMsg">Fill the fields you wish to update.Select the Product Id</p>
         </Box>
       </form>
     </>
