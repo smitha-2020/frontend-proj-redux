@@ -13,7 +13,13 @@ const Cart = () => {
   const cart = useAppSelector(state => { return state.cartReducer; })
   const dispatch = useAppDispatch();
   const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
-  console.log(cart)
+  // let cartLocalStorage = JSON.parse((localStorage.getItem('cart')) || '{}');
+  // if (cartLocalStorage === null) {
+  //   cartLocalStorage = [];
+  // }
+
+  // let userCart:<Cart[] = cartLocalStorage.filter((cartInfo:any) => {return cartInfo.userInfo.email === authentication.email})
+  // console.log(userCart)
   const cartSize: number = cart.length;
   function deleteCartitem(e: React.MouseEvent<SVGElement, MouseEvent>, id: number): void {
     e.preventDefault();
@@ -50,7 +56,7 @@ const Cart = () => {
               <Grid container>
                 <Grid item style={{ width: '1300px', border: '1px solid lightgray' }}></Grid>
               </Grid>
-              {cart.map((cartElement) => {
+              {cart.map((cartElement:any) => {
                 return (
                   <Grid container alignItems="center" justifyContent="center" spacing={0} direction="row" key={cartElement.product.id}>
                     <Grid item xs={1} ></Grid>

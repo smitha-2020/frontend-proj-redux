@@ -16,7 +16,6 @@ export interface Rating {
 //     image: string,
 //     rating:Rating 
 // }
-
 export interface Product {
     id: number,
     title: string,
@@ -28,6 +27,7 @@ export interface Product {
 export interface Cart {
     quantity: number,
     product: Product
+    // userInfo:authenticUser
 }
 export interface authenticUser {
     id: number,

@@ -3,49 +3,16 @@ import Category from '../components/category/Category'
 import ProductList from '../components/product/ProductList';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, Pagination } from '@mui/material';
-import styled from '@emotion/styled';
+import { Box, FormControl, SelectChangeEvent, Grid, Pagination } from '@mui/material';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
 import { Product } from '../common/Common';
 import IndividualProduct from './IndividualProduct';
 import { usePagination } from "../hooks/pagination"
+import { AnatherBox, AnatherInputLabel, AnatherMenuItem, AnatherSelect, CategoryBox, OuterBox, ProductBox } from '../styledComponent/productstyle';
 
 const Products = () => {
   const { id } = useParams();
-  const AnatherBox = styled(Box)({
-    display: "flex",
-    flexDirection: "row",
-    gap: "10px",
-    margin: "30px 0 0 0",
-    padding: "50px 0 0 50px"
-  })
-  const AnatherInputLabel = styled(InputLabel)({
-    fontSize: "10px"
-  })
-  const AnatherSelect = styled(Select)({
-    width: "200px",
-    float: "right",
-    fontSize: "10px",
-    height: "40px"
-  })
-  const AnatherMenuItem = styled(MenuItem)({
-    fontSize: "12px"
-  })
-  const CategoryBox = styled(Box)({
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-    minWidth: "200px",
-    fontSize: "12px"
-  })
-  const OuterBox = styled(Box)({
-    marginBottom: "20px"
-  })
-  const ProductBox = styled(Box)({
-    display: "flex",
-    flexDirection: "column",
-  })
   const [selCategory, setSelCategory] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [numbofPages, setNumbofPages] = useState(12);

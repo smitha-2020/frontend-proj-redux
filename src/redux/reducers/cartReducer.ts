@@ -20,6 +20,7 @@ const cartSlice = createSlice({
                 })
                 return datanew;
             } else {
+                localStorage.setItem('cart',JSON.stringify([...state, action.payload]))
                 return [...state, action.payload]
             }
         },

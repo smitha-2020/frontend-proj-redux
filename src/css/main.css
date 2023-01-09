@@ -11,26 +11,9 @@ a {
   text-decoration: none;
 }
 
-ul li {
-  list-style-type: none;
-}
-
 img {
   margin-top: 10px;
   background-size: contain;
-}
-
-.icons {
-  fill: orange;
-}
-
-.AnatherBox {
-  display: "flex";
-  flex-direction: "row";
-  gap: "15px";
-  width: "1000px";
-  height: "500px";
-  justify-content: "center";
 }
 
 .successMsg {
@@ -38,64 +21,30 @@ img {
   color: green;
 }
 
-.OuterBox {
-  display: "flex";
-  flex-direction: "row";
-  justify-content: "center";
-  margin-top: "200px";
-}
-
-.displayBox {
-  margin: "10px 0 0 0 ";
-}
-
-.displayBoxtitle {
-  font-size: "25px";
-  margin-top: "10px";
-}
-
 .errorwarnings {
   font-size: 10px;
   color: red;
 }
 
-NavLink {
-  background: #fff;
-  height: 4em;
-  text-align: center;
-  width: 4em;
-  font-weight: bold;
+.avatarImg {
+  border-radius: "50%";
 }
 
-.span-cart {
-  color: #333;
-  height: 4em;
-  vertical-align: middle;
-  width: 4em;
-  background-color: lightsteelblue;
-  padding: 5px;
-  font-size: 10px;
-  border-radius: 50%;
+.navlinkfont {
+  color: "gray";
+  font-size: "12px";
 }
 
-.cartMain {
-  min-height: "85vh";
-  min-width: "100vw";
-  color: "lightgray";
+.navlinkcolor {
+  color: gray;
 }
 
-#light {
-  background-color: white;
+.grayfill {
+  fill: "gray";
 }
 
-#dark {
-  background-color: lightcoral;
-}
-
-.homediv {
-  width: 200px;
-  height: 500px;
-  border: 1px solid black;
+.whitefill {
+  color: "white";
 }
 
 /*# sourceMappingURL=main.css.map */

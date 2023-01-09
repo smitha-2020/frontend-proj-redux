@@ -15,25 +15,7 @@ import { fetchAllCategories } from './redux/reducers/CategoryReducers'
 import Register from './Pages/Register'
 import { fetchSession } from './redux/reducers/authReducer'
 import Footer from './components/Footer'
-import { createTheme, ThemeProvider } from '@mui/material'
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      // light: will be calculated from palette.primary.main,
-      main: '#d6cbd3',
-      contrastText: 'white'
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
-    },
-    secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
-      // dark: will be calculated from palette.secondary.main,
-      contrastText: '#ffcc00',
-    }
-  }
-})
 const App = () => {
   const authentication = useAppSelector(state => state.loginReducer.user)
   const dispatch = useAppDispatch();
@@ -48,11 +30,9 @@ const App = () => {
       dispatch(fetchSession(userJson))
     }
   }, []);
-
   return (
     <>
       <div>
-        <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Header />
             <Routes>
@@ -67,7 +47,6 @@ const App = () => {
             </Routes>
             <Footer />
           </BrowserRouter>
-        </ThemeProvider>
       </div>
     </>
   )

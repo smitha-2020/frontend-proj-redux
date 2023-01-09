@@ -20,7 +20,7 @@ server.listen();
 describe("test product reducer", () => {
     test("Initial state of cart", () => {
         expect(store.getState().cartReducer.length).toBe(0)
-    }),
+    })
         test("Adding items to cart", () => {
             store.dispatch(addToCart(newcartProduct))
             expect(store.getState().cartReducer.length).toBe(1)

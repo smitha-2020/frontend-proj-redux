@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Button } from "@mui/material";
-import { Product, Cart } from '../../common/Common';
+import { Product, Cart, authenticUser } from '../../common/Common';
 import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
@@ -15,6 +15,7 @@ const AddToCart = ({ products,id }: { products: Product,id:string }) => {
         marginTop: "20px"
     });
     const cart = useAppSelector(state => { return state.cartReducer; })
+    const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
     const dispatch = useAppDispatch();
     const stock = 5;
     const [amount, setAmount] = useState(1)
@@ -33,8 +34,12 @@ const AddToCart = ({ products,id }: { products: Product,id:string }) => {
         quantity: amount,
         product: products
     }
-    const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        dispatch(addToCart({ ...data }))
+    const addCart = async(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        try{
+            await dispatch(addToCart({ ...data }))  
+        }catch(e){
+            console.log(e)
+        }
     }
     return (
         <>

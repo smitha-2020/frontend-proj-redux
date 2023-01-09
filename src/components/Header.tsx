@@ -14,7 +14,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-
 const Header = () => {
     const navigate = useNavigate();
     const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
@@ -64,7 +63,7 @@ const Header = () => {
 
                             }}
                         >
-                            <FcSignature style={{ fill: 'white' }} />
+                            <FcSignature className="whitefill" />
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -118,10 +117,10 @@ const Header = () => {
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
-                                <NavLink to="/" style={{ color: 'gray' }}>Home</NavLink>
+                                <NavLink to="/" className="navlinkcolor">Home</NavLink>
                             </Button>
                             <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
-                                <NavLink to="/products" style={{ color: 'gray' }}>Products</NavLink>
+                                <NavLink to="/products" className="navlinkcolor">Products</NavLink>
                             </Button>
                             {/* <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
                                 {authentication.avatar ? <FaSignOutAlt style={{ color: 'gray' }} onClick={(e) => deleteSession(e)} /> : ""}
@@ -130,10 +129,10 @@ const Header = () => {
                                 {authentication.avatar ? "" : <NavLink to="/login"><FaSignInAlt /></NavLink>}
                             </Button>
                             <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
-                                <NavLink style={{ color: 'gray' }} to="/register"><FaUserAlt /></NavLink>
+                                <NavLink className="navlinkcolor" to="/register"><FaUserAlt /></NavLink>
                             </Button>
                             <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
-                                <NavLink to="/cart" style={{ color: 'gray' }}><BsBasketFill style={{ fill: 'gray' }} /><span className="span-cart">{carttotal}</span></NavLink>
+                                <NavLink to="/cart" className="navlinkcolor"><BsBasketFill className="grayfill" /><span>{carttotal}</span></NavLink>
                             </Button>
 
                         </Box>
@@ -161,18 +160,18 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center"><NavLink style={{ color: 'gray', fontSize: '12px' }} to="/profile">Profile</NavLink> </Typography>
+                                    <Typography textAlign="center"><NavLink className="navlinkfont" to="/profile">Profile</NavLink> </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center"><NavLink style={{ color: 'gray', fontSize: '12px' }} to="/cart">Cart</NavLink> </Typography>
+                                    <Typography textAlign="center"><NavLink className="navlinkfont" to="/cart">Cart</NavLink> </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center" onClick={(e) => deleteSession(e)} style={{ color: 'gray', fontSize: '12px' }}>Logout</Typography>
+                                    <Typography textAlign="center" onClick={(e) => deleteSession(e)} className="navlinkfont">Logout</Typography>
                                 </MenuItem>
                             </Menu>
                         </Box>
                         <Box>
-                            <Switch {...label} size="small"/>
+                            <Switch {...label} size="small" />
                         </Box>
                     </Toolbar>
                 </Container>
