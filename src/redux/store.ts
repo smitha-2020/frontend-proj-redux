@@ -4,6 +4,7 @@ import loginReducer from './reducers/loginInfo'
 import categoryReducers from './reducers/CategoryReducers';
 import cartReducer from './reducers/cartReducer';
 import auhtReducer from './reducers/authReducer';
+import switchReducer from './reducers/themeSwitcher';
 
 
 
@@ -15,6 +16,7 @@ export const createStore = () =>{
       categoryReducers,
       cartReducer,
       auhtReducer, 
+      switchReducer
     }
   });
 

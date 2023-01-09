@@ -1,26 +1,28 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 
 import { NavLink, useNavigate } from "react-router-dom";
 import { BsBasketFill } from "react-icons/bs";
 import { FaSignInAlt, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
-import { Box, AppBar, Toolbar, Typography, Switch, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Switch, Menu, Container, Avatar, Button, Tooltip, MenuItem, FormGroup, FormControlLabel } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { authenticUser } from '../common/Common';
+import { authenticUser, modeCheck } from '../common/Common';
 import { clearSession } from '../redux/reducers/authReducer';
 
 import { FcSignature } from "react-icons/fc";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+import { toggleTheme } from '../redux/reducers/themeSwitcher';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const Header = () => {
+
     const navigate = useNavigate();
     const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
+    const switchcheck: modeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
-
     const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         console.log("Logging out")
         localStorage.setItem("access_token", "")
@@ -41,6 +43,9 @@ const Header = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const toggleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(toggleTheme())
+    }
     return (
         <>
             <AppBar position="static" sx={{ backgroundColor: 'white', color: 'lightgray' }}>
@@ -171,7 +176,17 @@ const Header = () => {
                             </Menu>
                         </Box>
                         <Box>
-                            <Switch {...label} size="small" />
+
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={
+                                        <Switch checked={switchcheck.darkMode} onChange={toggleChange} />
+                                    }
+                                    label=""
+                                />
+                            </FormGroup>
+                            {/* <h4>{switchcheck.darkMode ? "Dark" : "Light"} Theme</h4> */}
+                            {/* <Switch {...label} size="small" /> */}
                         </Box>
                     </Toolbar>
                 </Container>

@@ -60,7 +60,7 @@ const ProductList = ({
       {
         products.length > 0 ? <ProductListing>
           {products.map((element) => (
-            <Card key={element.id}>
+            <Card key={element.id} sx={{color:'text.primary'}}>
               <ImgBox>
                 <NavLink to={`/product/${element.id}`} ><img width="220" height="180" src={element.category.image} alt={element.category.image} /></NavLink>
                 {/* <Link href={`/product/${element.id}`} ><img width="220" height="180" src={element.image} alt={element.image}/></Link> */}

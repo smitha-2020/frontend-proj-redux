@@ -7,7 +7,6 @@ export const AnatherBox = styled(Box)({
     display: "flex",
     flexDirection: "row",
     gap: "10px",
-    margin: "30px 0 0 0",
     padding: "50px 0 0 50px"
   })
   export const AnatherInputLabel = styled(InputLabel)({

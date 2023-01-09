@@ -89,3 +89,6 @@ export interface ProductModify {
     id: number,
     updateProduct:Partial<Product>
 }
+export interface modeCheck{
+    darkMode:boolean;
+}

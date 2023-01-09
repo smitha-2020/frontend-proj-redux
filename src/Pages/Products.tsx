@@ -79,11 +79,11 @@ const Products = () => {
   } else {
     return (
       <>
-        <AnatherBox>
+        <AnatherBox sx={{backgroundColor:'primary.main'}}>
           <CategoryBox>
             <Category setSelCategory={setSelCategory} selCategory={selCategory} />
-            <Box display="flex" flexDirection="column">
-              <Box>
+            <Box display="flex" flexDirection="column" sx={{color:'text.primary'}}>
+              <Box sx={{color:'text.primary'}}>
                 Looking for something?
               </Box>
               <Box>
@@ -95,7 +95,7 @@ const Products = () => {
             <OuterBox>
               <Grid container spacing={2}>
                 <Grid item xs={5}></Grid>
-                <Grid item xs={3}>{products.length} products displayed</Grid>
+                <Grid sx={{color:'text.primary'}} item xs={3}>{products.length} products displayed</Grid>
                 {/* <Grid item xs={5}></Grid> */}
                 <Grid item xs={4}>
                   <Grid container spacing={0} display="flex" flexDirection="row">
@@ -135,13 +135,13 @@ const Products = () => {
                 </Grid>
               </Grid>
             </OuterBox>
-            <Box>
+            <Box sx={{backgroundColor:'primary.main'}}>
               <ProductList products={newProducts} />
             </Box>
           </ProductBox>
         </AnatherBox>
-        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw', marginTop: '20px' }}>
-          <Pagination count={totalDisplayed} onChange={handlePageChange} />
+        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw',backgroundColor:'primary.main',width:'100%' }}>
+          <Pagination count={totalDisplayed} onChange={handlePageChange}  sx={{backgroundColor:'primary.main'}}/>
         </Grid>
       </>
     )
