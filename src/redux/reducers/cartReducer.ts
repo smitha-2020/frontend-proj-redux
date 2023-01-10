@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Cart } from '../../common/Common'
+import { Cart } from '../../common/common'
 
 const initialState: Cart[] = [];
 const cartSlice = createSlice({
@@ -18,9 +18,10 @@ const cartSlice = createSlice({
                         return cartElement
                     }
                 })
+             
                 return datanew;
             } else {
-                localStorage.setItem('cart',JSON.stringify([...state, action.payload]))
+                //localStorage.setItem('cart',JSON.stringify([...state,action.payload]))
                 return [...state, action.payload]
             }
         },
@@ -28,8 +29,14 @@ const cartSlice = createSlice({
             const newCart = state.filter((cartElement) => { return cartElement.product.id !== action.payload })
             return [...newCart]
         },
-        removeCart(state) {
-            return [];
+        removeCart(state,action) {
+            const datanew = state.map((cartElement) => {
+                if (cartElement.userInfo.id === action.payload) {
+                    return {}
+                } else {
+                    return cartElement
+                }
+            })
         },
         increaseQuantity(state, action) {
             const existingData = state.filter((cartElement) => { return cartElement.product.id === action.payload })

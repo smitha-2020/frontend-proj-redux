@@ -8,7 +8,7 @@ import * as yup from "yup"
 import LoginIcon from '@mui/icons-material/Login';
 
 import { fetchLoginInfo } from '../redux/reducers/loginInfo'
-import { LoginData } from '../common/Common';
+import { LoginData } from '../common/common';
 import { fetchSession } from '../redux/reducers/authReducer';
 
 const schema = yup.object().shape({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
-import { Categorys } from '../../common/Common';
+import { Categorys } from '../../common/common';
 
 const ProductImg = ({ images, image }: { images: string[], image: Categorys }) => {
 

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { uploadImagefromForm } from '../redux/reducers/loginInfo';
-import { Inputs } from '../common/Common'
+import { Inputs } from '../common/common'
 
 const schema = yup.object().shape({
     name: yup.string().min(6).required(),

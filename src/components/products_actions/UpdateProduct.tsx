@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import { ProductBase, ProductOpt } from '../../common/Common';
+import { Product, ProductBase, ProductModify, ProductOpt } from '../../common/common';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -7,29 +7,47 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { json } from 'stream/consumers';
 import { string } from 'yup';
 import { modifyProduct } from '../../redux/reducers/ProductReducers';
-import { data } from '../../common/data';
+import { ChangeEvent } from 'react';
+import { useNavigate } from "react-router-dom";
+import { fetchAllCategories } from '../../redux/reducers/CategoryReducers';
 
 const UpdateProduct = () => {
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<ProductOpt>({});
+  const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<ProductOpt>({});
+  const navigate = useNavigate();
   const product = useAppSelector(state => state.productReducer)
-  const dispatch = useAppDispatch();
-  const onSubmit: SubmitHandler<ProductOpt> = data => {
-    if (data.id) {
-      //const newData = {id:data.id,}
-      //dispatch(modifyProduct(newData))
-      //console.log(data)
-    
-    }
-
-  };
   const categories = useAppSelector(state => state.categoryReducers)
+  const dispatch = useAppDispatch();
+  let selectedItem:Product[] = [];
+  const onSubmit: SubmitHandler<ProductOpt> = async(data) => {
+    if (data.id) {
+      console.log(data)
+      //const newData = {id:data.id,}
+      //console.log({id:data.id,UpdateProduct:data})
+      const { id, categoryId,images, ...dataRemaing } = data
+      const newData: ProductModify = { id: id, updateProduct: dataRemaing }
+      await dispatch(modifyProduct(newData))
+      if (product.isDone) {
+        navigate('/fulfilled')
+      }
+    }
+  };
+  const productIdSelected = (e: ChangeEvent<HTMLSelectElement>) => {
+    selectedItem = product.product.filter((productItem) => { return productItem.id === Number(e.target.value) })
+    setValue('id',selectedItem[0].id)
+    setValue('title',selectedItem[0].title)
+    setValue('price',selectedItem[0].price)
+    setValue('description',selectedItem[0].description)
+    setValue('categoryId',selectedItem[0].category.id)
+    setValue('images',selectedItem[0].images)
+    //setValue('data.title',selectedItem[0].title)
+  }
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display="flex" flexDirection="column" maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={5} padding={3} borderRadius={5} boxShadow={'5px 5px 10px lightgray'} sx={{ ":hover": { boxShadow: "10px 10px 10px lightgray", }, }}>
           <Typography variant="h6" textAlign="center" padding={3}> Update Product</Typography>
           <p><span>Category Source</span>
-            <select {...register("id")}>
+            <select {...register("id")} onChange={productIdSelected}>
               <option>---select product----</option>
               {
                 product.product.map((productData) => <option key={productData.id} value={productData.id}>{productData.title}</option>)
@@ -47,10 +65,11 @@ const UpdateProduct = () => {
               }
             </select>
           </p>
-          <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("images")} />
+          {/* <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("images")} /> */}
+          <TextField type="text" variant="outlined" placeholder="Image url here" margin="normal"  {...register("images")} />
           <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Add</Button>
           <br />
-          <p className="successMsg">{product.isDone ? 'Data Added successfully' : ''}</p>
+          <p className="successMsg">{product.isDone && 'Data Updated'}</p>
           <p className="successMsg">Fill the fields you wish to update.Select the Product Id</p>
         </Box>
       </form>

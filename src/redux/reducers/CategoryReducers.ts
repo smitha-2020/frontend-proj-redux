@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Action } from '@remix-run/router';
 import axios, { AxiosResponse } from 'axios';
-import { Categorys } from '../../common/Common';
+import { Categorys } from '../../common/common';
 
 
 

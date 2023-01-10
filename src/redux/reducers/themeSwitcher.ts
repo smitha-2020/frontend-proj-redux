@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { modeCheck } from '../../common/Common'
+import { modeCheck } from '../../common/common'
 
 const initialState:modeCheck = {
     darkMode:false

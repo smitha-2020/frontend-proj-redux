@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node"
-import { Product, ProductDesc } from "../../common/Common";
+import { Product, ProductDesc } from "../../common/common";
 
 const products = [
     {

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authenticUser } from '../../common/Common'
+import { authenticUser } from '../../common/common'
 
 const initialState: authenticUser = { id: 0, avatar: "", email: "", password: "", name: "", role: "" };
 

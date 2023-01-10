@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { Categorys, Product } from "../common/Common";
+import { Categorys, Product } from "../common/common";
 import { RootState } from "../redux/store";
 import { Grid } from "@mui/material";
 import ProductImg from "../components/product/ProductImg";

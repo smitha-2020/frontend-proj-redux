@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Button } from "@mui/material";
-import { Product, Cart, authenticUser } from '../../common/Common';
+import { Product, Cart, authenticUser } from '../../common/common';
 import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
@@ -32,7 +32,8 @@ const AddToCart = ({ products,id }: { products: Product,id:string }) => {
     });
     const data: Cart = {
         quantity: amount,
-        product: products
+        product: products,
+        userInfo:authentication
     }
     const addCart = async(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         try{

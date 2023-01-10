@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { LoginData } from '../../common/Common';
-import { Inputs, authenticUser, RegisteredUser } from '../../common/Common'
+import { LoginData } from '../../common/common';
+import { Inputs, authenticUser, RegisteredUser } from '../../common/common'
 
 const initialState: RegisteredUser =
 {

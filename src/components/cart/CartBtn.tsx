@@ -5,15 +5,17 @@ import { Button, Grid } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { removeFromCart, removeCart,increaseQuantity,decreaseQuantity } from '../../redux/reducers/cartReducer';
 import { useNavigate } from 'react-router-dom'
+import { authenticUser } from '../../common/common';
 
 
 const CartBtn = () => {
     const cart = useAppSelector(state => { return state.cartReducer; })
+    const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const clearCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        dispatch(removeCart())
+        dispatch(removeCart(authentication.id))
       }
       const movetoProducts = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();

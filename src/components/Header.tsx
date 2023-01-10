@@ -1,27 +1,26 @@
-import React, { useState } from 'react'
-
-import { NavLink, useNavigate } from "react-router-dom";
-import { BsBasketFill } from "react-icons/bs";
-import { FaSignInAlt, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
-import { Box, AppBar, Toolbar, Typography, Switch, Menu, Container, Avatar, Button, Tooltip, MenuItem, FormGroup, FormControlLabel } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { authenticUser, modeCheck } from '../common/Common';
-import { clearSession } from '../redux/reducers/authReducer';
-
+import React from 'react'
 import { FcSignature } from "react-icons/fc";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+import { NavLink, useNavigate } from "react-router-dom";
+import { BsBasketFill } from "react-icons/bs";
+import { FaSignInAlt, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
+import { Box, AppBar, Toolbar, Typography, Switch, Menu, Container, Avatar, Button, Tooltip, MenuItem, FormGroup, FormControlLabel } from '@mui/material';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { authenticUser, modeCheck } from '../common/common';
+import { clearSession } from '../redux/reducers/authReducer';
 import { toggleTheme } from '../redux/reducers/themeSwitcher';
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
 const Header = () => {
-
     const navigate = useNavigate();
     const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
     const switchcheck: modeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
+    const carttotal=cart.filter((cartElement) => cartElement.userInfo.id === authentication.id).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
+    //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
     const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         console.log("Logging out")
@@ -43,7 +42,7 @@ const Header = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-    const toggleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const toggleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(toggleTheme())
     }
     return (
@@ -137,11 +136,9 @@ const Header = () => {
                                 <NavLink className="navlinkcolor" to="/register"><FaUserAlt /></NavLink>
                             </Button>
                             <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
-                                <NavLink to="/cart" className="navlinkcolor"><BsBasketFill className="grayfill" /><span>{carttotal}</span></NavLink>
+                                <NavLink to="/cart" className="navlinkcolor"><BsBasketFill className="grayfill" /><span className="grayfill-circle">{carttotal}</span></NavLink>
                             </Button>
-
                         </Box>
-
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

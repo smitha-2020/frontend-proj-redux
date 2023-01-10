@@ -1,7 +1,8 @@
-import { Button, Grid } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { text } from 'stream/consumers';
+import { Grid } from '@mui/material'
+import { useEffect, useState } from 'react'
+
 import CreateProduct from '../components/products_actions/CreateProduct';
+import DeleteProduct from '../components/products_actions/DeleteProduct';
 import UpdateProduct from '../components/products_actions/UpdateProduct';
 import { useAppSelector } from '../hooks/reduxHook'
 
@@ -13,7 +14,6 @@ const Profile = () => {
     console.log("data refreshed");
   }, [authentication])
   if (authentication.avatar !== "") {
-    console.log("authentication" + authentication.avatar)
     return (
       <>
         <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' }}>
@@ -46,6 +46,10 @@ const Profile = () => {
                 <Grid item xs={2}>
                   {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('updateProduct'); }}>Update Product</a> : ''}
                 </Grid>
+                <br />
+                <Grid item xs={2}>
+                  {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('deleteProduct'); }}>Delete Product</a> : ''}
+                </Grid>
 
                 {/* <Grid item xs={2}>
                   <a href="#" onClick={(e) => { setUpdateProduct(!updateProduct); }}>Update Product</a>
@@ -56,6 +60,7 @@ const Profile = () => {
           <Grid item alignItems="center" justifyContent="center" xs={10} sx={{ minHeight: '80vh' }}>
             {(display === 'createProduct' && authentication.role === "admin") ? <CreateProduct /> : ''}
             {(display === 'updateProduct' && authentication.role === "admin") ? <UpdateProduct /> : ''}
+            {(display === 'deleteProduct' && authentication.role === "admin") ? <DeleteProduct /> : ''}
           </Grid>
         </Grid>
       </>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Product } from "../common/Common";
+import { Product } from "../common/common";
 
 //cardsPerPage,totalCards
 export const usePagination = (cardsPerPage: number, cards: Product[]) => {

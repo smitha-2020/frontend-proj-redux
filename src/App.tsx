@@ -15,7 +15,8 @@ import { fetchAllCategories } from './redux/reducers/CategoryReducers'
 import Register from './Pages/Register'
 import { fetchSession } from './redux/reducers/authReducer'
 import Footer from './components/Footer'
-import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material'
+import Fulfilled from './components/products_actions/Fulfilled'
 
 
 // const getDesignTokens = (mode: any) => ({
@@ -67,7 +68,7 @@ const getDesignTokens = (mode: any) => ({
         divider: "#fde68a",
         background: {
           default: "#fbbf24",
-          paper: "#ffffff",
+          paper: "",
         },
         text: {
           primary: "#a6a6a6",
@@ -91,12 +92,9 @@ const getDesignTokens = (mode: any) => ({
       }),
   },
 });
-
 const App = () => {
-
   const [mode, setMode] = useState("light");
   const darkMode = useAppSelector(state => state.switchReducer.darkMode)
-
   useMemo(() => {
     if (darkMode) {
       setMode("dark");
@@ -104,13 +102,9 @@ const App = () => {
       setMode("light");
     }
   }, [darkMode]);
-
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
   const authentication = useAppSelector(state => state.loginReducer.user)
-
   const dispatch = useAppDispatch();
-
-
   useEffect(() => {
     dispatch(fetchAllProducts())
     dispatch(fetchAllCategories())
@@ -121,13 +115,11 @@ const App = () => {
       dispatch(fetchSession(userJson))
     }
   }, []);
-
   return (
     <>
-
       <div>
         <BrowserRouter>
-          <Header/>
+          <Header />
           <ThemeProvider theme={theme}>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -137,6 +129,7 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="/fulfilled" element={<Fulfilled />} />
               <Route path="*" element={<NOTFOUND />} />
             </Routes>
           </ThemeProvider>

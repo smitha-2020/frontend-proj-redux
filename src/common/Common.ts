@@ -27,7 +27,7 @@ export interface Product {
 export interface Cart {
     quantity: number,
     product: Product
-    // userInfo:authenticUser
+    userInfo:authenticUser
 }
 export interface authenticUser {
     id: number,
@@ -59,7 +59,7 @@ export interface ProductBase{
     imagestr:string[]
 }
 export interface ProductNew extends ProductBase{
-    images: string[]
+    images: any[]
 }
 export interface LoginData {
     email: string,
