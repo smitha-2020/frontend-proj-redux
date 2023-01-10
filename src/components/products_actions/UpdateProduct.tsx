@@ -9,7 +9,7 @@ import { string } from 'yup';
 import { modifyProduct } from '../../redux/reducers/ProductReducers';
 import { ChangeEvent } from 'react';
 import { useNavigate } from "react-router-dom";
-import { fetchAllCategories } from '../../redux/reducers/CategoryReducers';
+import { fetchAllCategories } from '../../redux/reducers/categoryReducers';
 
 const UpdateProduct = () => {
   const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<ProductOpt>({});

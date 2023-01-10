@@ -21,7 +21,6 @@ const cartSlice = createSlice({
              
                 return datanew;
             } else {
-                //localStorage.setItem('cart',JSON.stringify([...state,action.payload]))
                 return [...state, action.payload]
             }
         },
@@ -30,13 +29,9 @@ const cartSlice = createSlice({
             return [...newCart]
         },
         removeCart(state,action) {
-            const datanew = state.map((cartElement) => {
-                if (cartElement.userInfo.id === action.payload) {
-                    return {}
-                } else {
-                    return cartElement
-                }
-            })
+            const newCart = state.filter((cartElement) => { return cartElement.userInfo.id! === action.payload })
+            console.log(newCart)
+            return newCart;
         },
         increaseQuantity(state, action) {
             const existingData = state.filter((cartElement) => { return cartElement.product.id === action.payload })

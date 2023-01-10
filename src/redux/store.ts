@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import productReducer from './reducers/ProductReducers';
 import loginReducer from './reducers/loginInfo'
-import categoryReducers from './reducers/CategoryReducers';
+import categoryReducers from './reducers/categoryReducers';
 import cartReducer from './reducers/cartReducer';
 import auhtReducer from './reducers/authReducer';
 import switchReducer from './reducers/themeSwitcher';

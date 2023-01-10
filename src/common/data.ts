@@ -16,6 +16,14 @@ export const newcartProduct = {
             image: "https://api.lorem.space/image/shoes?w=640&h=480&r=7041",
 
         }
+    },
+    userInfo: {
+        avatar:"https://api.lorem.space/image/face?w=640&h=480&r=3197",
+        email:"john@mail.com",
+        id:1,
+        name:"Jhon",
+        password:"changeme",
+        role:"customer",
     }
 }
 export const data = {

@@ -3,10 +3,8 @@ import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { Button, Grid } from "@mui/material";
 import { NavLink } from 'react-router-dom';
-import { removeFromCart, removeCart,increaseQuantity,decreaseQuantity } from '../../redux/reducers/cartReducer';
 import { useNavigate } from 'react-router-dom'
 import { authenticUser } from '../../common/common';
-
 
 const CartBtn = () => {
     const cart = useAppSelector(state => { return state.cartReducer; })
@@ -15,12 +13,15 @@ const CartBtn = () => {
     const navigate = useNavigate()
     const clearCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        dispatch(removeCart(authentication.id))
+        if(authentication.id){
+          //dispatch(removeCart(authentication.id))
+        }else{
+          //dispatch(removeCart(0))
+        }
       }
       const movetoProducts = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        navigate('/products')
-        
+        navigate('/products')  
       }
   return (
     <>
@@ -32,7 +33,7 @@ const CartBtn = () => {
             <Grid item xs={8} sx={{ fontSize: '10px', color: 'white', textAlign: 'center' }}>
             </Grid>
             <Grid item xs={2} sx={{ fontSize: '10px', textAlign: 'center' }}>
-              <NavLink to="" ><Button sx={{ backgroundColor: 'red', color: 'white', padding: "10px" }} onClick={(e) =>clearCart(e)}>Clear Cart</Button></NavLink>
+              {/* <NavLink to="" ><Button sx={{ backgroundColor: 'red', color: 'white', padding: "10px" }} onClick={(e) =>clearCart(e)}>Clear Cart</Button></NavLink> */}
             </Grid>
           </Grid>
         </Grid>

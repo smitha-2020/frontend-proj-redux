@@ -92,3 +92,7 @@ export interface ProductModify {
 export interface modeCheck{
     darkMode:boolean;
 }
+export interface categoryModify{
+    id:number,
+    updateCategory:Partial<Categorys>
+}
