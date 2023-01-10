@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
-import { categoryModify, Categorys, Product } from '../../common/common';
+import { CategoryModify, Categorys, Product } from '../../common/common';
 
 const initialState: Categorys[] = [];
 export const fetchAllCategories = createAsyncThunk(
@@ -17,9 +17,9 @@ export const fetchAllCategories = createAsyncThunk(
 )
 export const getSingleCategory = createAsyncThunk(
     "getSingleCategory",
-    async (id: number) => {
+    async (id: string) => {
         try {
-            const res = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}`);
+            const res: AxiosResponse<Categorys[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}`);
             return res.data;
         }
         catch (e) {
@@ -28,9 +28,9 @@ export const getSingleCategory = createAsyncThunk(
     })
 export const createCategory = createAsyncThunk(
     "createCategory",
-    async () => {
+    async (category: Categorys) => {
         try {
-            const res = await axios.post('https://api.escuelajs.co/api/v1/categories/')
+            const res = await axios.post('https://api.escuelajs.co/api/v1/categories/', category)
             return res.data;
         }
         catch (e) {
@@ -39,9 +39,11 @@ export const createCategory = createAsyncThunk(
     })
 export const updateCategory = createAsyncThunk(
     "updateCategory",
-    async ({ id, updateCategory }: categoryModify) => {
+    async (data: Categorys) => {
+        const { id, ...filteredCategory } = data
         try {
-            const res = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, updateCategory)
+            const res: AxiosResponse<Categorys, any> = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, filteredCategory)
+            console.log("data returned by thunk" + res.data)
             return res.data;
         }
         catch (e) {
@@ -53,16 +55,15 @@ export const deleteCategory = createAsyncThunk(
     "deleteCategory",
     async (id: number) => {
         const res = await axios.delete(`https://api.escuelajs.co/api/v1/categories/${id}`)
-        return res.data;
-
+        const result = res.data ? id : 0
+        return result
     }
 )
 export const getProductsByCategory = createAsyncThunk(
     "getProductsByCategory",
     async (id: number) => {
-        const res: AxiosResponse<Product[], any> = await axios.delete(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
+        const res: AxiosResponse<Product[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
         return res.data;
-
     }
 )
 const categorySlice = createSlice({
@@ -75,7 +76,6 @@ const categorySlice = createSlice({
         build.addCase(fetchAllCategories.fulfilled, (state, action) => {
             return action.payload
         })
-
             .addCase(fetchAllCategories.rejected, (state) => {
                 return state;
             })
@@ -86,13 +86,12 @@ const categorySlice = createSlice({
                 if (action.payload && "message" in action.payload) {
                     return state;
                 } else {
-                    if (action.payload && "name" in action.payload) {
-                        return action.payload
+                    if (action.payload && "image" in action.payload) {
+                        return action.payload;
                     } else {
                         return state;
                     }
                 }
-
             })
             .addCase(getSingleCategory.pending, (state) => {
                 return state
@@ -105,12 +104,11 @@ const categorySlice = createSlice({
                     return state;
                 } else {
                     if (action.payload && "name" in action.payload) {
-                        return [...state,action.payload]
+                        return [...state, action.payload]
                     } else {
                         return state;
                     }
                 }
-
             })
             .addCase(createCategory.pending, (state) => {
                 return state
@@ -122,16 +120,11 @@ const categorySlice = createSlice({
                 if (action.payload && "message" in action.payload) {
                     return state;
                 } else {
-                    if (action.payload && "id" in action.payload) {
-                        if (action.payload) {
-                            const getCategories = [...state]
-                            const updateCategory = getCategories.map((category) =>
-                                (category.id === action.payload.id) && action.payload 
-                            )
-                            return { ...state, updateCategory }
-                        }
-                    } else {
-                        return state;
+                    if (action.payload && "name" in action.payload) {
+                        //const modifyState = [...state]
+                        // const result = modifyState.filter(category => {return category.id !== action.payload?.id})
+                        return [action.payload]
+                        //return [...state]
                     }
                 }
             })
@@ -142,11 +135,9 @@ const categorySlice = createSlice({
                 return state
             })
             .addCase(deleteCategory.fulfilled, (state, action) => {
-                if (action.payload && "message" in action.payload) {
-                    return state;
-                } else {
-                   return action.payload;
-                }
+                const deletedData = [...state]
+                const result = deletedData.filter(category => { return category.id === action.payload })
+                return [...result]
             })
             .addCase(deleteCategory.pending, (state) => {
                 return state
@@ -154,14 +145,14 @@ const categorySlice = createSlice({
             .addCase(deleteCategory.rejected, (state) => {
                 return state
             })
-            .addCase(getProductsByCategory.fulfilled,(state,action) => {
+            .addCase(getProductsByCategory.fulfilled, (state, action) => {
                 if (action.payload && "message" in action.payload) {
                     return state;
                 }
-                else{
+                else {
                     const productList = action.payload;
-                    productList.map((product)=> {
-                        return [...state,product]
+                    productList.map((product) => {
+                        return [...state, product]
                     })
                 }
             })

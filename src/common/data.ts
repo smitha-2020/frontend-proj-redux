@@ -1,3 +1,5 @@
+import { Categorys } from "./common"
+
 export const newcartProduct = {
     quantity: 3,
     product: {
@@ -18,12 +20,12 @@ export const newcartProduct = {
         }
     },
     userInfo: {
-        avatar:"https://api.lorem.space/image/face?w=640&h=480&r=3197",
-        email:"john@mail.com",
-        id:1,
-        name:"Jhon",
-        password:"changeme",
-        role:"customer",
+        avatar: "https://api.lorem.space/image/face?w=640&h=480&r=3197",
+        email: "john@mail.com",
+        id: 1,
+        name: "Jhon",
+        password: "changeme",
+        role: "customer",
     }
 }
 export const data = {
@@ -32,4 +34,78 @@ export const data = {
         title: "Change title",
         price: 100
     }
+}
+
+export const products = [
+    {
+        id: 13,
+        title: "Incredible Metal Bacon",
+        price: 317,
+        description: "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+        images: [
+            "https://api.lorem.space/image/watch?w=640&h=480&r=9003",
+            "https://api.lorem.space/image/watch?w=640&h=480&r=375",
+            "https://api.lorem.space/image/watch?w=640&h=480&r=6293"
+        ],
+        category: {
+            id: 2,
+            name: "Electronics",
+            image: "https://api.lorem.space/image/watch?w=640&h=480&r=9863",
+        }
+    },
+    {
+        id: 12,
+        title: "Awesome Frozen Salad",
+        price: 444,
+        description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+        images: [
+            "https://api.lorem.space/image/watch?w=640&h=480&r=8808",
+            "https://api.lorem.space/image/watch?w=640&h=480&r=6980",
+            "https://api.lorem.space/image/watch?w=640&h=480&r=1512"
+        ],
+        category: {
+            id: 2,
+            name: "Electronics",
+            image: "https://api.lorem.space/image/watch?w=640&h=480&r=6865",
+        }
+    },
+    {
+        id: 1,
+        title: "Twesome Frozen Salad22",
+        price: 600,
+        description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+        images: [
+            "https://api.lorem.space/image/watch?w=640&h=480&r=8808",
+            "https://api.lorem.space/image/watch?w=640&h=480&r=6980",
+            "https://api.lorem.space/image/watch?w=640&h=480&r=1512"
+        ],
+        category: {
+            id: 1,
+            name: "Electronics",
+            image: "https://api.lorem.space/image/watch?w=640&h=480&r=6865",
+        }
+    },
+]
+
+export const categoryList = [
+    {
+        id: 1,
+        name: "Clothes",
+        image: "https://api.lorem.space/image/fashion?w=640&h=480&r=2301",
+    },
+    {
+        id: 2,
+        name: "Electronics",
+        image: "https://api.lorem.space/image/watch?w=640&h=480&r=7076",
+    },
+    {
+        id: 3,
+        name: "Furniture",
+        image: "https://api.lorem.space/image/furniture?w=640&h=480&r=4371",
+    }
+]
+export const updatecategory:Categorys ={
+    id: 1,
+    name: "Testing Cloths",
+    image: "https://api.lorem.space/image/fashion?w=640&h=480&r=2301",
 }
