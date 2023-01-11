@@ -13,6 +13,7 @@
 -  styled library of Material UI
 -  Jest for unit testing
 
+
 ## Features
 
 -  Used the API endpoint https://fakeapi.platzi.com/ to create an e-commerce website and write unit tests for the each of the reducers.
@@ -23,6 +24,7 @@ user reducer: Register and Login(once logged in as an admin, he has a full contr
 cart reducer: add product to cart, remove products, update products's quantity in cart
 - Implemented switch theme using useMemo
 - Implemented Pagination using custom hoook.
+- Used Redux-persist for persistence.
 - Implemented Hooks like useState,useEffect
 -  Written 4 test suits with upto 20 test cases for the user reducers,category reducer, product reducer, cart reducer.
 -  Made use of Material UI icons, and styled library for styling.
@@ -38,6 +40,95 @@ cart reducer: add product to cart, remove products, update products's quantity i
 - Including validation for the create Product component.
 
 Link to the frontend project https://soft-ganache-be532a.netlify.app/
+
+
+## Folder Structure
+
+───src
+    │   App.tsx
+    │   index.tsx
+    ├───common
+    │       common.ts
+    │       data.ts
+    │
+    ├───components
+    │   │   Footer.tsx
+    │   │   Header.tsx
+    │   │   Login.tsx
+    │   │   NoData.tsx
+    │   │
+    │   ├───cart
+    │   │       AddToCart.tsx
+    │   │       CartBtn.tsx
+    │   │       CartTotal.tsx
+    │   │       Star.tsx
+    │   │       ToggleButton.tsx
+    │   │
+    │   ├───category
+    │   │       Category.tsx
+    │   │
+    │   ├───home
+    │   │       Featured.tsx
+    │   │       Hero.tsx
+    │   │       Partners.tsx
+    │   │       Services.tsx
+    │   │
+    │   ├───product
+    │   │       ProductImg.tsx
+    │   │       ProductList.tsx
+    │   │
+    │   └───products_actions
+    │           CreateProduct.tsx
+    │           DeleteProduct.tsx
+    │           Fulfilled.tsx
+    │           UpdateProduct.tsx
+    │
+    ├───css
+    │       main.css
+    │       main.css.map
+    │
+    ├───hooks
+    │       pagination.ts
+    │       reduxHook.ts
+    │
+    ├───Pages
+    │       Cart.tsx
+    │       Home.tsx
+    │       IndividualProduct.tsx
+    │       NOTFOUND.tsx
+    │       Products.tsx
+    │       Profile.tsx
+    │       Register.tsx
+    │
+    ├───redux
+    │   │   store.ts
+    │   │
+    │   └───reducers
+    │           authReducer.ts
+    │           cartReducer.ts
+    │           categoryReducers.ts
+    │           loginInfo.ts
+    │           ProductReducers.ts
+    │           themeSwitcher.ts
+    │           userReducers.ts
+    │
+    ├───scss
+    │       main.scss
+    │
+    ├───styledComponent
+    │       home.ts
+    │       productstyle.ts
+    │
+    └───test
+        ├───reducers
+        │       cartReducer.test.ts
+        │       categoryReducers.test.ts
+        │       productReducers.test.ts
+        │       userReducers.test.ts
+        │
+        └───shared
+                server.ts
+
 ## Instruction to start the project
 
 In the project directory, you can run:
