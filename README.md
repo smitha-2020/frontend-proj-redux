@@ -32,10 +32,10 @@ cart reducer: add product to cart, remove products, update products's quantity i
 7.Made use of Material UI icons, and styled library for styling.
 ## Future Improvements
 Modularize the code.
-Using styled library through the application.
+Using styled library throughout the application.
 Testing of UI.
 Implementing debounce for the search bar.
-Iproving the overall look of the website.
+Improving the overall look of the website.
 
 Link to the frontend project https://imaginative-torrone-1d9492.netlify.app/
 ## Instruction to start the project
