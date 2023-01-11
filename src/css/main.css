@@ -52,4 +52,20 @@ img {
   color: "orange";
 }
 
+.grayfill-circle {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  fill: "gray";
+}
+
+.NavBtn {
+  background-color: purple;
+  padding: 10px;
+}
+
+.centered-icon {
+  text-align: center;
+}
+
 /*# sourceMappingURL=main.css.map */

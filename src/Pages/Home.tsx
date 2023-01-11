@@ -5,6 +5,11 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import { useAppSelector } from '../hooks/reduxHook';
 import { createTheme, ThemeProvider } from '@mui/material'
+import { HeroSection } from '../styledComponent/home';
+import Hero from '../../src/components/home/Hero'
+import Services from '../components/home/Services';
+import Partners from '../components/home/Partners';
+import Featured from '../components/home/Featured';
 
 const Home = () => {
 //  const themes = createTheme(light);
@@ -13,12 +18,14 @@ const Home = () => {
   const theme = useTheme();
   return (
     <>
+    {/* sx={{bgcolor:'primary.main'}} */}
     {/* <ThemeProvider theme={themechange}> */}
-      <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center"  sx={{bgcolor:'primary.main',minHeight:'84vh',height:'auto',minWidth:'100vw',color:'lightgray',marginTop:'5px'}}>
-        <Grid item  sx={{width:'900px',textAlign:'center',fontSize:'30px',color:'text.primary'}}>
-          under construction
-        </Grid>
-      </Grid>
+      <HeroSection sx={{backgroundColor:'primary.main'}}>
+        <Hero/>
+        <Featured/>
+        <Services/>
+        <Partners/>
+      </HeroSection>
       {/* </ThemeProvider> */}
     </>
   )

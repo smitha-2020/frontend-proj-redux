@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, Pagination } from '@mui/material';
+import { Box, InputLabel, MenuItem, Select, SelectChangeEvent, Grid, Pagination } from '@mui/material';
 import styled from '@emotion/styled';
 
-// styled utility from materialui
+// styled utility from materialui for product page
 export const AnatherBox = styled(Box)({
     display: "flex",
     flexDirection: "row",
