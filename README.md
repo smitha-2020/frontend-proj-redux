@@ -38,7 +38,7 @@ cart reducer: add product to cart, remove products, update products's quantity i
 - Including more test cases.
 - Including validation for the create Product component.
 
-Link to the frontend project https://soft-ganache-be532a.netlify.app/
+Link to the frontend project https://superlative-torte-9f2c82.netlify.app/
 
 
 ## Folder Structure
