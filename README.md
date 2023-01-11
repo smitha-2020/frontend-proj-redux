@@ -19,25 +19,27 @@ Jest for unit testing
 
 ## Features
 
-1.Used the API endpoint https://fakeapi.platzi.com/ to create an e-commerce website and write unit tests for the each of the reducers.
-2.Created  4 pages Home page(static page with categories), product page(displays products and categories to choose from), profile page (only available if user logins), and cart page (displays specific to the user.If logged out cart shows the content of anonymous user)
-3.Used redux-toolkit and redux-persist to create 
+-  Used the API endpoint https://fakeapi.platzi.com/ to create an e-commerce website and write unit tests for the each of the reducers.
+-  Created  4 pages Home page(static page with categories), product page(displays products and categories to choose from), profile page (only available if user logins), and cart page (displays specific to the user.If logged out cart shows the content of anonymous user)
+-  Used redux-toolkit and redux-persist to create 
 product reducer: get all products, find a single products, sort products by categories, sort products by price. Create, update and delete a product (enabling update & delete features only for admin of the webapp.
 user reducer: Register and Login(once logged in as an admin, he has a full control of the webapp)
 cart reducer: add product to cart, remove products, update products's quantity in cart
-4.Implemented switch theme using useMemo
-5.Implemented Pagination using custom hoook.
-6.Implemented Hooks like useState,useEffect
-6.Written 4 test suits with upto 20 test cases for the user reducers,category reducer, product reducer, cart reducer.
-7.Made use of Material UI icons, and styled library for styling.
+- Implemented switch theme using useMemo
+- Implemented Pagination using custom hoook.
+- Implemented Hooks like useState,useEffect
+-  Written 4 test suits with upto 20 test cases for the user reducers,category reducer, product reducer, cart reducer.
+-  Made use of Material UI icons, and styled library for styling.
+
 ## Future Improvements
-Modularize the code.
-Using styled library throughout the application.
-Testing of UI.
-Implementing debounce for the search bar.
-Improving the overall look of the website.
-Including more test cases.
-Including validation for the create Product component.
+-  Modularize the code.
+- Using styled library throughout the application.
+- Testing of UI.
+- Implementing debounce for the search bar.
+- Improving the overall look of the website.
+- Improving the overall look of the website.
+- Including more test cases.
+- Including validation for the create Product component.
 
 Link to the frontend project https://soft-ganache-be532a.netlify.app/
 ## Instruction to start the project
