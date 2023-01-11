@@ -15,7 +15,9 @@ const DeleteProduct = () => {
   }, [isDone])
   const dispatch = useAppDispatch()
   const onSubmit: SubmitHandler<ProductOpt> = async (data) => {
-    dispatch(deletingProduct(data.id))
+    //console.log(data.id)
+    const id = data.id;
+    dispatch(deletingProduct(id))
     if (product.isDone) {
       navigate('/fulfilled')
     }
