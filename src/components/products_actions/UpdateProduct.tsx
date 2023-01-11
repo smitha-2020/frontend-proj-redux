@@ -69,7 +69,7 @@ const UpdateProduct = () => {
           <TextField type="text" variant="outlined" placeholder="Image url here" margin="normal"  {...register("images")} />
           <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Add</Button>
           <br />
-          <p className="successMsg">{product.isDone && 'Data Updated'}</p>
+          {/* <p className="successMsg">{product.isDone && 'Data Updated'}</p> */}
           <p className="successMsg">Fill the fields you wish to update.Select the Product Id</p>
         </Box>
       </form>

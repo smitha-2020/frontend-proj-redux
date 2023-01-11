@@ -35,7 +35,7 @@ const Register = () => {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' }}>
+                <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px',backgroundColor:'primary.main' }}>
                     <Box display="flex" flexDirection="column" maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={5} padding={3} borderRadius={5} boxShadow={'5px 5px 10px lightgray'} sx={{ ":hover": { boxShadow: "10px 10px 10px lightgray", }, }}>
                         <Typography variant="h2" textAlign="center" padding={3}> SignUp</Typography>
                         <TextField type="text" variant="outlined" placeholder="Name" margin="normal" {...register("name")} />

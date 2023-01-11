@@ -16,7 +16,7 @@ const Profile = () => {
   if (authentication.avatar !== "") {
     return (
       <>
-        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' }}>
+        <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '84vh', height: 'auto', minWidth: '100vw', color: 'lightgray', marginTop: '5px' ,backgroundColor:'primary.main'}}>
           <Grid item alignItems="center" justifyContent="center" xs={2} sx={{ backgroundColor: 'lightgray', minHeight: '80vh' }}>
             <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" >
               <Grid item>
@@ -40,7 +40,7 @@ const Profile = () => {
                 <Grid item xs={2}>
                 </Grid>
                 <Grid item xs={2}>
-                  {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a> : ''}
+                {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a> : ''}
                 </Grid>
                 <br />
                 <Grid item xs={2}>
