@@ -6,12 +6,12 @@
 ![SASS](https://img.shields.io/badge/SASS-v.4.9-hotpink)
 
 ## Tools 
-redux toolkit
-Material UI
-SCSS
-redux-persist for persistence
-styled library of Material UI
-Jest for unit testing
+-  Redux toolkit
+-  Material UI
+-  SCSS
+-  redux-persist for persistence
+-  styled library of Material UI
+-  Jest for unit testing
 
 ## Features
 
