@@ -36,8 +36,10 @@ Using styled library throughout the application.
 Testing of UI.
 Implementing debounce for the search bar.
 Improving the overall look of the website.
+Including more test cases.
+Including validation for the create Product component.
 
-Link to the frontend project https://imaginative-torrone-1d9492.netlify.app/
+Link to the frontend project https://soft-ganache-be532a.netlify.app/
 ## Instruction to start the project
 
 In the project directory, you can run:
