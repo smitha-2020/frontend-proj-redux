@@ -8,10 +8,10 @@ const Star = () => {
     const ratingStar = Array.from({ length: 5 }, (v, i) => {
         let number = i + 0.5; // 0.5,1.5,2.5...
         return (<>
-            <Box component="span" m="{1}" key={i}>{star >= i + 1 ? <FaStar className="icons" /> : star >= number ? <FaStarHalfAlt  className="icons"/> : <AiOutlineStar className="icons"/>}</Box>
+            <Box component="span" m="{1}" key={i.toString()}>{star >= i + 1 ? <FaStar className="icons" /> : star >= number ? <FaStarHalfAlt  className="icons"/> : <AiOutlineStar className="icons"/>}</Box>
         </>)
     });
-    return(<Box key={star}>{ratingStar}</Box>)
+    return(<Box key={star+'id'}>{ratingStar}</Box>)
 }
 
 export default Star

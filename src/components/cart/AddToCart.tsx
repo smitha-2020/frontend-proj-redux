@@ -35,12 +35,10 @@ const AddToCart = ({ products,id }: { products: Product,id:string }) => {
         product: products,
         userInfo:authentication
     }
-    const addCart = async(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        try{
-            await dispatch(addToCart({ ...data }))  
-        }catch(e){
-            console.log(e)
-        }
+    const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+         console.log({...data})
+         dispatch(addToCart({ ...data }))  
+
     }
     return (
         <>

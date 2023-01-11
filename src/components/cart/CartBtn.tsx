@@ -12,7 +12,7 @@ const CartBtn = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const clearCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
+       
         if(authentication.id){
           //dispatch(removeCart(authentication.id))
         }else{

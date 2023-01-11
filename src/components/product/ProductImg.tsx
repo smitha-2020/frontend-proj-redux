@@ -24,7 +24,7 @@ const ProductImg = ({ images, image }: { images: string[], image: Categorys }) =
     return (
         <>
             <Boxfirst>
-                {<img src={image.image} alt={image.image} key={image.image} width="150" height="150" onClick={(e) => changeData(e, image.image)} />}
+                {<img src={image.image} alt={image.image} key={image.id} width="150" height="150" onClick={(e) => changeData(e, image.image)} />}
                 {images.map((data, key) => <img key={key} src={data} alt={data} width="150" height="150" onClick={(e) => changeData(e, data)} />)}
             </Boxfirst>
             <Boxsecond>
