@@ -96,3 +96,10 @@ export interface CategoryModify{
     id:number,
     updateCategory:Partial<Categorys>
 }
+export interface User{
+    id:number,
+    user:Partial<authenticUser>
+}
+export interface CreateUser {
+    user:Partial<authenticUser>
+}

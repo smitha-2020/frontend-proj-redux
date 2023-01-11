@@ -19,21 +19,6 @@ const initialState: RegisteredUser =
     isLogin: false,
     isLoading: false
 }
-interface FileInput {
-    file: File
-}
-// export const fetchSession = createAsyncThunk(
-//     "fetchSession",
-//     async (data: string) => {
-//         try {
-//             const response = await axios.get("https://api.escuelajs.co/api/v1/auth/profile", { headers: { Authorization: `Bearer ${data}` } })
-//             console.log(response.data)
-//             return response.data;
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     }
-// )
 export const fetchLoginInfo = createAsyncThunk(
     "fetchLoginInfo",
     async (data: LoginData) => {
@@ -64,8 +49,9 @@ export const uploadImagefromForm = createAsyncThunk(
             console.log(e.config);
         }
     }
-
 )
+
+
 const loginSlice = createSlice({
     name: "LoginSlice",
     initialState: initialState,
@@ -125,12 +111,12 @@ const loginSlice = createSlice({
                 }
             })
             .addCase(uploadImagefromForm.rejected, (state, action) => {
-                
                 return state;
             })
             .addCase(uploadImagefromForm.pending, (state, action) => {
                 return state;
             })
+         
         // build.addCase(fetchSession.fulfilled, (state, action) => {
         //     console.log("user Data" + action.payload)
         //     state.user = action.payload;

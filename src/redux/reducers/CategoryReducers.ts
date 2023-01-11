@@ -43,7 +43,6 @@ export const updateCategory = createAsyncThunk(
         const { id, ...filteredCategory } = data
         try {
             const res: AxiosResponse<Categorys, any> = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, filteredCategory)
-            console.log("data returned by thunk" + res.data)
             return res.data;
         }
         catch (e) {

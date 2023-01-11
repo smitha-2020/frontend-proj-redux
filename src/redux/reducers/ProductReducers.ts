@@ -64,7 +64,6 @@ export const addingProduct = createAsyncThunk(
             // if (responseImg.data) {
             //const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
             const response: AxiosResponse<Product, any> = await axios.post("https://api.escuelajs.co/api/v1/products", product)
-            //console.log("asfafs" + response.data)
             return response.data
         }
         catch (e) {

@@ -104,8 +104,44 @@ export const categoryList = [
         image: "https://api.lorem.space/image/furniture?w=640&h=480&r=4371",
     }
 ]
-export const updatecategory:Categorys ={
+export const updatecategory: Categorys = {
     id: 1,
     name: "Testing Cloths",
     image: "https://api.lorem.space/image/fashion?w=640&h=480&r=2301",
+}
+export const users = [
+
+    {
+        id: 1,
+        email: "john@mail.com",
+        password: "changeme",
+        name: "Jhon",
+        role: "customer",
+        avatar: "https://api.lorem.space/image/face?w=640&h=480&r=7996",
+    },
+    {
+        id: 2,
+        email: "maria@mail.com",
+        password: "12345",
+        name: "Maria",
+        role: "customer",
+        avatar: "https://api.lorem.space/image/face?w=640&h=480&r=9636",
+    },
+    {
+        id: 3,
+        email: "admin@mail.com",
+        password: "admin123",
+        name: "Admin",
+        role: "admin",
+        avatar: "https://api.lorem.space/image/face?w=640&h=480&r=3204",
+    }
+]
+
+export const createUserObjs =  {
+    email: "nicoo@gmail.com",
+    password: "1234",
+    name: "Nicolas",
+    avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
+    role: "customer",
+    id: 24
 }
