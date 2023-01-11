@@ -13,7 +13,6 @@
 -  styled library of Material UI
 -  Jest for unit testing
 
-
 ## Features
 
 -  Used the API endpoint https://fakeapi.platzi.com/ to create an e-commerce website and write unit tests for the each of the reducers.

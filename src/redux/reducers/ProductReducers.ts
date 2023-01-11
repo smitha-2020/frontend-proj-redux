@@ -185,7 +185,7 @@ const productSlice = createSlice({
                 }
                 if (action.payload && "id" in action.payload) {
 
-                    return { ...state, product: [...state.product, action.payload],isDone:true  }
+                    return { ...state, product: [...state.product, action.payload], isDone: true }
                 }
             })
             // .addCase(addProduct.fulfilled, (state, action) => {
@@ -217,7 +217,7 @@ const productSlice = createSlice({
                         const updateProducts = getProducts.map((product) =>
                             (product.id === action.payload?.id) ? action.payload : product
                         )
-                        return { ...state, product: updateProducts,isDone:true }
+                        return { ...state, product: updateProducts, isDone: true }
                     }
                 }
             })
@@ -234,11 +234,9 @@ const productSlice = createSlice({
                 state.isDone = false;
             })
             .addCase(deletingProduct.fulfilled, (state, action) => {
-                {
-                    if (action.payload) {
-                        const newReturn = state.product.filter((reqData) => { return reqData.id !== action.payload })
-                        return { ...state, product: newReturn,isDone:true}
-                    }
+                if (action.payload) {
+                    const newReturn = state.product.filter((reqData) => { return reqData.id !== action.payload })
+                    return { ...state, product: newReturn, isDone: true }
                 }
             })
             .addCase(deletingProduct.pending, (state, action) => {
