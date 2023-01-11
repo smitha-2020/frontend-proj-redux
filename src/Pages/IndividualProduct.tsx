@@ -30,9 +30,6 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
     // filteredData.push(...data);
     return filteredData;
   };
-  // const products: Product[] = useAppSelector((state) => {
-  //   return displayoneProduct(state);
-  // });
 
   const product = products.filter((product) => { return product.id === Number(id) })
   const [newdata] = product;

@@ -20,9 +20,6 @@ const UpdateProduct = () => {
   let selectedItem:Product[] = [];
   const onSubmit: SubmitHandler<ProductOpt> = async(data) => {
     if (data.id) {
-      console.log(data)
-      //const newData = {id:data.id,}
-      //console.log({id:data.id,UpdateProduct:data})
       const { id, categoryId,images, ...dataRemaing } = data
       const newData: ProductModify = { id: id, updateProduct: dataRemaing }
       await dispatch(modifyProduct(newData))

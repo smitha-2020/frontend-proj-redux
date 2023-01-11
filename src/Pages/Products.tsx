@@ -29,7 +29,7 @@ const Products = () => {
       return filteredData;
     } else if (search.search !== "") {
       
-      [...data] = state.productReducer.product.filter((product) => { return product.title.includes(search.search) })
+      [...data] = state.productReducer.product.filter((product) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
       filteredData.push(...data)
       return filteredData;
     } else {
@@ -38,12 +38,10 @@ const Products = () => {
   }
   const products = useAppSelector(state => { return displayNewProducts(state) })
   const searchText = (field: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.preventDefault();
     setSearch((prevVal) => ({ ...prevVal, [field]: e.target.value }));
   }
   //pagination change event.
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    console.log(value)
     setCurrentPage(value);
     dataPaginated.gotoPage(value)
   };

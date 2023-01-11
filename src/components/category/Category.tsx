@@ -7,12 +7,11 @@ const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispa
   const categories = useAppSelector(state => state.categoryReducers)
   const categortList = ["others", "shoes", "furniture","electronics","nuevo","un nuevo nombre"]
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     const index = selCategory.indexOf(Number(e.target.value))
     if (index === -1) {
       setSelCategory([...selCategory, Number(e.target.value)])
     } else {
-      setSelCategory(selCategory.filter((category) => category !== Number(e.target.value)))
+      setSelCategory(selCategory.filter((category) => {return category !== Number(e.target.value)}))
     }
   }
   const newcategories = categories.filter((category) => { return (categortList.includes(category.name.toLowerCase())) })
@@ -20,7 +19,7 @@ const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispa
     <>
     {newcategories.length>0? <FormGroup  sx={{fontSize:'10'}} >
         <Box sx={{color:'text.primary'}}>Categories:</Box>
-        {newcategories.map((category) => <FormControlLabel sx={{color:'text.primary'}} key={category.id}  label={category.name} control={<Checkbox sx={{color:'text.primary'}} value={category.id} checked={selCategory.includes(category.id)} onChange={handleChange} />}></FormControlLabel>)}
+        {newcategories.map((category) => <FormControlLabel  key={category.id}  label={category.name} control={<Checkbox  value={category.id} checked={selCategory.includes(category.id)} onChange={handleChange} />}></FormControlLabel>)}
       </FormGroup>:<p>No Categories Listed!!</p>}  
     </>
   )

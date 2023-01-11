@@ -59,7 +59,6 @@ export const addingProduct = createAsyncThunk(
     "addingProduct",
     async (product: ProductDesc) => {
         try {
-            console.log(product)
             //const responseImg = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': product.imagestr[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
             // if (responseImg.data) {
             //const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)

@@ -25,9 +25,7 @@ const CreateProduct = () => {
   const onSubmit: SubmitHandler<ProductBase> = async (data) => {
     if (data.description) {
       const uploadedImage = await uploadImageData(data)
-      console.log(uploadedImage['location'])
       const newData = { ...data, images: [uploadedImage['location']] }
-      console.log(newData)
       dispatch(addingProduct(newData))
       if (product.isDone) {
         navigate('/fulfilled')

@@ -6,7 +6,6 @@ import { Categorys } from '../../common/common';
 const ProductImg = ({ images, image }: { images: string[], image: Categorys }) => {
 
     const [mainImg, setMainImg] = useState(image.image)
-    //console.log(mainImg)
     const changeData = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, imagedata: string) => {
         setMainImg(imagedata);
     }

@@ -23,7 +23,6 @@ const Header = () => {
     //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
     const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        console.log("Logging out")
         localStorage.setItem("access_token", "")
         dispatch(clearSession())
         navigate("/login")

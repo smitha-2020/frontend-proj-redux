@@ -30,7 +30,6 @@ const cartSlice = createSlice({
         },
         removeCart(state,action) {
             const newCart = state.filter((cartElement) => { return cartElement.userInfo.id! === action.payload })
-            console.log(newCart)
             return newCart;
         },
         increaseQuantity(state, action) {

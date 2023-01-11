@@ -26,7 +26,6 @@ const Login = () => {
     try {
       await dispatch(fetchLoginInfo(data))
       const userJson = localStorage.getItem('access_token');
-      console.log("user" + userJson)
       if (userJson) {
         await dispatch(fetchSession(userJson))
         navigate('/profile')
