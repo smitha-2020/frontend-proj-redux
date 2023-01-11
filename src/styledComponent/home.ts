@@ -65,7 +65,7 @@ export const SericesSection = styled(Box)({
   minHeight: '40vh',
   height: 'auto',
   minWidth: '100vw',
-  color: 'lightgray',
+  color: '#cccccc',
   display: 'flex',
   flexDirection: 'row',
   alignItems: "center",

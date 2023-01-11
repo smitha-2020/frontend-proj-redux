@@ -9,19 +9,19 @@ const Partners = () => {
                     <Partnertext>Trusted by 1000+ companies</Partnertext>
                     <PartnerRow>
                         <PartnerItem>
-                            <FaAtlassian />
+                            <FaAtlassian className="home-img"/>
                         </PartnerItem>
                         <PartnerItem>
-                            <FaAws />
+                            <FaAws  className="home-img"/>
                         </PartnerItem>
                         <PartnerItem>
-                            <FaBattleNet />
+                            <FaBattleNet  className="home-img"/>
                         </PartnerItem>
                         <PartnerItem>
-                            <FaApple />
+                            <FaApple  className="home-img"/>
                         </PartnerItem>
                         <PartnerItem>
-                            <FaAmazonPay />
+                            <FaAmazonPay  className="home-img"/>
                         </PartnerItem>
                     </PartnerRow>
                     {/* <FaAirbnb /> */}
