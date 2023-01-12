@@ -67,7 +67,7 @@ const ProductList = ({
               </ImgBox>
               <CategorySBox>{element.category.name}</CategorySBox>
               <DescriptionBox>
-                <NameBox>{element.title}</NameBox>
+                <NameBox>{element.title.substring(0,30)}</NameBox>
                 <NameBox>${element.price}</NameBox>
               </DescriptionBox>
             </Card>
