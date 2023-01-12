@@ -12,21 +12,15 @@ import Partners from '../components/home/Partners';
 import Featured from '../components/home/Featured';
 
 const Home = () => {
-//  const themes = createTheme(light);
-//   const switchchange = useAppSelector(state => state.switchReducer)
-//   const themechange = (switchchange.modeChange === "light") ? createTheme(light) : createTheme(dark);
   const theme = useTheme();
   return (
     <>
-    {/* sx={{bgcolor:'primary.main'}} */}
-    {/* <ThemeProvider theme={themechange}> */}
       <HeroSection sx={{backgroundColor:'primary.main'}}>
         <Hero/>
         <Featured/>
         <Services/>
         <Partners/>
       </HeroSection>
-      {/* </ThemeProvider> */}
     </>
   )
 }

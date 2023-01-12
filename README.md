@@ -8,10 +8,11 @@
 ## Tools 
 -  Redux toolkit
 -  Material UI
+-  styled library of Material UI
 -  SCSS
 -  redux-persist for persistence
--  styled library of Material UI
 -  Jest for unit testing
+-  React Hook Form with yup for form validation
 
 ## Features
 
@@ -29,14 +30,14 @@ cart reducer: add product to cart, remove products, update products's quantity i
 -  Made use of Material UI icons, and styled library for styling.
 
 ## Future Improvements
--  Modularize the code.
+- Modularize the code.
 - Using styled library throughout the application.
 - Testing of UI.
 - Implementing debounce for the search bar.
 - Improving the overall look of the website.
-- Improving the overall look of the website.
 - Including more test cases.
-- Including validation for the create Product component.
+- Including validation for the Admin action(create Product).
+- Make the site responsive
 
 Link to the frontend project https://frolicking-panda-899a36.netlify.app/
 
