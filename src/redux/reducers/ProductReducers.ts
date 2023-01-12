@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError, AxiosResponse } from "axios"
 import { Product, ProductDesc, ProductDetails, ProductModify } from "../../common/common"
 import axios from "axios"
-import Products from "../../Pages/Products";
-import { S } from "msw/lib/SetupServerApi-70cc71a7";
 
 const initialState: ProductDetails = {
     product: [],

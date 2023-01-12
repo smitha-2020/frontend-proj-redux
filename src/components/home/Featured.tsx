@@ -1,7 +1,6 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/reduxHook'
-import { SericesItem, SericesSection } from '../../styledComponent/home'
+import { SericesSection } from '../../styledComponent/home'
 import { Card, CategorySBox, DescriptionBox, ImgBox, NameBox } from '../../styledComponent/productstyle'
 
 const Featured = () => {

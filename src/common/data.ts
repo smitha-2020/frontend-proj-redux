@@ -35,7 +35,6 @@ export const data = {
         price: 100
     }
 }
-
 export const products = [
     {
         id: 13,
@@ -86,7 +85,6 @@ export const products = [
         }
     },
 ]
-
 export const categoryList = [
     {
         id: 1,
@@ -136,7 +134,6 @@ export const users = [
         avatar: "https://api.lorem.space/image/face?w=640&h=480&r=3204",
     }
 ]
-
 export const createUserObjs =  {
     email: "nicoo@gmail.com",
     password: "1234",

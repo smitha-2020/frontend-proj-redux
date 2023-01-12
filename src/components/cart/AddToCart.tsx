@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-
 import { Button } from "@mui/material";
-import { Product, Cart, authenticUser } from '../../common/common';
 import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
+
+import { Product, Cart, authenticUser } from '../../common/common';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { addToCart } from '../../redux/reducers/cartReducer';
 

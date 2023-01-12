@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../../hooks/reduxHook'
-import NoData from '../NoData'
 
+import { useAppSelector } from '../../hooks/reduxHook'
+import { NotFound } from '../../styledComponent/productstyle'
 
 const Fulfilled = () => {
   const authentication = useAppSelector(state => state.auhtReducer)
@@ -21,10 +21,9 @@ const Fulfilled = () => {
       </Grid>
   </Grid>
     )
-
   }else{
     return(
-      <NoData/>
+      <NotFound sx={{backgroundColor:'primary.main',color:'text.secondary'}}>Oops!! No Products Found.</NotFound>
     )
   }
   

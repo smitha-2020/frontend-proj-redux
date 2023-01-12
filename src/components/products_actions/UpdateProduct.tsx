@@ -1,15 +1,13 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import { Product, ProductBase, ProductModify, ProductOpt } from '../../common/common';
+import { Product, ProductModify, ProductOpt } from '../../common/common';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-
-import { json } from 'stream/consumers';
-import { string } from 'yup';
-import { modifyProduct } from '../../redux/reducers/ProductReducers';
+//import { json } from 'stream/consumers';
+//import { string } from 'yup';
+import { modifyProduct } from '../../redux/reducers/productReducers';
 import { ChangeEvent } from 'react';
 import { useNavigate } from "react-router-dom";
-import { fetchAllCategories } from '../../redux/reducers/categoryReducers';
 
 const UpdateProduct = () => {
   const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<ProductOpt>({});

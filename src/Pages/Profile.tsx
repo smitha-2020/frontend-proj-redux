@@ -6,7 +6,6 @@ import DeleteProduct from '../components/products_actions/DeleteProduct';
 import UpdateProduct from '../components/products_actions/UpdateProduct';
 import { useAppSelector } from '../hooks/reduxHook'
 
-
 const Profile = () => {
   const [display, setDisplay] = useState<string>("");
   const authentication = useAppSelector(state => state.auhtReducer)

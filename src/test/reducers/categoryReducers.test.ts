@@ -2,7 +2,7 @@ import { AnyAction, MiddlewareArray, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
-import { data, updatecategory } from "../../common/data";
+import { updatecategory } from "../../common/data";
 import { createCategory, deleteCategory, fetchAllCategories, getSingleCategory, updateCategory } from "../../redux/reducers/categoryReducers";
 import { Categorys } from "../../common/common";
 

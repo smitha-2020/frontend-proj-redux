@@ -55,7 +55,6 @@ Link to the frontend project https://frolicking-panda-899a36.netlify.app/
     │   │   Footer.tsx
     │   │   Header.tsx
     │   │   Login.tsx
-    │   │   NoData.tsx
     │   │
     │   ├───cart
     │   │       AddToCart.tsx
@@ -95,7 +94,6 @@ Link to the frontend project https://frolicking-panda-899a36.netlify.app/
     │       Cart.tsx
     │       Home.tsx
     │       IndividualProduct.tsx
-    │       NOTFOUND.tsx
     │       Products.tsx
     │       Profile.tsx
     │       Register.tsx

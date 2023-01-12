@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
-import { CategoryModify, Categorys, Product } from '../../common/common';
+import { Categorys, Product } from '../../common/common';
 
 const initialState: Categorys[] = [];
 export const fetchAllCategories = createAsyncThunk(

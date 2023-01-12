@@ -1,5 +1,4 @@
-import React from 'react'
-import { AppBar, Box, Button, Container, Grid, Toolbar } from '@mui/material';
+import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { NavLink } from 'react-router-dom';
 

@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { Grid } from "@mui/material";
 import { FaTrashAlt } from "react-icons/fa";
+
 import { removeFromCart, increaseQuantity, decreaseQuantity } from '../redux/reducers/cartReducer';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { authenticUser } from '../common/common';
 import ToggleButton from '../components/cart/ToggleButton';
-import NoData from '../components/NoData';
 import CartBtn from '../components/cart/CartBtn';
 import CartTotal from '../components/cart/CartTotal';
+import { NotFound } from '../styledComponent/productstyle';
 
 const Cart = () => {
   const cart = useAppSelector(state => { return state.cartReducer; })
@@ -79,7 +79,7 @@ const Cart = () => {
     )
   } else {
     return (<>
-      <NoData />
+      <NotFound sx={{backgroundColor:'primary.main',color:'text.secondary'}}>Ooops!!! Cart is empty</NotFound>
     </>)
   }
 }

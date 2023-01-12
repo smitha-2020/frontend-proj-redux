@@ -87,7 +87,6 @@ export const NotFound = styled(Grid)({
   minHeight: '84vh',
   height: 'auto',
   minWidth: '70vw',
-  color: 'lightgray',
   marginTop: '5px',
   display:"flex",
   flexDirection:"row",

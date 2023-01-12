@@ -6,7 +6,6 @@ import server from "../shared/server";
 import { newcartProduct } from "../../common/data";
 
 let store: ToolkitStore<RootState, AnyAction, MiddlewareArray<[ThunkMiddleware<RootState, AnyAction, undefined>]>>
-// let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 beforeAll(() => {
     server.listen()
 })

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Category from '../components/category/Category'
 import ProductList from '../components/product/ProductList';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
-import { ascendingOrder, sortByPrice } from '../redux/reducers/ProductReducers';
+import { ascendingOrder, sortByPrice } from '../redux/reducers/productReducers';
 import { Box, FormControl, SelectChangeEvent, Grid, Pagination } from '@mui/material';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
@@ -28,7 +28,6 @@ const Products = () => {
       }
       return filteredData;
     } else if (search.search !== "") {
-      
       [...data] = state.productReducer.product.filter((product) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
       filteredData.push(...data)
       return filteredData;

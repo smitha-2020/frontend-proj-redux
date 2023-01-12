@@ -1,9 +1,9 @@
 import React from 'react'
-
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { Button, Grid } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
+
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { authenticUser } from '../../common/common';
 
 const CartBtn = () => {
@@ -12,7 +12,6 @@ const CartBtn = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const clearCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-       
         if(authentication.id){
           //dispatch(removeCart(authentication.id))
         }else{

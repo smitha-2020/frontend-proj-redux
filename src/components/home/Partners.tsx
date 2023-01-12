@@ -1,4 +1,4 @@
-import { FaAtlassian, FaAws, FaBattleNet, FaApple, FaAmazonPay, FaAirbnb } from "react-icons/fa";
+import { FaAtlassian, FaAws, FaBattleNet, FaApple, FaAmazonPay } from "react-icons/fa";
 import { PartnerItem, PartnerRow, PartnerSection, Partnertext, SericesSection } from "../../styledComponent/home";
 
 const Partners = () => {

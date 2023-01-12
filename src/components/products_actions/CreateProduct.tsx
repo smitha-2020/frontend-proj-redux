@@ -1,10 +1,12 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import { ProductBase } from '../../common/common';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { addingProduct } from '../../redux/reducers/ProductReducers';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+import { ProductBase } from '../../common/common';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
+import { addingProduct } from '../../redux/reducers/productReducers';
+
 
 const CreateProduct = () => {
   const navigate = useNavigate();

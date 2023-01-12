@@ -4,8 +4,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { authenticUser } from '../../common/common'
 
 const initialState: authenticUser = { id: 0, avatar: "", email: "", password: "", name: "", role: "" };
-
-
 //get the user session
 export const fetchSession = createAsyncThunk(
     "fetchSession",

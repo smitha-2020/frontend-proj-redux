@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
-import productReducer from './reducers/ProductReducers';
+import productReducer from './reducers/productReducers';
 import loginReducer from './reducers/loginInfo'
 import categoryReducers from './reducers/categoryReducers';
 import cartReducer from './reducers/cartReducer';

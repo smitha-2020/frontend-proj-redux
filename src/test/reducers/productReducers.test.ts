@@ -1,10 +1,9 @@
 import { AnyAction, MiddlewareArray, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import {  addingProduct, ascendingOrder, deletingProduct, fetchAllProducts, modifyProduct } from "../../redux/reducers/ProductReducers";
+import {  addingProduct, ascendingOrder, deletingProduct, fetchAllProducts, modifyProduct } from "../../redux/reducers/productReducers";
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { data } from "../../common/data";
-import { ProductDesc } from "../../common/common";
 
 let store: ToolkitStore<RootState, AnyAction, MiddlewareArray<[ThunkMiddleware<RootState, AnyAction, undefined>]>>
 beforeAll(() => {

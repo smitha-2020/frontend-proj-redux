@@ -1,7 +1,7 @@
-import React from 'react'
-import { FaStarHalfAlt, FaStar } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai"
-import { Box, Link, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+
+import { FaStarHalfAlt, FaStar } from "react-icons/fa";
 
 const Star = () => {
     const star = 4.5;

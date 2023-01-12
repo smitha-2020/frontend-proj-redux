@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { CreateUser, LoginData, User } from '../../common/common';
-import { Inputs, authenticUser, RegisteredUser } from '../../common/common'
+import { CreateUser, User } from '../../common/common';
+import { authenticUser } from '../../common/common'
 
 const initialState: authenticUser[] = []
 export const getAllUsers = createAsyncThunk(

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createStore } from './redux/store';
@@ -6,18 +6,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-// import "../src/css/main.css";
 import "../src/scss/main.scss"
-import { useAppSelector } from './hooks/reduxHook';
-import { createTheme } from '@mui/material';
 
 const container = document.getElementById('root')!;
 const store = createStore();
 let persistor = persistStore(store);
 const root = createRoot(container);
-// let theme = React.useMemo(() => {
-//   return createTheme(switchchange.modeChange ? dark : light);
-// }, [switchchange]);
 root.render(
   <React.StrictMode>
     <Provider store={store}>

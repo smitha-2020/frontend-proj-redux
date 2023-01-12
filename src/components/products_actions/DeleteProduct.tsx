@@ -1,10 +1,11 @@
-import { Box, Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ProductOpt } from '../../common/common';
-import { deletingProduct } from '../../redux/reducers/ProductReducers';
-import { useNavigate } from "react-router-dom";
+import { deletingProduct } from '../../redux/reducers/productReducers';
 
 const DeleteProduct = () => {
   const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<ProductOpt>({});

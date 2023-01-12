@@ -14,7 +14,6 @@ afterAll(() => {
 beforeEach(() => {
     store = createStore();
 })
-
 describe("test category reducers", () => {
     test("initial state of the login reducer", () => {
         expect(store.getState().userReducer.length).toBe(0)

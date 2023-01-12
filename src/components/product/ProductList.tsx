@@ -26,7 +26,7 @@ const ProductList = ({
               </DescriptionBox>
             </Card>
           ))}
-        </ProductListing> :<NotFound>No Records Found!!</NotFound> }
+        </ProductListing> :<NotFound >No Records Found!!</NotFound>}
     </>
   );
 };
