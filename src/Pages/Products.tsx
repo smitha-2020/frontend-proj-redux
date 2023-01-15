@@ -19,7 +19,8 @@ const Products = () => {
   const [search, setSearch] = useState({ search: "" });
   const dispatch = useAppDispatch();
   const displayNewProducts = (state: RootState) => {
-    let data;
+  let data,newData;
+
     let filteredData: Product[] = [];
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
@@ -27,7 +28,8 @@ const Products = () => {
         filteredData.push(...data)
       }
       return filteredData;
-    } else if (search.search !== "") {
+    }
+    else if (search.search !== "") {
       [...data] = state.productReducer.product.filter((product) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
       filteredData.push(...data)
       return filteredData;
