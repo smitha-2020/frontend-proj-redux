@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { RootState } from '../redux/store';
+import { useParams } from 'react-router-dom';
+import { Box, FormControl, SelectChangeEvent, Grid, Pagination } from '@mui/material';
+
 import Category from '../components/category/Category'
 import ProductList from '../components/product/ProductList';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 import { ascendingOrder, sortByPrice } from '../redux/reducers/productReducers';
-import { Box, FormControl, SelectChangeEvent, Grid, Pagination } from '@mui/material';
-import { RootState } from '../redux/store';
-import { useParams } from 'react-router-dom';
 import { IProduct } from '../types/productType';
 import IndividualProduct from './IndividualProduct';
 import { usePagination } from "../hooks/usePagination"
@@ -19,7 +20,7 @@ const Products = () => {
   const [search, setSearch] = useState({ search: "" });
   const dispatch = useAppDispatch();
   const displayNewProducts = (state: RootState) => {
-  let data,newData;
+    let data, newData;
 
     let filteredData: IProduct[] = [];
     if (selCategory.length > 0) {
@@ -30,7 +31,7 @@ const Products = () => {
       return filteredData;
     }
     else if (search.search !== "") {
-      [...data] = state.productReducer.product.filter((product:IProduct) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
+      [...data] = state.productReducer.product.filter((product: IProduct) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
       filteredData.push(...data)
       return filteredData;
     } else {
@@ -78,14 +79,14 @@ const Products = () => {
   } else {
     return (
       <>
-        <AnatherBox sx={{backgroundColor:'primary.main'}}>
+        <AnatherBox sx={{ backgroundColor: 'primary.main' }}>
           <CategoryBox>
             <Category setSelCategory={setSelCategory} selCategory={selCategory} />
-            <Box display="flex" flexDirection="column" sx={{color:'text.primary'}}>
-              <Box sx={{color:'text.primary'}}>
+            <Box display="flex" flexDirection="column" sx={{ color: 'text.primary' }}>
+              <Box sx={{ color: 'text.primary' }}>
                 Looking for something?
               </Box>
-              <br/>
+              <br />
               <Box>
                 <input type="text" placeholder="Search" name="search" value={search.search} onChange={(e) => searchText('search', e)} />
               </Box>
@@ -95,7 +96,7 @@ const Products = () => {
             <OuterBox>
               <Grid container spacing={2}>
                 <Grid item xs={5}></Grid>
-                <Grid sx={{color:'text.primary'}} item xs={3}>{products.length} products displayed</Grid>
+                <Grid sx={{ color: 'text.primary' }} item xs={3}>{products.length} products displayed</Grid>
                 {/* <Grid item xs={5}></Grid> */}
                 <Grid item xs={4}>
                   <Grid container spacing={0} display="flex" flexDirection="row">
@@ -135,13 +136,13 @@ const Products = () => {
                 </Grid>
               </Grid>
             </OuterBox>
-            <Box sx={{backgroundColor:'primary.main'}}>
+            <Box sx={{ backgroundColor: 'primary.main' }}>
               <ProductList products={newProducts} />
             </Box>
           </ProductBox>
         </AnatherBox>
-        <Grid container display="flex" spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw',backgroundColor:'primary.main',width:'100%' }}>
-          <Pagination count={totalDisplayed} onChange={handlePageChange}  sx={{backgroundColor:'primary.main'}}/>
+        <Grid container display="flex" spacing={0} direction="row" alignItems="center" justifyContent="center" style={{ minHeight: '1vh', minWidth: '100vw', backgroundColor: 'primary.main', width: '100%' }}>
+          <Pagination count={totalDisplayed} onChange={handlePageChange} sx={{ backgroundColor: 'primary.main' }} />
         </Grid>
       </>
     )

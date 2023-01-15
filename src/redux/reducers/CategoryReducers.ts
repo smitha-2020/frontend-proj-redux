@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ICategory, IProduct } from '../../types/productType';
 
 const initialState: ICategory[] = [];
@@ -8,10 +8,11 @@ export const fetchAllCategories = createAsyncThunk(
     "fetchAllCategories",
     async () => {
         try {
-            const res = await axios.get("https://api.escuelajs.co/api/v1/categories")
+            const res: AxiosResponse<ICategory[], any> = await axios.get("https://api.escuelajs.co/api/v1/categories")
             return res.data;
         } catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -23,18 +24,20 @@ export const getSingleCategory = createAsyncThunk(
             return res.data;
         }
         catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     })
 export const createCategory = createAsyncThunk(
     "createCategory",
     async (category: ICategory) => {
         try {
-            const res = await axios.post('https://api.escuelajs.co/api/v1/categories/', category)
+            const res: AxiosResponse<ICategory, any> = await axios.post('https://api.escuelajs.co/api/v1/categories/', category)
             return res.data;
         }
         catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     })
 export const updateCategory = createAsyncThunk(
@@ -46,14 +49,15 @@ export const updateCategory = createAsyncThunk(
             return res.data;
         }
         catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
 export const deleteCategory = createAsyncThunk(
     "deleteCategory",
     async (id: number) => {
-        const res = await axios.delete(`https://api.escuelajs.co/api/v1/categories/${id}`)
+        const res: AxiosResponse<ICategory, any> = await axios.delete(`https://api.escuelajs.co/api/v1/categories/${id}`)
         const result = res.data ? id : 0
         return result
     }
@@ -69,10 +73,12 @@ const categorySlice = createSlice({
     name: "categorySlice",
     initialState: initialState,
     reducers: {
-
     },
     extraReducers: (build) => {
         build.addCase(fetchAllCategories.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                return state;
+            }
             return action.payload
         })
             .addCase(fetchAllCategories.rejected, (state) => {
@@ -82,7 +88,7 @@ const categorySlice = createSlice({
                 return state;
             })
             .addCase(getSingleCategory.fulfilled, (state, action) => {
-                if (action.payload && "message" in action.payload) {
+                if (action.payload instanceof AxiosError) {
                     return state;
                 } else {
                     if (action.payload && "image" in action.payload) {
@@ -99,7 +105,7 @@ const categorySlice = createSlice({
                 return state
             })
             .addCase(createCategory.fulfilled, (state, action) => {
-                if (action.payload && "message" in action.payload) {
+                if (action.payload instanceof AxiosError) {
                     return state;
                 } else {
                     if (action.payload && "name" in action.payload) {
@@ -116,15 +122,18 @@ const categorySlice = createSlice({
                 return state
             })
             .addCase(updateCategory.fulfilled, (state, action) => {
-                if (action.payload && "message" in action.payload) {
+                if (action.payload instanceof AxiosError) {
                     return state;
                 } else {
-                    if (action.payload && "name" in action.payload) {
-                        //const modifyState = [...state]
-                        // const result = modifyState.filter(category => {return category.id !== action.payload?.id})
-                        return [action.payload]
-                        //return [...state]
-                    }
+                    const result: ICategory[] = [];
+                    const returnedData = action.payload;
+                    const updateState: ICategory[] = state
+                    const updateCategory = updateState.map((category) =>
+                       {return (category.id === returnedData.id) ? action.payload : category }
+                    )
+                    console.log(updateCategory)
+                    //console.log(updateCategory)
+                    // return [...updateCategory]
                 }
             })
             .addCase(updateCategory.pending, (state) => {
