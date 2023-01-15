@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
-import { Categorys } from '../../common/common';
+import { ICategory } from '../../types/productType';
 
-const ProductImg = ({ images, image }: { images: string[], image: Categorys }) => {
+const ProductImg = ({ images, image }: { images: string[], image: ICategory }) => {
 
     const [mainImg, setMainImg] = useState(image.image)
     const changeData = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, imagedata: string) => {

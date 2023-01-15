@@ -1,10 +1,9 @@
 import axios, { AxiosResponse } from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { CreateUser, User } from '../../common/common';
-import { authenticUser } from '../../common/common'
+import { CreateUser, IUser,IAuthenticUser } from '../../types/userType';
 
-const initialState: authenticUser[] = []
+const initialState: IAuthenticUser[] = []
 export const getAllUsers = createAsyncThunk(
     "getAllUsers", async () => {
         try {
@@ -28,7 +27,7 @@ export const getUser = createAsyncThunk(
 export const createUser = createAsyncThunk(
     "createUser", async (user: CreateUser) => {
         try {
-            const res: AxiosResponse<authenticUser, any> = await axios.post("https://api.escuelajs.co/api/v1/users/", user.user)
+            const res: AxiosResponse<IAuthenticUser, any> = await axios.post("https://api.escuelajs.co/api/v1/users/", user.user)
             return res.data
         }
         catch (e) {
@@ -36,10 +35,10 @@ export const createUser = createAsyncThunk(
         }
     })
 export const updateUser = createAsyncThunk(
-    "updateUser", async (user: User) => {
+    "updateUser", async (user: IUser) => {
         try {
             const {id,role,...filteredUser} = user.user;
-            const res: AxiosResponse<authenticUser, any> = await axios.put(`https://api.escuelajs.co/api/v1/users/${id}`, filteredUser)
+            const res: AxiosResponse<IAuthenticUser, any> = await axios.put(`https://api.escuelajs.co/api/v1/users/${id}`, filteredUser)
             return res.data
         }
         catch (e) {

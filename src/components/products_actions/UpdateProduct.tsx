@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import { Product, ProductModify, ProductOpt } from '../../common/common';
+import { IProduct, IProductModify, IProductOpt } from '../../types/productType';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -10,16 +10,16 @@ import { ChangeEvent } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const UpdateProduct = () => {
-  const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<ProductOpt>({});
+  const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<IProductOpt>({});
   const navigate = useNavigate();
   const product = useAppSelector(state => state.productReducer)
   const categories = useAppSelector(state => state.categoryReducers)
   const dispatch = useAppDispatch();
-  let selectedItem:Product[] = [];
-  const onSubmit: SubmitHandler<ProductOpt> = async(data) => {
+  let selectedItem:IProduct[] = [];
+  const onSubmit: SubmitHandler<IProductOpt> = async(data) => {
     if (data.id) {
       const { id, categoryId,images, ...dataRemaing } = data
-      const newData: ProductModify = { id: id, updateProduct: dataRemaing }
+      const newData: IProductModify = { id: id, updateProduct: dataRemaing }
       await dispatch(modifyProduct(newData))
       if (product.isDone) {
         navigate('/fulfilled')

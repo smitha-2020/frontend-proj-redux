@@ -4,7 +4,7 @@ import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { updatecategory } from "../../common/data";
 import { createCategory, deleteCategory, fetchAllCategories, getSingleCategory, updateCategory } from "../../redux/reducers/categoryReducers";
-import { Categorys } from "../../common/common";
+import { ICategory } from "../../types/productType";
 
 let store: ToolkitStore<RootState, AnyAction, MiddlewareArray<[ThunkMiddleware<RootState, AnyAction, undefined>]>>
 beforeAll(() => {
@@ -26,7 +26,7 @@ describe("test category reducers",()=>{
         expect(store.getState().categoryReducers.length).toBe(3)
     }),
     test("should create a category",async ()=>{
-        const newCategory:Categorys =  {
+        const newCategory:ICategory =  {
             id: 1,
             name: "Clothes",
             image: "https://api.lorem.space/image/fashion?w=640&h=480&r=2301",

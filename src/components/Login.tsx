@@ -7,7 +7,7 @@ import * as yup from "yup"
 import LoginIcon from '@mui/icons-material/Login';
 
 import { fetchLoginInfo } from '../redux/reducers/loginInfo'
-import { LoginData } from '../common/common';
+import { ILoginData } from '../types/userType';
 import { fetchSession } from '../redux/reducers/authReducer';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 
@@ -19,10 +19,10 @@ const Login = () => {
   const navigate = useNavigate()
   const { isLogin, isLoading } = useAppSelector(state => state.loginReducer)
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginData>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<ILoginData>({
     resolver: yupResolver(schema)
   });
-  const onSubmit: SubmitHandler<LoginData> = async (data) => {
+  const onSubmit: SubmitHandler<ILoginData> = async (data) => {
     try {
       await dispatch(fetchLoginInfo(data))
       const userJson = localStorage.getItem('access_token');

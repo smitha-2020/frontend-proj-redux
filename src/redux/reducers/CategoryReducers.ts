@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
-import { Categorys, Product } from '../../common/common';
+import { ICategory, IProduct } from '../../types/productType';
 
-const initialState: Categorys[] = [];
+const initialState: ICategory[] = [];
 export const fetchAllCategories = createAsyncThunk(
     "fetchAllCategories",
     async () => {
@@ -19,7 +19,7 @@ export const getSingleCategory = createAsyncThunk(
     "getSingleCategory",
     async (id: string) => {
         try {
-            const res: AxiosResponse<Categorys[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}`);
+            const res: AxiosResponse<ICategory[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}`);
             return res.data;
         }
         catch (e) {
@@ -28,7 +28,7 @@ export const getSingleCategory = createAsyncThunk(
     })
 export const createCategory = createAsyncThunk(
     "createCategory",
-    async (category: Categorys) => {
+    async (category: ICategory) => {
         try {
             const res = await axios.post('https://api.escuelajs.co/api/v1/categories/', category)
             return res.data;
@@ -39,10 +39,10 @@ export const createCategory = createAsyncThunk(
     })
 export const updateCategory = createAsyncThunk(
     "updateCategory",
-    async (data: Categorys) => {
+    async (data: ICategory) => {
         const { id, ...filteredCategory } = data
         try {
-            const res: AxiosResponse<Categorys, any> = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, filteredCategory)
+            const res: AxiosResponse<ICategory, any> = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, filteredCategory)
             return res.data;
         }
         catch (e) {
@@ -61,7 +61,7 @@ export const deleteCategory = createAsyncThunk(
 export const getProductsByCategory = createAsyncThunk(
     "getProductsByCategory",
     async (id: number) => {
-        const res: AxiosResponse<Product[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
+        const res: AxiosResponse<IProduct[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
         return res.data;
     }
 )

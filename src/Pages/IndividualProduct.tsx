@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { Categorys, Product } from "../common/common";
+import { ICategory, IProduct } from "../types/productType";
 import { RootState } from "../redux/store";
 import { Grid } from "@mui/material";
 import ProductImg from "../components/product/ProductImg";
@@ -11,10 +11,10 @@ import AddToCart from "../components/cart/AddToCart";
 import Star from "../components/cart/Star";
 
 
-const IndividualProduct = ({ products }: { products: Product[] }) => {
+const IndividualProduct = ({ products }: { products: IProduct[] }) => {
   let { id } = useParams();
   let images: string[] = [];
-  let img: Categorys = {id: 0, name: "", image: "" };
+  let img: ICategory = {id: 0, name: "", image: "" };
   // let rating: number = 0;
   // let reviews: number = 0;
   //let image: Category = { id: 0, name: "", image: "" };
@@ -22,7 +22,7 @@ const IndividualProduct = ({ products }: { products: Product[] }) => {
     description,
     title: string = "";
   const displayoneProduct = (state: RootState) => {
-    let filteredData: Product[] = [];
+    let filteredData: IProduct[] = [];
     //console.log(filteredData)
     // [...data] = state.productReducer.filter((product) => {
     //   return product.id === Number(id);

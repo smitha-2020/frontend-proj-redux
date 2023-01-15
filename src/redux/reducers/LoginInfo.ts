@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { LoginData } from '../../common/common';
-import { Inputs, authenticUser, RegisteredUser } from '../../common/common'
+import { ILoginData } from '../../types/userType';
+import { Inputs, IAuthenticUser, IRegisteredUser } from '../../types/userType'
 
-const initialState: RegisteredUser =
+const initialState: IRegisteredUser =
 {
     access_token: "",
     user: {
@@ -21,7 +21,7 @@ const initialState: RegisteredUser =
 }
 export const fetchLoginInfo = createAsyncThunk(
     "fetchLoginInfo",
-    async (data: LoginData) => {
+    async (data: ILoginData) => {
         try {
             const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", data, { headers: { 'Content-Type': 'application/json' } })
             return response.data;
@@ -35,7 +35,7 @@ export const uploadImagefromForm = createAsyncThunk(
     async (inputFile: Inputs) => {
         try {
             const responseEmail = await axios.get("https://api.escuelajs.co/api/v1/users")
-            const resEmailArr: authenticUser[] = responseEmail.data
+            const resEmailArr: IAuthenticUser[] = responseEmail.data
             const emailArr = resEmailArr.filter((element) => element.email === inputFile.email)
             if (emailArr.length === 0) {
                 const response = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': inputFile.avatar[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
@@ -116,7 +116,7 @@ const loginSlice = createSlice({
             .addCase(uploadImagefromForm.pending, (state, action) => {
                 return state;
             })
-         
+
         // build.addCase(fetchSession.fulfilled, (state, action) => {
         //     console.log("user Data" + action.payload)
         //     state.user = action.payload;

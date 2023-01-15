@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Cart } from '../../common/common'
+import { ICart } from '../../types/cartType'
 
-const initialState: Cart[] = [];
+const initialState: ICart[] = [];
 const cartSlice = createSlice({
     name: 'productSlice',
     initialState: initialState,
     reducers: {
-        addToCart(state, action: PayloadAction<Cart>) {
+        addToCart(state, action: PayloadAction<ICart>) {
             const existingData = state.filter((cartElement) => { return cartElement.product.id === action.payload.product.id })
             if (existingData.length) {
                 const datanew = state.map((cartElement) => {

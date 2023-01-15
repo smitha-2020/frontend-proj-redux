@@ -3,7 +3,7 @@ import { FaTrashAlt } from "react-icons/fa";
 
 import { removeFromCart, increaseQuantity, decreaseQuantity } from '../redux/reducers/cartReducer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { authenticUser } from '../common/common';
+import { IAuthenticUser } from '../types/userType';
 import ToggleButton from '../components/cart/ToggleButton';
 import CartBtn from '../components/cart/CartBtn';
 import CartTotal from '../components/cart/CartTotal';
@@ -12,7 +12,7 @@ import { NotFound } from '../styledComponent/productstyle';
 const Cart = () => {
   const cart = useAppSelector(state => { return state.cartReducer; })
   const dispatch = useAppDispatch();
-  const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
+  const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
   let userCart = cart.filter((cartInfo: any) => { return cartInfo.userInfo.id === authentication.id })
   const cartSize: number = userCart.length;
   function deleteCartitem(e: React.MouseEvent<SVGElement, MouseEvent>, id: number): void {

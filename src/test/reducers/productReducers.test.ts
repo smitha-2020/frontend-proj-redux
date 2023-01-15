@@ -50,7 +50,7 @@ describe("test product reducer", () => {
         test("should update the product", async () => {
             await store.dispatch(fetchAllProducts())
             await store.dispatch(modifyProduct(data))
-            expect(store.getState().productReducer.product.find(productDetails => productDetails.id === 1)?.title).toBe("Change title")
+            expect(store.getState().productReducer.product.find((productDetails: { id: number; }) => productDetails.id === 1)?.title).toBe("Change title")
         }),
         test("should delete the product", async () => {
             await store.dispatch(fetchAllProducts())

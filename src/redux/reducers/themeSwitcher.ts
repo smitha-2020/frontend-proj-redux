@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { modeCheck } from '../../common/common'
+import { ImodeCheck } from '../../types/common'
 
-const initialState:modeCheck = {
+const initialState:ImodeCheck = {
     darkMode:false
 }
 export const switchSlice = createSlice({

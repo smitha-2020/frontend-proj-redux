@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { authenticUser } from '../../common/common';
+import { IAuthenticUser } from '../../types/userType';
 
 const CartBtn = () => {
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
+    const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const clearCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

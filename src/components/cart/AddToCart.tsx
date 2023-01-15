@@ -4,18 +4,20 @@ import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
 import { NavLink } from 'react-router-dom';
 
-import { Product, Cart, authenticUser } from '../../common/common';
+import { IProduct } from '../../types/productType';
+import {ICart} from '../../types/cartType';
+import { IAuthenticUser } from '../../types/userType';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { addToCart } from '../../redux/reducers/cartReducer';
 
-const AddToCart = ({ products,id }: { products: Product,id:string }) => {
+const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
     const ButtonNew = styled(Button)({
         backgroundColor: "darkgray",
         color: "white",
         marginTop: "20px"
     });
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
+    const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
     const dispatch = useAppDispatch();
     const stock = 5;
     const [amount, setAmount] = useState(1)
@@ -30,7 +32,7 @@ const AddToCart = ({ products,id }: { products: Product,id:string }) => {
         backgroundColor: "lightblue",
         color: "gray"
     });
-    const data: Cart = {
+    const data: ICart = {
         quantity: amount,
         product: products,
         userInfo:authentication

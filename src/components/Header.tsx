@@ -9,15 +9,16 @@ import { FaSignInAlt, FaUserAlt, FaSignOutAlt } from "react-icons/fa";
 import { Box, AppBar, Toolbar, Typography, Switch, Menu, Container, Avatar, Button, Tooltip, MenuItem, FormGroup, FormControlLabel } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { authenticUser, modeCheck } from '../common/common';
+import {  ImodeCheck } from '../types/common';
+import { IAuthenticUser } from '../types/userType';
 import { clearSession } from '../redux/reducers/authReducer';
 import { toggleTheme } from '../redux/reducers/themeSwitcher';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Header = () => {
     const navigate = useNavigate();
-    const authentication: authenticUser = useAppSelector(state => state.auhtReducer)
-    const switchcheck: modeCheck = useAppSelector(state => state.switchReducer)
+    const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
+    const switchcheck: ImodeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     const carttotal=cart.filter((cartElement) => cartElement.userInfo.id === authentication.id).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)

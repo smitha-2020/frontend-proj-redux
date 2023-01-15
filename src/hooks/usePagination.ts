@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { Product } from "../common/common";
+import { IProduct } from "../types/productType";
 
 //cardsPerPage,totalCards
-export const usePagination = (cardsPerPage: number, cards: Product[]) => {
+export const usePagination = (cardsPerPage: number, cards: IProduct[]) => {
     const totalPages = Math.ceil(cards.length / cardsPerPage);
     const [currentPageIndex, setcurrentPageIndex] = useState(1);
     //function
@@ -11,7 +11,7 @@ export const usePagination = (cardsPerPage: number, cards: Product[]) => {
         const pageNumber = Math.max(1, page)
         setcurrentPageIndex(Math.min(pageNumber, totalPages))
     }
-    const currentPageData = (): Product[] => {
+    const currentPageData = (): IProduct[] => {
         const start = (currentPageIndex - 1) * cardsPerPage
         const end = start + cardsPerPage
         return cards.slice(start, end)

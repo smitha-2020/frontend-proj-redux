@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { ProductBase } from '../../common/common';
+import {IProductBase } from '../../types/productType';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { addingProduct } from '../../redux/reducers/productReducers';
 
 
 const CreateProduct = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<ProductBase>({
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<IProductBase>({
     defaultValues: {
       title: "",
       price: 0,
@@ -18,13 +18,13 @@ const CreateProduct = () => {
       categoryId: 0,
     }
   });
-  const uploadImageData = async (data: ProductBase) => {
+  const uploadImageData = async (data: IProductBase) => {
     const responseImg = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': data.imagestr[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
     return responseImg.data;
   }
   const product = useAppSelector(state => state.productReducer)
   const dispatch = useAppDispatch();
-  const onSubmit: SubmitHandler<ProductBase> = async (data) => {
+  const onSubmit: SubmitHandler<IProductBase> = async (data) => {
     if (data.description) {
       const uploadedImage = await uploadImageData(data)
       const newData = { ...data, images: [uploadedImage['location']] }

@@ -6,9 +6,9 @@ import { ascendingOrder, sortByPrice } from '../redux/reducers/productReducers';
 import { Box, FormControl, SelectChangeEvent, Grid, Pagination } from '@mui/material';
 import { RootState } from '../redux/store';
 import { useParams } from 'react-router-dom';
-import { Product } from '../common/common';
+import { IProduct } from '../types/productType';
 import IndividualProduct from './IndividualProduct';
-import { usePagination } from "../hooks/pagination"
+import { usePagination } from "../hooks/usePagination"
 import { AnatherBox, AnatherInputLabel, AnatherMenuItem, AnatherSelect, CategoryBox, OuterBox, ProductBox } from '../styledComponent/productstyle';
 
 const Products = () => {
@@ -21,16 +21,16 @@ const Products = () => {
   const displayNewProducts = (state: RootState) => {
   let data,newData;
 
-    let filteredData: Product[] = [];
+    let filteredData: IProduct[] = [];
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
-        [...data] = state.productReducer.product.filter((product) => { return product.category.id === selCategory[i] && product.title.includes(search.search) })
+        [...data] = state.productReducer.product.filter((product: IProduct) => { return product.category.id === selCategory[i] && product.title.includes(search.search) })
         filteredData.push(...data)
       }
       return filteredData;
     }
     else if (search.search !== "") {
-      [...data] = state.productReducer.product.filter((product) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
+      [...data] = state.productReducer.product.filter((product:IProduct) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
       filteredData.push(...data)
       return filteredData;
     } else {
@@ -65,7 +65,7 @@ const Products = () => {
   }
   const dataPaginated = usePagination(numbofPages, products);
   //New products array returned by usePagination hook.
-  const newProducts: Product[] = []
+  const newProducts: IProduct[] = []
   dataPaginated.currentPageData().map((data) => { return newProducts.push(data) })
   //total slots that needs to be displayed
   const totalDisplayed = dataPaginated.totalPages;

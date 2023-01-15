@@ -1,4 +1,4 @@
-import { Categorys } from "./common"
+import { ICategory } from "../types/productType"
 
 export const newcartProduct = {
     quantity: 3,
@@ -102,7 +102,7 @@ export const categoryList = [
         image: "https://api.lorem.space/image/furniture?w=640&h=480&r=4371",
     }
 ]
-export const updatecategory: Categorys = {
+export const updatecategory: ICategory = {
     id: 1,
     name: "Testing Cloths",
     image: "https://api.lorem.space/image/fashion?w=640&h=480&r=2301",

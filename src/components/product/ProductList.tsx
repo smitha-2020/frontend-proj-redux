@@ -1,5 +1,5 @@
 
-import { Product } from "../../common/common";
+import { IProduct } from "../../types/productType";
 import { Grid } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import { Card, CategorySBox, DescriptionBox, ImgBox, NameBox, NotFound, ProductListing } from "../../styledComponent/productstyle";
@@ -7,7 +7,7 @@ import { Card, CategorySBox, DescriptionBox, ImgBox, NameBox, NotFound, ProductL
 const ProductList = ({
   products,
 }: {
-  products: Product[];
+  products: IProduct[];
 }) => {
   return (
     <>

@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { ProductOpt } from '../../common/common';
+import { IProductOpt } from '../../types/productType';
 import { deletingProduct } from '../../redux/reducers/productReducers';
 
 const DeleteProduct = () => {
-  const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<ProductOpt>({});
+  const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<IProductOpt>({});
   const navigate = useNavigate();
   const product = useAppSelector(state => state.productReducer)
   const isDone = product.isDone;
   useEffect(() => {
   }, [isDone])
   const dispatch = useAppDispatch()
-  const onSubmit: SubmitHandler<ProductOpt> = async (data) => {
+  const onSubmit: SubmitHandler<IProductOpt> = async (data) => {
     //console.log(data.id)
     const id = data.id;
     dispatch(deletingProduct(id))

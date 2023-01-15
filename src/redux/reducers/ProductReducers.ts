@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError, AxiosResponse } from "axios"
-import { Product, ProductDesc, ProductDetails, ProductModify } from "../../common/common"
+import { IProduct, IProductDesc, IProductDetails, IProductModify } from "../../types/productType"
 import axios from "axios"
 
-const initialState: ProductDetails = {
+const initialState: IProductDetails = {
     product: [],
     totalCount: 0,
     isDone: false
@@ -12,7 +12,7 @@ export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async () => {
         try {
-            const response: AxiosResponse<any, Product[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
+            const response: AxiosResponse<any, IProduct[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
             return response.data
         } catch (e) {
             console.log(e)
@@ -23,7 +23,7 @@ export const fetchAllProductsbyCategory = createAsyncThunk(
     "fetchAllProductsbyCategory",
     async (id: number) => {
         try {
-            const response: AxiosResponse<any, Product[]> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
+            const response: AxiosResponse<any, IProduct[]> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
             return response.data
         } catch (e) {
             console.log(e)
@@ -34,7 +34,7 @@ export const fetchProductsByPagination = createAsyncThunk(
     "fetchProductsByPagination",
     async (currentPage: number) => {
         try {
-            const response: AxiosResponse<any, Product[]> = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=${currentPage}&limit=12`)
+            const response: AxiosResponse<any, IProduct[]> = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=${currentPage}&limit=12`)
             return response.data
         } catch (e) {
             console.log(e)
@@ -46,7 +46,7 @@ export const getSingleProduct = createAsyncThunk(
     async (productId: string) => {
         let url = `https://api.escuelajs.co/api/v1/products/${productId}`;
         try {
-            const response: AxiosResponse<any, Product> = await axios.get(url)
+            const response: AxiosResponse<any, IProduct> = await axios.get(url)
             return response.data
         } catch (e) {
             console.log(e)
@@ -55,12 +55,12 @@ export const getSingleProduct = createAsyncThunk(
 )
 export const addingProduct = createAsyncThunk(
     "addingProduct",
-    async (product: ProductDesc) => {
+    async (product: IProductDesc) => {
         try {
             //const responseImg = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': product.imagestr[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
             // if (responseImg.data) {
             //const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
-            const response: AxiosResponse<Product, any> = await axios.post("https://api.escuelajs.co/api/v1/products", product)
+            const response: AxiosResponse<IProduct, any> = await axios.post("https://api.escuelajs.co/api/v1/products", product)
             return response.data
         }
         catch (e) {
@@ -83,9 +83,9 @@ export const deletingProduct = createAsyncThunk(
 )
 export const modifyProduct = createAsyncThunk(
     "modifyProduct",
-    async ({ id, updateProduct }: ProductModify) => {
+    async ({ id, updateProduct }: IProductModify) => {
         try {
-            const response: AxiosResponse<Product, any> = await axios.put(`https://api.escuelajs.co/api/v1/products/${id}`, updateProduct)
+            const response: AxiosResponse<IProduct, any> = await axios.put(`https://api.escuelajs.co/api/v1/products/${id}`, updateProduct)
             return response.data
         } catch (e) {
             console.log(e)
@@ -125,7 +125,7 @@ const productSlice = createSlice({
         }
     },
     extraReducers: (build) => {
-        build.addCase(fetchAllProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
+        build.addCase(fetchAllProducts.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
             if (action.payload && "message" in action.payload) {
                 return state;
             } else {
@@ -145,7 +145,7 @@ const productSlice = createSlice({
                 console.log("Pending")
                 return state;
             })
-            .addCase(fetchAllProductsbyCategory.fulfilled, (state, action: PayloadAction<Product[] | Error>) => {
+            .addCase(fetchAllProductsbyCategory.fulfilled, (state, action: PayloadAction<IProduct[] | Error>) => {
                 if (action.payload && "message" in action.payload) {
                     return state;
                 } else {

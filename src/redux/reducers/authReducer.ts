@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authenticUser } from '../../common/common'
+import { IAuthenticUser } from '../../types/userType'
 
-const initialState: authenticUser = { id: 0, avatar: "", email: "", password: "", name: "", role: "" };
+const initialState: IAuthenticUser = { id: 0, avatar: "", email: "", password: "", name: "", role: "" };
 //get the user session
 export const fetchSession = createAsyncThunk(
     "fetchSession",

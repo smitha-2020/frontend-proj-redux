@@ -1,7 +1,9 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node"
-import { authenticUser, CategoryModify, Categorys, Product, ProductDesc, User } from "../../common/common";
+import { IProduct,IProductDesc } from "../../types/productType";
+import { ICategory } from "../../types/productType";
 import { products,categoryList, users, createUserObjs } from '../../common/data'
+
 
 
 const handler = [
@@ -12,7 +14,7 @@ const handler = [
     }),
 
     rest.put("https://api.escuelajs.co/api/v1/products/:id", async (req, res, ctx) => {
-        const product: Partial<Product> = await req.json();
+        const product: Partial<IProduct> = await req.json();
         const { id } = req.params;
         const foundProduct = products.find((reqProduct) => reqProduct.id === Number(id))
         if (foundProduct) {
@@ -30,7 +32,7 @@ const handler = [
     }),
     rest.put("https://api.escuelajs.co/api/v1/categories/:id/products", (req, res, ctx) => {
         const { id } = req.params;
-        const foundProduct:Product[] = products.filter((reqProduct) => { return reqProduct.category.id === Number(id) })
+        const foundProduct:IProduct[] = products.filter((reqProduct) => { return reqProduct.category.id === Number(id) })
         if (foundProduct) {
             return res(
                 ctx.json({
@@ -44,7 +46,7 @@ const handler = [
         }
     }),
     rest.post("https://api.escuelajs.co/api/v1/products", async (req, res, ctx) => {
-        const product: ProductDesc = await req.json()
+        const product: IProductDesc = await req.json()
         if (product.price < 0) {
             return res(
                 ctx.status(400, "invalid data")
@@ -56,7 +58,7 @@ const handler = [
     }),
     rest.delete("https://api.escuelajs.co/api/v1/products/:id", async (req, res, ctx) => {
         const { id } = req.params;
-        const remainingProduct:Product[] = products.filter((reqProduct) => { return reqProduct.id !== Number(id) })
+        const remainingProduct:IProduct[] = products.filter((reqProduct) => { return reqProduct.id !== Number(id) })
         return res(
             ctx.json({
                 ...remainingProduct
@@ -76,16 +78,16 @@ const handler = [
         )
     }),
     rest.post("https://api.escuelajs.co/api/v1/categories/",async (req,res,ctx) => {
-        const category: Categorys = await req.json()
+        const category: ICategory = await req.json()
         return res(
             ctx.json(category)
         )
     }),
     rest.put("https://api.escuelajs.co/api/v1/categories/:id",async (req,res,ctx) => {
         const { id } = req.params;
-        const foundCategory:Categorys[] = categoryList.filter((reqProduct) => { return reqProduct.id === Number(id) })
+        const foundCategory:ICategory[] = categoryList.filter((reqProduct) => { return reqProduct.id === Number(id) })
         const [found] = foundCategory;
-        const newcategory: Categorys = await req.json()
+        const newcategory: ICategory = await req.json()
         if (foundCategory) {
             return res(
                 ctx.json({
@@ -101,7 +103,7 @@ const handler = [
     }),
     rest.delete("https://api.escuelajs.co/api/v1/categories/:id",async (req,res,ctx) => {
         const { id } = req.params;
-        const foundCategory:Categorys[] = categoryList.filter((reqProduct) => { return reqProduct.id === Number(id) })
+        const foundCategory:ICategory[] = categoryList.filter((reqProduct) => { return reqProduct.id === Number(id) })
         return res(
             ctx.json(foundCategory)
         )
