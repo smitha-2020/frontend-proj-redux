@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IProductOpt } from '../../types/productType';
-import { deletingProduct } from '../../redux/reducers/productReducers';
+import { deletingProduct } from '../../redux/reducers/reducerMethods/productMethods';
 
 const DeleteProduct = () => {
   const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<IProductOpt>({});

@@ -1,6 +1,7 @@
 import { AnyAction, MiddlewareArray, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import {  addingProduct, ascendingOrder, deletingProduct, fetchAllProducts, modifyProduct } from "../../redux/reducers/productReducers";
+import { ascendingOrder } from "../../redux/reducers/productReducers";
+import { fetchAllProducts, addingProduct, deletingProduct, modifyProduct } from '../../redux/reducers/reducerMethods/productMethods'
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { data } from "../../common/data";

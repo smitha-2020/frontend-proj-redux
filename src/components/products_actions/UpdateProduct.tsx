@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 //import { json } from 'stream/consumers';
 //import { string } from 'yup';
-import { modifyProduct } from '../../redux/reducers/productReducers';
+import { modifyProduct } from '../../redux/reducers/reducerMethods/productMethods';
 import { ChangeEvent } from 'react';
 import { useNavigate } from "react-router-dom";
 

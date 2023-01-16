@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {IProductBase } from '../../types/productType';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { addingProduct } from '../../redux/reducers/productReducers';
+import { addingProduct } from '../../redux/reducers/reducerMethods/productMethods';
 
 
 const CreateProduct = () => {

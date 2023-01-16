@@ -1,6 +1,6 @@
 import { AnyAction, MiddlewareArray, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import { createUser, getAllUsers, getUser, updateUser } from "../../redux/reducers/userReducers";
+import { createUser, getAllUsers, getUser, updateUser } from "../../redux/reducers/reducerMethods/userMethods";
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IAuthenticUser } from '../../types/userType'
 

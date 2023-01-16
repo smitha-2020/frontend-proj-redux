@@ -1,50 +1,10 @@
-import axios, { AxiosResponse } from 'axios'
+
 import { createSlice } from '@reduxjs/toolkit'
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { CreateUser, IUser,IAuthenticUser } from '../../types/userType';
+import { IAuthenticUser } from '../../types/userType';
+import { getAllUsers, getUser, createUser, updateUser } from '../../redux/reducers/reducerMethods/userMethods'
 
 const initialState: IAuthenticUser[] = []
-export const getAllUsers = createAsyncThunk(
-    "getAllUsers", async () => {
-        try {
-            const res = await axios.get("https://api.escuelajs.co/api/v1/users")
-            return res.data
-        }
-        catch (e) {
-            console.log(e)
-        }
-    })
-export const getUser = createAsyncThunk(
-    "getUser", async (id: number) => {
-        try {
-            const res = await axios.get(`https://api.escuelajs.co/api/v1/users/${id}`)
-            return res.data
-        }
-        catch (e) {
-            console.log(e)
-        }
-    })
-export const createUser = createAsyncThunk(
-    "createUser", async (user: CreateUser) => {
-        try {
-            const res: AxiosResponse<IAuthenticUser, any> = await axios.post("https://api.escuelajs.co/api/v1/users/", user.user)
-            return res.data
-        }
-        catch (e) {
-            console.log(e)
-        }
-    })
-export const updateUser = createAsyncThunk(
-    "updateUser", async (user: IUser) => {
-        try {
-            const {id,role,...filteredUser} = user.user;
-            const res: AxiosResponse<IAuthenticUser, any> = await axios.put(`https://api.escuelajs.co/api/v1/users/${id}`, filteredUser)
-            return res.data
-        }
-        catch (e) {
-            console.log(e)
-        }
-    })
+
 export const userSlice = createSlice({
     name: "userSlice",
     initialState,
@@ -103,7 +63,7 @@ export const userSlice = createSlice({
                     return state;
                 } else {
                     const modifyState = [...state]
-                    const result = modifyState.map(user => user.id === action.payload?.id? action.payload : user)
+                    const result = modifyState.map(user => user.id === action.payload?.id ? action.payload : user)
                     return [...result]
                 }
                 return state;

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { ImodeCheck } from '../../types/common'
 
 const initialState:ImodeCheck = {
