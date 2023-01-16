@@ -4,6 +4,7 @@ import {  addingProduct, ascendingOrder, deletingProduct, fetchAllProducts, modi
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { data } from "../../common/data";
+import { IProductDesc } from "../../types/productType";
 
 let store: ToolkitStore<RootState, AnyAction, MiddlewareArray<[ThunkMiddleware<RootState, AnyAction, undefined>]>>
 beforeAll(() => {
@@ -26,7 +27,7 @@ describe("test product reducer", () => {
         }),
         // test("should add a new product", async () => {
         //     //await store.dispatch(fetchAllProducts())
-        //     const productData:ProductDesc = {
+        //     const productData:IProductDesc = {
         //         title: "New Product",
         //         price: 10,
         //         description: "A description",
@@ -34,8 +35,8 @@ describe("test product reducer", () => {
         //         images: ["https://api.lorem.space/image/watch?w=640&h=480&r=8808"]
         //     }
         //     await store.dispatch(addingProduct(productData))
-        //     expect(store.getState().productReducer.product[0].price).toBe(10)
-        //     expect(store.getState().productReducer.product.length).toBe(1)
+        //     console.log(store.getState().productReducer.product)
+        //     //expect(store.getState().productReducer.product.length).toBe(1)
         // }),
         test("should display products in descending order", async () => {
             await store.dispatch(fetchAllProducts())

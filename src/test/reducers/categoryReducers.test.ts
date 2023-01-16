@@ -37,11 +37,11 @@ describe("test category reducers",()=>{
     test("should update a category",async ()=>{
         await store.dispatch(fetchAllCategories())
         await store.dispatch(updateCategory(updatecategory))
-        store.getState().categoryReducers
+        expect(store.getState().categoryReducers[0].name).toBe("Testing Cloths")
     })
-    // test("should delete a category",async ()=>{
-    //     await store.dispatch(fetchAllCategories())
-    //     await store.dispatch(deleteCategory(3))
-    //     expect(store.getState().categoryReducers[0].name).toBe("Furniture")
-    // })
+    test("should delete a category",async ()=>{
+        await store.dispatch(fetchAllCategories())
+        await store.dispatch(deleteCategory(3))
+        expect(store.getState().categoryReducers[0].name).toBe("Furniture")
+    })
 })

@@ -85,13 +85,12 @@ const handler = [
     }),
     rest.put("https://api.escuelajs.co/api/v1/categories/:id",async (req,res,ctx) => {
         const { id } = req.params;
-        const foundCategory:ICategory[] = categoryList.filter((reqProduct) => { return reqProduct.id === Number(id) })
-        const [found] = foundCategory;
-        const newcategory: ICategory = await req.json()
+        const foundCategory= categoryList.find((reqProduct) =>reqProduct.id === Number(id) )
+        const newcategory = await req.json()
         if (foundCategory) {
             return res(
                 ctx.json({
-                    ...found,
+                    ...foundCategory,
                     ...newcategory
                 })
             )

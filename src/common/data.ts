@@ -85,21 +85,22 @@ export const products = [
         }
     },
 ]
-export const categoryList = [
+export const categoryList:ICategory[] = [
     {
         id: 1,
         name: "Clothes",
-        image: "https://api.lorem.space/image/fashion?w=640&h=480&r=2301",
+        image: "https://api.lorem.space/image/fashion?w=640&h=480&r=5664",
     },
     {
         id: 2,
         name: "Electronics",
-        image: "https://api.lorem.space/image/watch?w=640&h=480&r=7076",
+        image: "https://api.lorem.space/image/watch?w=640&h=480&r=6002",
     },
     {
         id: 3,
         name: "Furniture",
-        image: "https://api.lorem.space/image/furniture?w=640&h=480&r=4371",
+        image: "https://api.lorem.space/image/furniture?w=640&h=480&r=5292",
+
     }
 ]
 export const updatecategory: ICategory = {
@@ -134,7 +135,7 @@ export const users = [
         avatar: "https://api.lorem.space/image/face?w=640&h=480&r=3204",
     }
 ]
-export const createUserObjs =  {
+export const createUserObjs = {
     email: "nicoo@gmail.com",
     password: "1234",
     name: "Nicolas",

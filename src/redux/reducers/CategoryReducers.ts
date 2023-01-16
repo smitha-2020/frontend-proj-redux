@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ICategory, IProduct } from '../../types/productType';
@@ -46,6 +46,7 @@ export const updateCategory = createAsyncThunk(
         const { id, ...filteredCategory } = data
         try {
             const res: AxiosResponse<ICategory, any> = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, filteredCategory)
+            console.log(res.data)
             return res.data;
         }
         catch (e) {
@@ -62,13 +63,13 @@ export const deleteCategory = createAsyncThunk(
         return result
     }
 )
-export const getProductsByCategory = createAsyncThunk(
-    "getProductsByCategory",
-    async (id: number) => {
-        const res: AxiosResponse<IProduct[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
-        return res.data;
-    }
-)
+// export const getProductsByCategory = createAsyncThunk(
+//     "getProductsByCategory",
+//     async (id: number) => {
+//         const res: AxiosResponse<IProduct[], any> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
+//         return res.data;
+//     }
+// )
 const categorySlice = createSlice({
     name: "categorySlice",
     initialState: initialState,
@@ -125,16 +126,18 @@ const categorySlice = createSlice({
                 if (action.payload instanceof AxiosError) {
                     return state;
                 } else {
-                    const result: ICategory[] = [];
+                    // if (action.payload && "id" in action.payload) {
                     const returnedData = action.payload;
-                    const updateState: ICategory[] = state
-                    const updateCategory = updateState.map((category) =>
-                       {return (category.id === returnedData.id) ? action.payload : category }
+                    return state.map(category => {
+                        return category.id === returnedData.id ? returnedData : category
+                    }
                     )
-                    console.log(updateCategory)
-                    //console.log(updateCategory)
-                    // return [...updateCategory]
+                    //console.log(action.payload)
+                    // console.log("updateCategory" + [updateCategory])
+                    // //console.log(updateCategory)
+                    // return [...state, updateCategory]
                 }
+                //}
             })
             .addCase(updateCategory.pending, (state) => {
                 return state
@@ -153,17 +156,17 @@ const categorySlice = createSlice({
             .addCase(deleteCategory.rejected, (state) => {
                 return state
             })
-            .addCase(getProductsByCategory.fulfilled, (state, action) => {
-                if (action.payload && "message" in action.payload) {
-                    return state;
-                }
-                else {
-                    const productList = action.payload;
-                    productList.map((product) => {
-                        return [...state, product]
-                    })
-                }
-            })
+        // .addCase(getProductsByCategory.fulfilled, (state, action) => {
+        //     if (action.payload && "message" in action.payload) {
+        //         return state;
+        //     }
+        //     else {
+        //         const productList = action.payload;
+        //         productList.map((product) => {
+        //             return [...state, product]
+        //         })
+        //     }
+        // })
     }
 })
 
