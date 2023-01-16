@@ -44,7 +44,7 @@ export const createCategory = createAsyncThunk(
             const { id, ...filteredCategory } = data
             try {
                 const res: AxiosResponse<ICategory, any> = await axios.put(`https://api.escuelajs.co/api/v1/categories/${id}`, filteredCategory)
-                console.log(res.data)
+                //console.log(res.data)
                 return res.data;
             }
             catch (e) {

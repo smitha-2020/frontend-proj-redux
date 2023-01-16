@@ -5,7 +5,6 @@ import { fetchAllProducts, addingProduct, deletingProduct, modifyProduct } from 
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { data } from "../../common/data";
-import { IProductDesc } from "../../types/productType";
 
 let store: ToolkitStore<RootState, AnyAction, MiddlewareArray<[ThunkMiddleware<RootState, AnyAction, undefined>]>>
 beforeAll(() => {
