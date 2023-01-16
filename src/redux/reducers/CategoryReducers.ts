@@ -58,7 +58,7 @@ export const updateCategory = createAsyncThunk(
 export const deleteCategory = createAsyncThunk(
     "deleteCategory",
     async (id: number) => {
-        const res: AxiosResponse<ICategory, any> = await axios.delete(`https://api.escuelajs.co/api/v1/categories/${id}`)
+        const res: AxiosResponse<boolean, any> = await axios.delete(`https://api.escuelajs.co/api/v1/categories/${id}`)
         const result = res.data ? id : 0
         return result
     }
@@ -148,7 +148,7 @@ const categorySlice = createSlice({
             .addCase(deleteCategory.fulfilled, (state, action) => {
                 const deletedData = [...state]
                 const result = deletedData.filter(category => { return category.id === action.payload })
-                return [...result]
+                return result
             })
             .addCase(deleteCategory.pending, (state) => {
                 return state
