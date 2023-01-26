@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { IAuthenticUser, ILoginData, Inputs } from "../../../types/userType";
 
 export const fetchLoginInfo = createAsyncThunk(
@@ -9,7 +9,8 @@ export const fetchLoginInfo = createAsyncThunk(
             const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", data, { headers: { 'Content-Type': 'application/json' } })
             return response.data;
         } catch (e: any) {
-            console.log(e.response.data)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -29,7 +30,8 @@ export const uploadImagefromForm = createAsyncThunk(
                 }
             }
         } catch (e: any) {
-            console.log(e.config);
+            const error = e as AxiosError
+            return error
         }
     }
 )

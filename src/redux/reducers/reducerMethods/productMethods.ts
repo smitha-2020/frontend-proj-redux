@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { IProduct, IProductDesc, IProductModify } from '../../../types/productType';
 
 export const fetchAllProducts = createAsyncThunk(
@@ -9,7 +9,8 @@ export const fetchAllProducts = createAsyncThunk(
             const response: AxiosResponse<any, IProduct[]> = await axios.get("https://api.escuelajs.co/api/v1/products")
             return response.data
         } catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -20,7 +21,8 @@ export const fetchAllProductsbyCategory = createAsyncThunk(
             const response: AxiosResponse<any, IProduct[]> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
             return response.data
         } catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -31,7 +33,8 @@ export const fetchProductsByPagination = createAsyncThunk(
             const response: AxiosResponse<any, IProduct[]> = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=${currentPage}&limit=12`)
             return response.data
         } catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -43,7 +46,8 @@ export const getSingleProduct = createAsyncThunk(
             const response: AxiosResponse<any, IProduct> = await axios.get(url)
             return response.data
         } catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -58,7 +62,8 @@ export const addingProduct = createAsyncThunk(
             return response.data
         }
         catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
@@ -71,7 +76,8 @@ export const deletingProduct = createAsyncThunk(
             return dataReturn;
         }
         catch (e) {
-            console.log(e)
+            const error = e as AxiosError
+            return error
         }
     }
 )
