@@ -2,7 +2,8 @@ import axios from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ILoginData } from '../../types/userType';
-import { Inputs, IAuthenticUser, IRegisteredUser } from '../../types/userType'
+import { Inputs, IAuthenticUser, IRegisteredUser } from '../../types/userType';
+import {fetchLoginInfo, uploadImagefromForm} from '../reducers/reducerMethods/loginMethods';
 
 const initialState: IRegisteredUser =
 {
@@ -19,37 +20,6 @@ const initialState: IRegisteredUser =
     isLogin: false,
     isLoading: false
 }
-export const fetchLoginInfo = createAsyncThunk(
-    "fetchLoginInfo",
-    async (data: ILoginData) => {
-        try {
-            const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", data, { headers: { 'Content-Type': 'application/json' } })
-            return response.data;
-        } catch (e: any) {
-            console.log(e.response.data)
-        }
-    }
-)
-export const uploadImagefromForm = createAsyncThunk(
-    "uploadImagefromForm",
-    async (inputFile: Inputs) => {
-        try {
-            const responseEmail = await axios.get("https://api.escuelajs.co/api/v1/users")
-            const resEmailArr: IAuthenticUser[] = responseEmail.data
-            const emailArr = resEmailArr.filter((element) => element.email === inputFile.email)
-            if (emailArr.length === 0) {
-                const response = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': inputFile.avatar[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
-                const url: string = response.data.location;
-                if (url) {
-                    const responseRegister = await axios.post("https://api.escuelajs.co/api/v1/users/", { ...inputFile, avatar: url })
-                    return responseRegister.data
-                }
-            }
-        } catch (e: any) {
-            console.log(e.config);
-        }
-    }
-)
 
 
 const loginSlice = createSlice({

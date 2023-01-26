@@ -25,13 +25,14 @@ const Products = () => {
     let filteredData: IProduct[] = [];
     if (selCategory.length > 0) {
       for (let i = 0; i < selCategory.length; i++) {
-        [...data] = state.productReducer.product.filter((product: IProduct) => { return product.category.id === selCategory[i] && product.title.includes(search.search) })
+        [...data] = state.productReducer.product.filter((product: IProduct) => { return product.category.id === selCategory[i] && product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
         filteredData.push(...data)
       }
       return filteredData;
     }
     else if (search.search !== "") {
-      [...data] = state.productReducer.product.filter((product: IProduct) => { return product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()) })
+      console.log("hi");
+      [...data] = state.productReducer.product.filter((product: IProduct) => product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()))
       filteredData.push(...data)
       return filteredData;
     } else {

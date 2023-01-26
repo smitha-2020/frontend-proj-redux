@@ -6,7 +6,7 @@ import * as yup from "yup"
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { uploadImagefromForm } from '../redux/reducers/loginInfo';
+import { uploadImagefromForm } from '../redux/reducers/reducerMethods/loginMethods';
 import { Inputs } from '../types/userType'
 
 const schema = yup.object().shape({

@@ -13,7 +13,7 @@ import Header from './components/Header'
 import { fetchAllProducts } from './redux/reducers/reducerMethods/productMethods'
 import { fetchAllCategories } from './redux/reducers/reducerMethods/categoryMethods'
 import Register from './Pages/Register'
-import { fetchSession } from './redux/reducers/authReducer'
+import { fetchSession } from './redux/reducers/reducerMethods/authMethods'
 import Footer from './components/Footer'
 import Fulfilled from './components/products_actions/Fulfilled'
 

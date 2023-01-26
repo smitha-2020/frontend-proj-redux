@@ -5,7 +5,7 @@ import { CreateUser, IAuthenticUser, IUser } from '../../../types/userType'
 export const getAllUsers = createAsyncThunk(
     "getAllUsers", async () => {
         try {
-            const res = await axios.get("https://api.escuelajs.co/api/v1/users")
+            const res:AxiosResponse<any,IAuthenticUser[]> = await axios.get("https://api.escuelajs.co/api/v1/users")
             return res.data
         }
         catch (e) {
@@ -15,7 +15,7 @@ export const getAllUsers = createAsyncThunk(
 export const getUser = createAsyncThunk(
     "getUser", async (id: number) => {
         try {
-            const res = await axios.get(`https://api.escuelajs.co/api/v1/users/${id}`)
+            const res:AxiosResponse<any,IAuthenticUser> = await axios.get(`https://api.escuelajs.co/api/v1/users/${id}`)
             return res.data
         }
         catch (e) {
@@ -25,7 +25,7 @@ export const getUser = createAsyncThunk(
 export const createUser = createAsyncThunk(
     "createUser", async (user: CreateUser) => {
         try {
-            const res: AxiosResponse<IAuthenticUser, any> = await axios.post("https://api.escuelajs.co/api/v1/users/", user.user)
+            const res: AxiosResponse<any, IAuthenticUser> = await axios.post("https://api.escuelajs.co/api/v1/users/", user.user)
             return res.data
         }
         catch (e) {
@@ -37,7 +37,7 @@ export const updateUser = createAsyncThunk(
         try {
             const userData = user.user;
             console.log("userDara", userData)
-            const res: AxiosResponse<IAuthenticUser, any> = await axios.put(`https://api.escuelajs.co/api/v1/users/${user.id}`, userData)
+            const res: AxiosResponse<any, IAuthenticUser> = await axios.put(`https://api.escuelajs.co/api/v1/users/${user.id}`, userData)
             console.log("res", res.data)
             return res.data
         }

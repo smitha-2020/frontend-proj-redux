@@ -23,6 +23,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
+  blacklist:['auhtReducer','loginReducer','productReducer']
 }
 const reducers = combineReducers(
   {

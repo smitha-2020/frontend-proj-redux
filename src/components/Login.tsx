@@ -6,9 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import LoginIcon from '@mui/icons-material/Login';
 
-import { fetchLoginInfo } from '../redux/reducers/loginInfo'
+import { fetchLoginInfo } from '../redux/reducers/reducerMethods/loginMethods';
 import { ILoginData } from '../types/userType';
-import { fetchSession } from '../redux/reducers/authReducer';
+import { fetchSession } from '../redux/reducers/reducerMethods/authMethods';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook'
 
 const schema = yup.object().shape({
