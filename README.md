@@ -43,7 +43,7 @@ Link to the frontend project https://frolicking-panda-899a36.netlify.app/
 
 
 ## Folder Structure
-
+```sh
 ───src
     │   App.tsx
     │   index.tsx
@@ -126,6 +126,9 @@ Link to the frontend project https://frolicking-panda-899a36.netlify.app/
         │
         └───shared
                 server.ts
+```
+
+
 
 ## Instruction to start the project
 

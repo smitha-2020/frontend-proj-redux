@@ -138,7 +138,6 @@ const productSlice = createSlice({
 
       // })
       .addCase(modifyProduct.fulfilled, (state, action) => {
-        console.log(action.payload);
         if (action.payload) {
           const getProducts = [...state.product];
           const updateProducts = getProducts.map((product) =>
