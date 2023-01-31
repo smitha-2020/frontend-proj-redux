@@ -5,6 +5,7 @@ import { fetchAllProducts, addingProduct, deletingProduct, modifyProduct } from 
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { data } from "../../common/data";
+import { IProductDesc } from "../../types/productType";
 
 let store: ToolkitStore<RootState, AnyAction, MiddlewareArray<[ThunkMiddleware<RootState, AnyAction, undefined>]>>
 beforeAll(() => {
@@ -25,19 +26,18 @@ describe("test product reducer", () => {
             await store.dispatch(fetchAllProducts())
             expect(store.getState().productReducer.product.length).toBe(3)
         }),
-        // test("should add a new product", async () => {
-        //     //await store.dispatch(fetchAllProducts())
-        //     const productData:IProductDesc = {
-        //         title: "New Product",
-        //         price: 10,
-        //         description: "A description",
-        //         categoryId: 1,
-        //         images: ["https://api.lorem.space/image/watch?w=640&h=480&r=8808"]
-        //     }
-        //     await store.dispatch(addingProduct(productData))
-        //     console.log(store.getState().productReducer.product)
-        //     //expect(store.getState().productReducer.product.length).toBe(1)
-        // }),
+        test("should add a new product", async () => {
+            //await store.dispatch(fetchAllProducts())
+            const productData:IProductDesc = {
+                title: "New Product",
+                price: 10,
+                description: "A description",
+                categoryId: 1,
+                images: ["https://api.lorem.space/image/watch?w=640&h=480&r=8808"]
+            }
+            await store.dispatch(addingProduct(productData))
+            expect(store.getState().productReducer.isDone).toBe(true);
+        }),
         test("should display products in descending order", async () => {
             await store.dispatch(fetchAllProducts())
             store.dispatch(ascendingOrder("desc"))
@@ -57,6 +57,11 @@ describe("test product reducer", () => {
             await store.dispatch(fetchAllProducts())
             await store.dispatch(deletingProduct(13))
             expect(store.getState().productReducer.product.length).toBe(2)
+        }),
+        test("should not delete the product", async () => {
+            await store.dispatch(fetchAllProducts())
+            await store.dispatch(deletingProduct(100))
+            expect(store.getState().productReducer.product.length).toBe(3)
         })
 
 })

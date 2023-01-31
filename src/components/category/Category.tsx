@@ -5,7 +5,7 @@ import { Checkbox, FormControlLabel, FormGroup,Box } from '@mui/material'
 
 const Category = ({ setSelCategory, selCategory }: { setSelCategory: React.Dispatch<React.SetStateAction<number[]>>, selCategory: number[] }) => {
   const categories = useAppSelector(state => state.categoryReducers)
-  const categortList = ["others", "shoes", "furniture","electronics","nuevo","un nuevo nombre"]
+  const categortList = ["others", "shoes", "furniture","electronics","nuevo","un nuevo nombre","clothes"]
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const index = selCategory.indexOf(Number(e.target.value))
     if (index === -1) {

@@ -63,7 +63,7 @@ export const userSlice = createSlice({
                     return state;
                 } else {
                     const modifyState = [...state]
-                    console.log(modifyState.map(user => user.id === action.payload?.id ? action.payload : user))
+                    //console.log(modifyState.map(user => user.id === action.payload?.id ? action.payload : user))
                     return  modifyState.map(user => user.id === action.payload?.id ? action.payload : user)
                     //return [...result]
                 }

@@ -20,7 +20,6 @@ const Header = () => {
     const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
     const switchcheck: ImodeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
-    console.log(cart);
     const carttotal=cart.filter((cartElement) => cartElement.userInfo.id === authentication.id).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();

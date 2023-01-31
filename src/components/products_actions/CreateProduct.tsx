@@ -27,8 +27,10 @@ const CreateProduct = () => {
   const onSubmit: SubmitHandler<IProductBase> = async (data) => {
     if (data.description) {
       const uploadedImage = await uploadImageData(data)
-      const newData = { ...data, images: [uploadedImage['location']] }
-      dispatch(addingProduct(newData))
+
+      const newDatanew = {title:data.title,price:data.price,description:data.description,categoryId:data.categoryId, images: [uploadedImage['location']] }
+      //const newData = { ...data, images: [uploadedImage['location']] }
+      dispatch(addingProduct(newDatanew))
       if (product.isDone) {
         navigate('/fulfilled')
       }

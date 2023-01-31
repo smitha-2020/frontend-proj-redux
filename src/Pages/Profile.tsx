@@ -10,7 +10,7 @@ const Profile = () => {
   const [display, setDisplay] = useState<string>("");
   const authentication = useAppSelector(state => state.auhtReducer)
   useEffect(() => {
-    console.log("data refreshed");
+    //console.log("data refreshed");
   }, [authentication])
   if (authentication.avatar !== "") {
     return (

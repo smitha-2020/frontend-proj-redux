@@ -53,16 +53,16 @@ const productSlice = createSlice({
       .addCase(
         fetchAllProducts.fulfilled,
         (state, action: PayloadAction<IProduct[]>) => {
-          if (action.payload && "message" in action.payload) {
+          // if (action.payload && "message" in action.payload) {
+          //   return state;
+          // } else {
+          if (!action.payload) {
             return state;
-          } else {
-            if (!action.payload) {
-              return state;
-            }
-            state.product = action.payload;
-            state.totalCount = action.payload.length;
           }
+          state.product = action.payload;
+          state.totalCount = action.payload.length;
         }
+        //}
       )
       .addCase(fetchAllProducts.rejected, (state) => {
         console.log("Rejected");
@@ -106,13 +106,10 @@ const productSlice = createSlice({
         if (action.payload && "message" in action.payload) {
           return state;
         }
-        if (action.payload instanceof AxiosError) {
-          // console.log("ssgsgsgd")
-        }
-        if (action.payload && "id" in action.payload) {
+        if (action.payload) {
           return {
             ...state,
-            product: [...state.product, action.payload],
+            product: [...state.product,action.payload],
             isDone: true,
           };
         }

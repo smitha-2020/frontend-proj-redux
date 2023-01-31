@@ -20,8 +20,6 @@ const initialState: IRegisteredUser =
     isLogin: false,
     isLoading: false
 }
-
-
 const loginSlice = createSlice({
     name: "LoginSlice",
     initialState: initialState,
