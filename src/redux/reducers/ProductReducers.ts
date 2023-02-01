@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
 import { IProduct, IProductDetails } from "../../types/productType";
 import {
   fetchAllProducts,
@@ -15,20 +14,6 @@ const initialState: IProductDetails = {
   totalCount: 0,
   isDone: false,
 };
-
-// export const modifyProduct = createAsyncThunk(
-//     "modifyProduct",
-//     async (data: ProductOpt) => {
-//         const { id, ...updateProduct } = data
-//         const newData = {id:id,updateProduct:updateProduct}
-//         try {
-//             const response: AxiosResponse<Product, any> = await axios.put(`https://api.escuelajs.co/api/v1/products/${id}`, newData)
-//             return response.data
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     }
-// )
 const productSlice = createSlice({
   name: "productSlice",
   initialState: initialState,
@@ -53,9 +38,6 @@ const productSlice = createSlice({
       .addCase(
         fetchAllProducts.fulfilled,
         (state, action: PayloadAction<IProduct[]>) => {
-          // if (action.payload && "message" in action.payload) {
-          //   return state;
-          // } else {
           if (!action.payload) {
             return state;
           }
@@ -64,14 +46,6 @@ const productSlice = createSlice({
         }
         //}
       )
-      .addCase(fetchAllProducts.rejected, (state) => {
-        console.log("Rejected");
-        return state;
-      })
-      .addCase(fetchAllProducts.pending, (state) => {
-        console.log("Pending");
-        return state;
-      })
       .addCase(
         fetchAllProductsbyCategory.fulfilled,
         (state, action: PayloadAction<IProduct[] | Error>) => {
@@ -82,25 +56,14 @@ const productSlice = createSlice({
               const getCategory = action.payload;
               console.log({ ...state, product: getCategory });
             }
-            // state.product = action.payload;
-            // state.totalCount = action.payload.length;
           }
         }
       )
-      .addCase(fetchAllProductsbyCategory.rejected, (state) => {
-        console.log("Rejected");
-        return state;
-      })
-      .addCase(fetchAllProductsbyCategory.pending, (state) => {
-        console.log("Pending");
-        return state;
-      })
       .addCase(getSingleProduct.fulfilled, (state, action) => {
         if (action.payload && "message" in action.payload) {
           return state;
         }
         return { ...state, product: action.payload };
-        //state.product = action.payload;
       })
       .addCase(addingProduct.fulfilled, (state, action) => {
         if (action.payload && "message" in action.payload) {
@@ -114,26 +77,6 @@ const productSlice = createSlice({
           };
         }
       })
-      // .addCase(addProduct.fulfilled, (state, action) => {
-      //     if (action.payload && "message" in action.payload) {
-      //         return state;
-      //     } else {
-      //         if (action.payload) {
-      //             state.product.push(action.payload)
-      //             state.isDone = true;
-      //         }
-      //     }
-      // })
-      // .addCase(updateProduct.fulfilled, (state, action) => {
-      //     if (action.payload && "message" in action.payload) {
-      //         return state;
-      //     } else {
-      //         if (action.payload) {
-      //             state.isDone = true;
-      //         }
-      //     }
-
-      // })
       .addCase(modifyProduct.fulfilled, (state, action) => {
         if (action.payload) {
           const getProducts = [...state.product];
@@ -143,18 +86,6 @@ const productSlice = createSlice({
           return { ...state, product: updateProducts, isDone: true };
         }
       })
-      .addCase(modifyProduct.rejected, (state, action) => {
-        state.isDone = false;
-      })
-      .addCase(modifyProduct.pending, (state, action) => {
-        state.isDone = false;
-      })
-      .addCase(addingProduct.rejected, (state, action) => {
-        state.isDone = false;
-      })
-      .addCase(addingProduct.pending, (state, action) => {
-        state.isDone = false;
-      })
       .addCase(deletingProduct.fulfilled, (state, action) => {
         if (action.payload) {
           const newReturn = state.product.filter((reqData) => {
@@ -163,12 +94,6 @@ const productSlice = createSlice({
           return { ...state, product: newReturn, isDone: true };
         }
       })
-      .addCase(deletingProduct.pending, (state, action) => {
-        state.isDone = false;
-      })
-      .addCase(deletingProduct.rejected, (state, action) => {
-        state.isDone = false;
-      });
   },
 });
 

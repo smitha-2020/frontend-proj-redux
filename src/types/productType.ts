@@ -28,7 +28,6 @@ export interface IProductBase{
 export interface IProductNew extends IProductBase{
     images: any[]
 }
-
 export interface IProductDetails{
     product:IProduct[],
     totalCount:number,

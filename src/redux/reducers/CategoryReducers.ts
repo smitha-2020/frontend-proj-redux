@@ -17,12 +17,6 @@ const categorySlice = createSlice({
             }
             return action.payload
         })
-            .addCase(fetchAllCategories.rejected, (state) => {
-                return state;
-            })
-            .addCase(fetchAllCategories.pending, (state) => {
-                return state;
-            })
             .addCase(getSingleCategory.fulfilled, (state, action) => {
                 if (action.payload instanceof AxiosError) {
                     return state;
@@ -33,12 +27,6 @@ const categorySlice = createSlice({
                         return state;
                     }
                 }
-            })
-            .addCase(getSingleCategory.pending, (state) => {
-                return state
-            })
-            .addCase(getSingleCategory.rejected, (state) => {
-                return state
             })
             .addCase(createCategory.fulfilled, (state, action) => {
                 if (action.payload instanceof AxiosError) {
@@ -51,12 +39,6 @@ const categorySlice = createSlice({
                     }
                 }
             })
-            .addCase(createCategory.pending, (state) => {
-                return state
-            })
-            .addCase(createCategory.rejected, (state) => {
-                return state
-            })
             .addCase(updateCategory.fulfilled, (state, action) => {
                 if (action.payload instanceof AxiosError) {
                     return state;
@@ -68,22 +50,10 @@ const categorySlice = createSlice({
                     )
                 }
             })
-            .addCase(updateCategory.pending, (state) => {
-                return state
-            })
-            .addCase(updateCategory.rejected, (state) => {
-                return state
-            })
             .addCase(deleteCategory.fulfilled, (state, action) => {
                 const deletedData = [...state]
                 const result = deletedData.filter(category => { return category.id === action.payload })
                 return result
-            })
-            .addCase(deleteCategory.pending, (state) => {
-                return state
-            })
-            .addCase(deleteCategory.rejected, (state) => {
-                return state
             })
     }
 })

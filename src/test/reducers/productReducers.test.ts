@@ -16,7 +16,6 @@ afterAll(() => {
 })
 beforeEach(() => {
     store = createStore();
-
 })
 describe("test product reducer", () => {
     test("test to return initial state for product reducer", () => {
@@ -27,7 +26,6 @@ describe("test product reducer", () => {
             expect(store.getState().productReducer.product.length).toBe(3)
         }),
         test("should add a new product", async () => {
-            //await store.dispatch(fetchAllProducts())
             const productData:IProductDesc = {
                 title: "New Product",
                 price: 10,
